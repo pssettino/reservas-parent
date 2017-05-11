@@ -45,3 +45,11 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+reservas-webapp/target/*
+.project
+*.prefs
+reservas-core/.classpath
+reservas-core/target/*
+reservas-webapp/.classpath
+*.jsdtscope
+reservas-webapp/.settings/*

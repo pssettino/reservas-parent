@@ -1,13 +1,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:context="http://www.springframework.org/schema/context"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:tx="http://www.springframework.org/schema/tx"
-xmlns:p="http://www.springframework.org/schema/p" 
-xmlns:mvc="http://www.springframework.org/schema/mvc"
-xmlns:security="http://www.springframework.org/schema/security"
-xmlns:oxm="http://www.springframework.org/schema/oxm"
-xmlns:cache="http://www.springframework.org/schema/cache"
-xsi:schemaLocation="
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
 http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 http://www.springframework.org/schema/context
@@ -21,46 +18,48 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd
 http://www.springframework.org/schema/cache 
 http://www.springframework.org/schema/cache/spring-cache.xsd
 http://www.springframework.org/schema/oxm 
-http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd"	>
+http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
 
-<!-- 	<cache:annotation-driven /> -->
+	<!-- <cache:annotation-driven /> -->
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.reservas.*" />
-<!-- 	<context:component-scan base-package="caching" /> -->
-	
+	<!-- <context:component-scan base-package="caching" /> -->
+
 	<tx:annotation-driven transaction-manager="txManager" />
-	
-	
 
-<!--  <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"> -->
-<!--  	<property name="cacheManager" ref="ehcache"></property> -->
-<!--  </bean> -->
- 	 
 
-<!--  <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"  -->
-<!--      p:configLocation="classpath:ehcache.xml"   -->
-<!--      p:shared="true"/> -->
-	 
-      
-	
-	
 
- 	<mvc:resources location="/resources/" mapping="/resources/**"  />
- 	<mvc:resources location="/css/" mapping="/css/**"  />
-<!--  	<mvc:resources location="/fonts/" mapping="/fonts/**"  /> -->
-<!--  	<mvc:resources location="/img/" mapping="/img/**"  /> -->
+	<!-- <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"> -->
+	<!-- <property name="cacheManager" ref="ehcache"></property> -->
+	<!-- </bean> -->
+
+
+	<!-- <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" -->
+	<!-- p:configLocation="classpath:ehcache.xml" -->
+	<!-- p:shared="true"/> -->
+
+
+
+
+
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<!-- <mvc:resources location="/fonts/" mapping="/fonts/**" /> -->
+	<!-- <mvc:resources location="/img/" mapping="/img/**" /> -->
 	<mvc:resources location="/js/" mapping="/js/**" />
-<!--  	<mvc:resources location="/src/" mapping="/src/**"  /> -->
-<!--  	<mvc:resources location="/graphs/" mapping="/graphs/**"  /> -->
-<!--  	<mvc:resources location="/assets/" mapping="/assets/**"  /> -->
+	<!-- <mvc:resources location="/src/" mapping="/src/**" /> -->
+	<!-- <mvc:resources location="/graphs/" mapping="/graphs/**" /> -->
+	<!-- <mvc:resources location="/assets/" mapping="/assets/**" /> -->
 
-	<context:property-placeholder location="classpath:application.properties"/>
-	
-	
-	<security:global-method-security pre-post-annotations="enabled" />
-	
-<!-- 	<import resource="/rci-seguro-directo-appContext.xml" /> -->
-	
+	<!-- <context:property-placeholder location="classpath:application.properties"/> -->
+
+
+	<security:global-method-security
+		pre-post-annotations="enabled" />
+
+	<import resource="classpath:reservas-appContext.xml" />
+
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -72,11 +71,11 @@ http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd"	>
 		</property>
 	</bean>
 	<bean id="multipartResolver"
-        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
- 
-         <!-- setting maximum upload size -->
-        <property name="maxUploadSize" value="100000" />
- 
-    </bean>
-	
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="100000" />
+
+	</bean>
+
 </beans>

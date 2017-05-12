@@ -8,8 +8,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-					 /WEB-INF/reservas-servlet.xml
-<!-- 					 /WEB-INF/database.xml -->
+					 /WEB-INF/reservas-servlet.xml		
 		</param-value>
 	</context-param>
 

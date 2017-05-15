@@ -6,6 +6,6 @@ import com.reservas.dao.UsuarioDAO;
 import com.reservas.model.UsuarioBO;
 
 @Repository
-public class UsuarioDAOImpl extends BaseDAOImpl<Integer, UsuarioBO> implements UsuarioDAO {
+public class UsuarioDAOImpl extends BaseDAOImpl<Long, UsuarioBO> implements UsuarioDAO {
 
 }

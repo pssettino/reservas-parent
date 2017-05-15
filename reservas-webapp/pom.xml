@@ -20,7 +20,6 @@
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-servlet-api</artifactId>
 			<version>7.0.77</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.reservas</groupId>
@@ -44,13 +43,11 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-pool</groupId>
 			<artifactId>commons-pool</artifactId>
 			<version>1.6</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- Spring dependencies -->
@@ -88,7 +85,6 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- Spring dependencies for dataaccess -->
@@ -172,13 +168,11 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.1.2</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<!-- conection pooling dependencies -->
@@ -186,7 +180,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.0</version>
-			<scope>provided</scope>
 		</dependency>
 		<!-- jsr303 validation -->
 		<dependency>
@@ -297,13 +290,11 @@
 			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
 			<version>1.1.1</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
-			<scope>provided</scope>
+			<version>5.1.6</version>	
 		</dependency>
 
 		<!-- Dependencias de Jackson para Habilitar JQuery Asincrónico -->
@@ -369,14 +360,12 @@
 			<groupId>xml-security</groupId>
 			<artifactId>xmlsec</artifactId>
 			<version>1.0.5D2</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>xalan</groupId>
 			<artifactId>xalan</artifactId>
 			<version>2.6.0</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -389,7 +378,6 @@
 			<groupId>com.sun.xml.stream</groupId>
 			<artifactId>sjsxp</artifactId>
 			<version>1.0.2</version>
-			<scope>provided</scope>
 		</dependency>
 
 

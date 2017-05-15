@@ -11,12 +11,12 @@ import com.reservas.service.UsuarioService;
 
 @Service
 @Transactional
-public class UsuarioServiceImpl extends BaseServiceImpl<Integer, UsuarioBO> implements UsuarioService {
+public class UsuarioServiceImpl extends BaseServiceImpl<Long, UsuarioBO> implements UsuarioService {
 
 	@Autowired
 	protected UsuarioDAO dao;
 
-	public BaseDAO<Integer, UsuarioBO> getDAO() {
+	public BaseDAO<Long, UsuarioBO> getDAO() {
 		return this.dao;
 	}
 

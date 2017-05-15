@@ -24,7 +24,7 @@ public class LogonController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
-		UsuarioBO user = usuarioService.get(1);
+		UsuarioBO user = usuarioService.get(1L);
 		return "login";
 	}
 

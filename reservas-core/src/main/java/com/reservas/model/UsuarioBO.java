@@ -15,58 +15,55 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "USERS")
 public class UsuarioBO {
 
 	@Id
-	@Column(name = "USU_ID")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer idUsuario;
+	private Long idUsuario;
 
-	@Column(name = "USU_APELLIDO")
+	@Column(name = "USER_APELLIDO")
 	private String apellido;
 
-	@Column(name = "USU_NOMBRE")
+	@Column(name = "USER_NOMBRE")
 	private String nombre;
 
-	@Column(name = "USU_NUMERO_DOCUMENTO")
+	@Column(name = "USER_USERNAME")
+	private String userName;
+
+	@Column(name = "USER_PASSWORD")
+	private String password;
+
+	@Column(name = "USER_NUMERO_DOCUMENTO")
 	private String nroDocumento;
 
-	@Column(name = "USU_IDIOMA")
+	@Column(name = "USER_IDIOMA")
 	private String idioma;
 
-	@Column(name = "USU_EMAIL")
+	@Column(name = "USER_EMAIL")
 	private String email;
 
-	@Column(name = "USU_FECHA_NACIMIENTO")
+	@Column(name = "USER_FECHA_NACIMIENTO")
 	private Date fechaNacimiento;
 
-	@Column(name = "USU_ESTADO")
+	@Column(name = "USER_ESTADO")
 	private Boolean estado;
 
-	@Column(name = "USU_TELEFONO_PARTICULAR")
+	@Column(name = "USER_TELEFONO_PARTICULAR")
 	private String telefonoParticular;
 
-	@Column(name = "USU_TELEFONO_LABORAL")
+	@Column(name = "USER_TELEFONO_LABORAL")
 	private String telefonoLaboral;
 
-	@Column(name = "USU_IMAGEN")
-	private String imagen;
-
-	@Column(name = "USU_CLAVE")
-	private String clave;
-
-	@Column(name = "USU_FECHA_ULTIMA_MODIFICACION_CLAVE")
+	@Column(name = "USER_FECHA_ULTIMA_MODIFICACION_CLAVE")
 	private Date fechaUltModifClave;
 
-	@Column(name = "USU_CANT_INTENTOS_FALLIDOS")
+	@Column(name = "USER_CANTIDAD_INTENTOS_FALLIDOS")
 	private Integer intentosFallidos = 0;
 
-	@Column(name = "USU_CUIT")
+	@Column(name = "USER_CUIT")
 	private String CUIT;
-
-	@Column(name = "USU_CODIGO_MARCA")
-	private String codigoMarca;
 
 	@Transient
 	private static final Integer MESES_VIGENCIA_CLAVE = 6;
@@ -74,11 +71,11 @@ public class UsuarioBO {
 	@Transient
 	public static final Integer CANTIDAD_MAXIMA_INTENTOS_FALLIDOS = 5;
 
-	public Integer getIdUsuario() {
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
+	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
@@ -159,22 +156,6 @@ public class UsuarioBO {
 		this.telefonoLaboral = telefonoLaboral;
 	}
 
-	public String getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
-
-	public String getClave() {
-		return clave;
-	}
-
-	public void setClave(String clave) {
-		this.clave = clave;
-	}
-
 	public String getCUIT() {
 		return CUIT;
 	}
@@ -230,12 +211,20 @@ public class UsuarioBO {
 		return this.getFechaUltModifClave().after(mesesVigencia);
 	}
 
-	public String getCodigoMarca() {
-		return codigoMarca;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setCodigoMarca(String codigoMarca) {
-		this.codigoMarca = codigoMarca;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

@@ -8,7 +8,11 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
+<<<<<<< HEAD
 					 /WEB-INF/reservas-servlet.xml					 
+=======
+					 /WEB-INF/reservas-servlet.xml		
+>>>>>>> branch 'master' of https://github.com/pssettino/reservas-parent.git
 		</param-value>
 	</context-param>
 

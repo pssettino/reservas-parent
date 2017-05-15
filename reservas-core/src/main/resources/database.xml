@@ -11,10 +11,17 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
+<<<<<<< HEAD
 		<property name="driverClassName" value="${database.driverClassName}" />
 		<property name="url" value="${database.url}" />
 		<property name="username" value="${database.username}" />
 		<property name="password" value="${database.password}" />
+=======
+		<property name="driverClassName" value="net.sourceforge.jtds.jdbc.Driver" />
+		<property name="url" value="jdbc:jtds:sqlserver://10.250.232.2/1433;databaseName=RCI_DESA" />
+		<property name="username" value="RCIPuestoVendedor_desa" />
+		<property name="password" value="3nero2016" />
+>>>>>>> branch 'master' of https://github.com/pssettino/reservas-parent.git
 	</bean>
 
 	<bean id="sessionFactory"

@@ -18,10 +18,12 @@
 					Already registered? <a href="#">Sign In</a>
 				</p>
 			</form>
-			<form class="login-form">
-				<input type="text" placeholder="username" /> <input type="password"
-					placeholder="password" />
-				<button>login</button>
+			<form class="login-form" id="loginForm" name="loginForm"
+				action="./login" method="post">
+				<input type="text" placeholder="username" id="username"
+					name="username" /> <input type="password" placeholder="password"
+					id="password" name="password" />
+				<button id="login" name="login" onclick="this.submit();">login</button>
 				<p class="message">
 					Not registered? <a href="#">Create an account</a>
 				</p>
@@ -35,9 +37,9 @@
 	<!-- Post -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	
+
 	<link href="css/login.css" rel="stylesheet">
-	
+
 
 	<script type="text/javascript">
 		$('.message a').click(function() {

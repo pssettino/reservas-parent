@@ -6,9 +6,12 @@ import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -64,6 +67,11 @@ public class UsuarioBO {
 
 	@Column(name = "USER_CUIT")
 	private String CUIT;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "USER_PER_ID", nullable = true)
+//	@JsonFilter("Perfil")
+	private PerfilBO perfil;
 
 	@Transient
 	private static final Integer MESES_VIGENCIA_CLAVE = 6;
@@ -227,4 +235,14 @@ public class UsuarioBO {
 		this.password = password;
 	}
 
+	public PerfilBO getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(PerfilBO perfil) {
+		this.perfil = perfil;
+	}
+
+	
+	
 }

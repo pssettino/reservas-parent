@@ -6,8 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.reservas.dao.BaseDAO;
 import com.reservas.dao.UsuarioDAO;
+import com.reservas.exeptions.BusinessExeption;
 import com.reservas.model.UsuarioBO;
 import com.reservas.service.UsuarioService;
+
+
 
 @Service
 @Transactional
@@ -18,6 +21,10 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Long, UsuarioBO> impleme
 
 	public BaseDAO<Long, UsuarioBO> getDAO() {
 		return this.dao;
+	}
+
+	public UsuarioBO findByUserNamePassword(String userName, String password) throws BusinessExeption {
+		return this.dao.findByUserNamePassword(userName, password);
 	}
 
 }

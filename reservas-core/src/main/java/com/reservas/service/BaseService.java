@@ -4,28 +4,27 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.reservas.dao.BaseDAO;
+import com.reservas.exeptions.BusinessExeption;
 
 public interface BaseService<KeyType extends Serializable, EntityClass> {
 
 	public BaseDAO<KeyType, EntityClass> getDAO();
 
-	public List<EntityClass> getAll();
+	public List<EntityClass> getAll() throws BusinessExeption;;
 
-	public EntityClass save(EntityClass tipo);
+	public EntityClass save(EntityClass tipo) throws BusinessExeption;;
 
-	public EntityClass delete(EntityClass tipo);
+	public EntityClass delete(EntityClass tipo) throws BusinessExeption;;
 
-	public EntityClass get(KeyType id);
+	public EntityClass get(KeyType id) throws BusinessExeption;;
 
-	// public EntityClass update(EntityClass tipo);
+	public List<EntityClass> findOrderAsc(String atributo) throws BusinessExeption;;
 
-	public List<EntityClass> findOrderAsc(String atributo);
+	public List<EntityClass> findOrderDesc(String atributo) throws BusinessExeption;;
 
-	public List<EntityClass> findOrderDesc(String atributo);
+	public List<EntityClass> findByProperty(String propertyName, String propertyValue) throws BusinessExeption;;
 
-	public List<EntityClass> findByProperty(String propertyName, String propertyValue);
+	public List<EntityClass> findByProperty(String propertyName, long propertyValue) throws BusinessExeption;;
 
-	public List<EntityClass> findByProperty(String propertyName, long propertyValue);
-
-	public List<EntityClass> findByProperty(String propertyName, Integer propertyValue);
+	public List<EntityClass> findByProperty(String propertyName, Integer propertyValue) throws BusinessExeption;;
 }

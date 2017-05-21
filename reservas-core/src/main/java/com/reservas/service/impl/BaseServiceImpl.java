@@ -5,53 +5,54 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.reservas.exeptions.BusinessExeption;
 import com.reservas.service.BaseService;
 
 public abstract class BaseServiceImpl<KeyType extends Serializable, EntityClass>
 		implements BaseService<KeyType, EntityClass> {
 
 	@Transactional
-	public List<EntityClass> getAll() {
+	public List<EntityClass> getAll() throws BusinessExeption {
 		return getDAO().getAll();
 	}
 
 	@Transactional
-	public EntityClass save(EntityClass entity) {
+	public EntityClass save(EntityClass entity) throws BusinessExeption {
 		return getDAO().save(entity);
 	}
 
 	@Transactional
-	public EntityClass delete(EntityClass entity) {
+	public EntityClass delete(EntityClass entity) throws BusinessExeption {
 		return getDAO().delete(entity);
 	}
 
 	@Transactional
-	public EntityClass get(KeyType id) {
+	public EntityClass get(KeyType id) throws BusinessExeption {
 		return getDAO().get(id);
 	}
 
 	@Transactional
-	public List<EntityClass> findOrderAsc(String atributo) {
+	public List<EntityClass> findOrderAsc(String atributo) throws BusinessExeption {
 		return getDAO().findOrderAsc(atributo);
 	}
 
 	@Transactional
-	public List<EntityClass> findOrderDesc(String atributo) {
+	public List<EntityClass> findOrderDesc(String atributo) throws BusinessExeption {
 		return getDAO().findOrderDesc(atributo);
 	}
 
 	@Transactional
-	public List<EntityClass> findByProperty(String propertyName, String propertyValue) {
+	public List<EntityClass> findByProperty(String propertyName, String propertyValue) throws BusinessExeption {
 		return getDAO().findByProperty(propertyName, propertyValue);
 	}
 
 	@Transactional
-	public List<EntityClass> findByProperty(String propertyName, long propertyValue) {
+	public List<EntityClass> findByProperty(String propertyName, long propertyValue) throws BusinessExeption {
 		return getDAO().findByProperty(propertyName, propertyValue);
 	}
 
 	@Transactional
-	public List<EntityClass> findByProperty(String propertyName, Integer propertyValue) {
+	public List<EntityClass> findByProperty(String propertyName, Integer propertyValue) throws BusinessExeption {
 		return getDAO().findByProperty(propertyName, propertyValue);
 	}
 }

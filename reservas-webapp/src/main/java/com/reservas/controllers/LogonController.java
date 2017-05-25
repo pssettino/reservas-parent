@@ -63,16 +63,14 @@ public class LogonController {
 
 						return modelView;
 					} else {
-						modelView.setViewName("error");
-						modelView.addObject("tituloError", "Clave no vigente");
-						modelView.addObject("mensajeError", "Clave no vigente");
+						modelView.setViewName("login");						
+						modelView.addObject("errorMessage", "Clave no vigente");
 						return modelView;
 					}
 				} else {
 					// TODO: usuario bloqueado
-					modelView.setViewName("error");
-					modelView.addObject("tituloError", "Bloqueado");
-					modelView.addObject("mensajeError", "Usuario Bloqueado");
+					modelView.setViewName("login");
+					modelView.addObject("errorMessage", "Usuario Bloqueado");
 					return modelView;
 				}
 			} else {
@@ -90,9 +88,8 @@ public class LogonController {
 						user.incrementarIntentosFallidos();
 						usuarioService.save(user);
 						if (user.quedanIntentos()) {
-							modelView.setViewName("error");
-							modelView.addObject("tituloError", "Contraseña Incorrecta");
-							modelView.addObject("mensajeError",
+							modelView.setViewName("login");
+							modelView.addObject("errorMessage",
 									"Contraseña Incorrecta quedan " + user.getIntentosFallidos() + " intentos");
 							return modelView;
 						} else {
@@ -103,23 +100,20 @@ public class LogonController {
 								// TODO: se olvido la contraseña
 							}
 
-							modelView.setViewName("error");
-							modelView.addObject("tituloError", "Usuario Bloqueado");
-							modelView.addObject("mensajeError", "Ya no quedan intentos, esta bloqueado");
+							modelView.setViewName("login");
+							modelView.addObject("errorMessage", "Ya no quedan intentos, esta bloqueado");
 							return modelView;
 						}
 					} else {
 						// TODO: ya no quedan intentos usuario bloqueado
-						modelView.setViewName("error");
-						modelView.addObject("tituloError", "Usuario Bloqueado");
-						modelView.addObject("mensajeError", "Ya no quedan intentos, esta bloqueado");
+						modelView.setViewName("login");
+						modelView.addObject("errorMessage", "Ya no quedan intentos, esta bloqueado");
 						return modelView;
 					}
 				} else {
 					// TODO: el usuario no existe.
-					modelView.setViewName("error");
-					modelView.addObject("tituloError", "Usuario inexistente");
-					modelView.addObject("mensajeError", "Usuario inexistente");
+					modelView.setViewName("login");
+					modelView.addObject("errorMessage", "Usuario inexistente");
 					return modelView;
 				}
 			}
@@ -132,6 +126,11 @@ public class LogonController {
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().invalidate();
 		return "login";
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView welcome(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+		return new ModelAndView("welcome");
 	}
 
 }

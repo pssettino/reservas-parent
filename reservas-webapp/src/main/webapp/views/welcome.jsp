@@ -50,11 +50,11 @@
 
 							<div class="pull-right form-inline">
 								<div class="btn-group">
-									<button class="btn btn-primary" data-calendar-nav="prev"><<
+									<button class="btn btn-primary" data-calendar-nav="prev">
 										Prev</button>
 									<button class="btn btn-default" data-calendar-nav="today">Today</button>
 									<button class="btn btn-primary" data-calendar-nav="next">Next
-										>></button>
+									</button>
 								</div>
 								<div class="btn-group">
 									<button class="btn btn-warning" data-calendar-view="year">Year</button>
@@ -111,16 +111,16 @@
 
 		</div>
 		<!-- /#wrapper -->
+	</div>
 
+	<jsp:include page="commons.jsp"></jsp:include>
 
-		<jsp:include page="commons.jsp"></jsp:include>
-
-		<script type="text/javascript"
-			src="components/underscore/underscore-min.js"></script>
-		<script type="text/javascript"
-			src="components/jstimezonedetect/jstz.min.js"></script>
-		<script type="text/javascript" src="js/calendar.js"></script>
-		<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript"
+		src="components/underscore/underscore-min.js"></script>
+	<script type="text/javascript"
+		src="components/jstimezonedetect/jstz.min.js"></script>
+	<script type="text/javascript" src="js/calendar.js"></script>	
+	<script type="text/javascript" src="js/app.js"></script>
 </body>
 
 </html>

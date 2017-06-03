@@ -27,7 +27,7 @@ import com.reservas.service.UsuarioService;
 import com.reservas.utils.Constantes;
 
 @Controller
-public class LogonController {
+public class LogonController extends AbstractBaseController {
 
 	Log log = LogFactory.getLog(LogonController.class);
 
@@ -35,7 +35,8 @@ public class LogonController {
 	private UsuarioService usuarioService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, ModelMap model)
+			throws Exception {
 
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -55,15 +56,14 @@ public class LogonController {
 								user.getPerfil().getId(), permissions);
 						SecurityContextHolder.getContext().setAuthentication(newAuth);
 						request.getSession().setAttribute("usuario", user.getNombre() + " " + user.getApellido());
-						request.getSession().setAttribute(Constantes.KEY_ID_USUARIO, user.getIdUsuario());
-						request.getSession().setAttribute(Constantes.KEY_USUARIO_BO, user);
-
+						super.addSessionAttribute(request, Constantes.KEY_ID_USUARIO, user.getIdUsuario());
+						super.addSessionAttribute(request, Constantes.KEY_USUARIO_BO, user);
 						modelView.setViewName("welcome");
 						modelView.addObject("mensaje", "bienvenido");
 
 						return modelView;
 					} else {
-						modelView.setViewName("login");						
+						modelView.setViewName("login");
 						modelView.addObject("errorMessage", "Clave no vigente");
 						return modelView;
 					}
@@ -124,6 +124,8 @@ public class LogonController {
 
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		super.removeSessionAttribute(request, Constantes.KEY_USUARIO_BO);
+		super.removeSessionAttribute(request, Constantes.KEY_ID_USUARIO);
 		request.getSession().invalidate();
 		return "login";
 	}

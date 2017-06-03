@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ReportesController {
-	
+public class ReportesController extends AbstractBaseController {
+
 	@RequestMapping(value = "/reportes", method = RequestMethod.GET)
 	public ModelAndView reportes(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		return new ModelAndView("reportes");
 	}
-
 
 }

@@ -18,58 +18,58 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 public class UsuarioBO {
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idUsuario;
 
-	@Column(name = "USER_APELLIDO")
+	@Column(name = "user_apellido")
 	private String apellido;
 
-	@Column(name = "USER_NOMBRE")
+	@Column(name = "user_nombre")
 	private String nombre;
 
-	@Column(name = "USER_USERNAME")
+	@Column(name = "user_username")
 	private String userName;
 
-	@Column(name = "USER_PASSWORD")
+	@Column(name = "user_password")
 	private String password;
 
-	@Column(name = "USER_NUMERO_DOCUMENTO")
+	@Column(name = "user_numero_documento")
 	private String nroDocumento;
 
-	@Column(name = "USER_IDIOMA")
+	@Column(name = "user_idioma")
 	private String idioma;
 
-	@Column(name = "USER_EMAIL")
+	@Column(name = "user_email")
 	private String email;
 
-	@Column(name = "USER_FECHA_NACIMIENTO")
+	@Column(name = "user_fecha_nacimiento")
 	private Date fechaNacimiento;
 
-	@Column(name = "USER_ESTADO")
+	@Column(name = "user_estado")
 	private Boolean estado;
 
-	@Column(name = "USER_TELEFONO_PARTICULAR")
+	@Column(name = "user_telefono_particular")
 	private String telefonoParticular;
 
-	@Column(name = "USER_TELEFONO_LABORAL")
+	@Column(name = "user_telefono_laboral")
 	private String telefonoLaboral;
 
-	@Column(name = "USER_FECHA_ULTIMA_MODIFICACION_CLAVE")
+	@Column(name = "user_fecha_ultima_modificacion_clave")
 	private Date fechaUltModifClave;
 
-	@Column(name = "USER_CANTIDAD_INTENTOS_FALLIDOS")
+	@Column(name = "user_cantidad_intentos_fallidos")
 	private Integer intentosFallidos = 0;
 
-	@Column(name = "USER_CUIT")
+	@Column(name = "user_cuit")
 	private String CUIT;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "USER_PER_ID", nullable = true)
+	@JoinColumn(name = "user_per_id", nullable = true)
 //	@JsonFilter("Perfil")
 	private PerfilBO perfil;
 

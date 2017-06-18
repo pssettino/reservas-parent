@@ -41,8 +41,17 @@
 								Eventos</a></li>
 						<li><a href="reportes"><i
 								class="fa fa-bar-chart-o fa-fw"></i> Reportes</a></li>
-						<li><a href="tables.html"><i class="fa fa-wrench fa-fw"></i>
-								Usuarios</a></li>
+						<li><a href="#"><i class="fa fa-wrench fa-fw"></i>
+								Administracion</a>
+								 <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="admClientes">Adm Clientes</a>
+                                </li>
+                                <li>
+                                    <a href="admUsuarios">Adm Usuarios</a>
+                                </li>
+                            </ul>
+								</li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->

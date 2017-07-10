@@ -50,6 +50,8 @@ http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
 	<mvc:resources location="/components/" mapping="/components/**" />
 	<mvc:resources location="/tmpls/" mapping="/tmpls/**" />
 	<mvc:resources location="/src/" mapping="/src/**" />
+	<mvc:resources location="/calendar/" mapping="/calendar/**" />
+	<mvc:resources location="/reservas/" mapping="/reservas/**" />
 	<!-- <mvc:resources location="/graphs/" mapping="/graphs/**" /> -->
 	<!-- <mvc:resources location="/assets/" mapping="/assets/**" /> -->
 

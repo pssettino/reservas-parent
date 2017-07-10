@@ -5,8 +5,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +21,8 @@ public class EventoBO implements Serializable {
 
 	@Id
 	@Column(name = "eve_id")
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@Column(name = "eve_fecha_desde")
 	private Date fechaDesde;
@@ -37,14 +39,14 @@ public class EventoBO implements Serializable {
 	@Column(name = "eve_descripcion")
 	private String descripcion;
 
-	@OneToOne
-	private TipoEventoBO tipoEvento;
+	// @OneToOne
+	// private TipoEventoBO tipoEvento;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -88,14 +90,6 @@ public class EventoBO implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public TipoEventoBO getTipoEvento() {
-		return tipoEvento;
-	}
-
-	public void setTipoEvento(TipoEventoBO tipoEvento) {
-		this.tipoEvento = tipoEvento;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -104,7 +98,6 @@ public class EventoBO implements Serializable {
 		result = prime * result + ((fechaDesde == null) ? 0 : fechaDesde.hashCode());
 		result = prime * result + ((fechaHasta == null) ? 0 : fechaHasta.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((tipoEvento == null) ? 0 : tipoEvento.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		result = prime * result + ((todoDia == null) ? 0 : todoDia.hashCode());
 		return result;
@@ -139,11 +132,6 @@ public class EventoBO implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (tipoEvento == null) {
-			if (other.tipoEvento != null)
-				return false;
-		} else if (!tipoEvento.equals(other.tipoEvento))
-			return false;
 		if (titulo == null) {
 			if (other.titulo != null)
 				return false;
@@ -160,7 +148,7 @@ public class EventoBO implements Serializable {
 	@Override
 	public String toString() {
 		return "EventoBO [id=" + id + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + ", todoDia="
-				+ todoDia + ", titulo=" + titulo + ", descripcion=" + descripcion + ", tipoEvento=" + tipoEvento + "]";
+				+ todoDia + ", titulo=" + titulo + ", descripcion=" + descripcion + "]";
 	}
 
 }

@@ -68,15 +68,15 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items=${clientes } var="cliente" varStatus="index">
-											<tr>
-												<td>${cliente.apellido }</td>
-												<td>${cliente.nombre }</td>
-												<td>${cliente.dni }</td>
-												<td>${cliente.telefono }</td>
-												<td>${cliente.email }</td>
-											</tr>
-										</c:forEach>
+<%-- 										<c:forEach items=${clientes } var="cliente" varStatus="index"> --%>
+<!-- 											<tr> -->
+<%-- 												<td>${cliente.apellido }</td> --%>
+<%-- 												<td>${cliente.nombre }</td> --%>
+<%-- 												<td>${cliente.dni }</td> --%>
+<%-- 												<td>${cliente.telefono }</td> --%>
+<%-- 												<td>${cliente.email }</td> --%>
+<!-- 											</tr> -->
+<%-- 										</c:forEach> --%>
 
 									</tbody>
 								</table>

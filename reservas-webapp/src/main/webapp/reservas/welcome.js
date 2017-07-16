@@ -35,7 +35,8 @@ $(document)
 											obj = {
 												id : value.id,
 												title : value.title,
-												start : value.start.substring(0,10)
+												start : value.start.substring(
+														0, 10)
 											};
 
 										}

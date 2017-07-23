@@ -1,12 +1,12 @@
 package com.reservas.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -22,6 +22,7 @@ public class ClienteBO implements Serializable {
 	private static final long serialVersionUID = -4542473738866179570L;
 
 	@Id
+	@GeneratedValue
 	@Column(name = "cli_id")
 	private Integer id;
 
@@ -49,6 +50,39 @@ public class ClienteBO implements Serializable {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cli_localidad_fk", nullable = true)
 	private LocalidadBO localidad;
+
+	public ClienteBO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ClienteBO(Integer id, String nombre, String apellido, Long dni, String telefono, Date fechaAlta,
+			Boolean eliminado, String email, LocalidadBO localidad) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.telefono = telefono;
+		this.fechaAlta = fechaAlta;
+		this.eliminado = eliminado;
+		this.email = email;
+		this.localidad = localidad;
+	}
+
+	public ClienteBO(String nombre, String apellido, Long dni, String telefono, Date fechaAlta, Boolean eliminado,
+			String email) {
+		super();
+
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.telefono = telefono;
+		this.fechaAlta = fechaAlta;
+		this.eliminado = eliminado;
+		this.email = email;
+
+	}
 
 	public Integer getId() {
 		return id;

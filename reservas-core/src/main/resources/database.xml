@@ -15,6 +15,9 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/reservas" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
+<!-- 		<property name="url" value="jdbc:mysql://167.250.4.41:5058/c688chiquipark" />		 -->
+<!-- 		<property name="username" value="c688root" /> -->
+<!-- 		<property name="password" value="root$123" /> -->
 	</bean>
 
 	<bean id="sessionFactory"

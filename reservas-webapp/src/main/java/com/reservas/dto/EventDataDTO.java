@@ -8,17 +8,15 @@ public class EventDataDTO implements Serializable {
 	private String title;
 	private String start;
 	private String end;
+	private Boolean allDay;
 
-	
-	
-	
-	
-	public EventDataDTO(Long id, String title, String start, String end) {
+	public EventDataDTO(Long id, String title, String start, String end, Boolean allDay) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.start = start;
 		this.end = end;
+		this.allDay = allDay;
 	}
 
 	public EventDataDTO() {
@@ -28,6 +26,14 @@ public class EventDataDTO implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Boolean getAllDay() {
+		return allDay;
+	}
+
+	public void setAllDay(Boolean allDay) {
+		this.allDay = allDay;
 	}
 
 	public void setId(Long id) {
@@ -57,7 +63,5 @@ public class EventDataDTO implements Serializable {
 	public void setEnd(String end) {
 		this.end = end;
 	}
-
-	
 
 }

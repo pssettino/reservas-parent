@@ -38,15 +38,20 @@ public class ScheduleController extends AbstractBaseController {
 	public EventDataDTO saveEvent(HttpServletRequest request, HttpServletResponse response, ModelMap model,
 			@RequestBody EventDataDTO eventData) throws Exception {
 
-		saveOrUpdateEvent(eventData, new EventoBO());
+		EventoBO evt = saveOrUpdateEvent(eventData, new EventoBO());
+		eventData.setId(evt.getId());
 		return eventData;
 	}
 
-	private void saveOrUpdateEvent(EventDataDTO eventData, EventoBO evt) throws ParseException, BusinessExeption {
+	private EventoBO saveOrUpdateEvent(EventDataDTO eventData, EventoBO evt) throws ParseException, BusinessExeption {
 		SimpleDateFormat sdf;
 
 		String start = eventData.getStart();
+
 		String end = eventData.getEnd();
+		if (evt.getId() == null) {
+			end = null;
+		}
 
 		if (!Strings.isNullOrEmpty(start) && start.length() > 10) {
 			sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -65,12 +70,22 @@ public class ScheduleController extends AbstractBaseController {
 		} else {
 			evt.setFechaHasta(null);
 		}
+
+		if (eventData.getAllDay() != null && eventData.getAllDay()) {
+			evt.setFechaHasta(null);
+		} else {
+			if (!Strings.isNullOrEmpty(end)) {
+				evt.setFechaHasta(sdf.parse(end));
+			} else {
+				evt.setFechaHasta(null);
+			}
+		}
 		evt.setDescripcion(evt.getTitulo());
 		evt.setTitulo(eventData.getTitle());
 
 		evt.setTodoDia(Strings.isNullOrEmpty(end));
 
-		eventoService.save(evt);
+		return eventoService.save(evt);
 	}
 
 	@RequestMapping(value = "/getAllEvents", method = RequestMethod.POST)
@@ -86,16 +101,17 @@ public class ScheduleController extends AbstractBaseController {
 			Date desde = eventoBO.getFechaDesde();
 			Date hasta = eventoBO.getFechaHasta();
 
-			String fechaDesde=null;
-			String fechaHasta=null;
+			String fechaDesde = null;
+			String fechaHasta = null;
 			if (desde != null) {
-				fechaDesde = sdf.format(desde);
+				fechaDesde = sdf.format(desde).replace(" ", "T");
 			}
 			if (hasta != null) {
-				fechaHasta = sdf.format(hasta);
+				fechaHasta = sdf.format(hasta).replace(" ", "T");;
 			}
 
-			eventosDTO.add(new EventDataDTO(eventoBO.getId(), eventoBO.getTitulo(), fechaDesde, fechaHasta));
+			eventosDTO.add(new EventDataDTO(eventoBO.getId(), eventoBO.getTitulo(), fechaDesde, fechaHasta,
+					eventoBO.getTodoDia()));
 		}
 
 		return eventosDTO;

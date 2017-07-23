@@ -15,8 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
 @Table(name = "users")
 public class UsuarioBO {
@@ -66,11 +64,11 @@ public class UsuarioBO {
 	private Integer intentosFallidos = 0;
 
 	@Column(name = "user_cuit")
-	private String CUIT;
+	private String cuit;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_per_id", nullable = true)
-//	@JsonFilter("Perfil")
+	// @JsonFilter("Perfil")
 	private PerfilBO perfil;
 
 	@Transient
@@ -78,6 +76,40 @@ public class UsuarioBO {
 
 	@Transient
 	public static final Integer CANTIDAD_MAXIMA_INTENTOS_FALLIDOS = 5;
+
+	public UsuarioBO() {
+	}
+
+	
+	
+	
+	
+	public UsuarioBO(Long idUsuario, String apellido, String nombre, String userName, String password,
+			String nroDocumento, String idioma, String email, Date fechaNacimiento, Boolean estado,
+			String telefonoParticular, String telefonoLaboral, Date fechaUltModifClave, Integer intentosFallidos,
+			String cuit, PerfilBO perfil) {
+		super();
+		this.idUsuario = idUsuario;
+		this.apellido = apellido;
+		this.nombre = nombre;
+		this.userName = userName;
+		this.password = password;
+		this.nroDocumento = nroDocumento;
+		this.idioma = idioma;
+		this.email = email;
+		this.fechaNacimiento = fechaNacimiento;
+		this.estado = estado;
+		this.telefonoParticular = telefonoParticular;
+		this.telefonoLaboral = telefonoLaboral;
+		this.fechaUltModifClave = fechaUltModifClave;
+		this.intentosFallidos = intentosFallidos;
+		this.cuit = cuit;
+		this.perfil = perfil;
+	}
+
+
+
+
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -97,10 +129,6 @@ public class UsuarioBO {
 
 	public String getNombre() {
 		return nombre;
-	}
-
-	public String getNombreApellido() {
-		return getNombre() + " " + getApellido();
 	}
 
 	public void setNombre(String nombre) {
@@ -131,7 +159,6 @@ public class UsuarioBO {
 		this.email = email;
 	}
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
@@ -164,14 +191,6 @@ public class UsuarioBO {
 		this.telefonoLaboral = telefonoLaboral;
 	}
 
-	public String getCUIT() {
-		return CUIT;
-	}
-
-	public void setCUIT(String cuit) {
-		this.CUIT = cuit;
-	}
-
 	public Date getFechaUltModifClave() {
 		return fechaUltModifClave;
 	}
@@ -181,11 +200,19 @@ public class UsuarioBO {
 	}
 
 	public Integer getIntentosFallidos() {
-		return (this.intentosFallidos != null ? this.intentosFallidos : 0);
+		return intentosFallidos;
 	}
 
-	public void setIntentosFallidos(Integer i) {
-		this.intentosFallidos = i;
+	public void setIntentosFallidos(Integer intentosFallidos) {
+		this.intentosFallidos = intentosFallidos;
+	}
+
+	public String getCuit() {
+		return cuit;
+	}
+
+	public void setCuit(String cuit) {
+		this.cuit = cuit;
 	}
 
 	public Boolean estaBloqueado() {
@@ -243,6 +270,4 @@ public class UsuarioBO {
 		this.perfil = perfil;
 	}
 
-	
-	
 }

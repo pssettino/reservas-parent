@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- jQuery -->
+
 <script src="js/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
@@ -12,3 +13,5 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="js/sb-admin-2.js"></script>
+
+<script src="js/bootstrap-confirmation.min.js"></script>

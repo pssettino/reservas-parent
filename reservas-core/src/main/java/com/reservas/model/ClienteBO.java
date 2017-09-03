@@ -12,6 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Entity
 @Table(name = "cliente")
 public class ClienteBO implements Serializable {

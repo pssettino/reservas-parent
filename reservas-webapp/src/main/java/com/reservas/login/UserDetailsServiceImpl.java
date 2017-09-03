@@ -16,6 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.reservas.dao.UsuarioDAO;
 import com.reservas.model.UsuarioBO;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements org.springframework.security.core.userdetails.UserDetailsService {
 

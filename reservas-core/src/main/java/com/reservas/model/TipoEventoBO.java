@@ -7,6 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Entity
 @Table(name = "tipo_evento")
 public class TipoEventoBO implements Serializable {

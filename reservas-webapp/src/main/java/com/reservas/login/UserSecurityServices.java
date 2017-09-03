@@ -11,6 +11,11 @@ import com.reservas.dao.UsuarioDAO;
 import com.reservas.model.PersistentTokenBO;
 import com.reservas.model.UsuarioBO;
 
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Service("userServices")
 public class UserSecurityServices {
 

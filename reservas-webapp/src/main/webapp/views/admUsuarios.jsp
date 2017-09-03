@@ -59,7 +59,7 @@
 									id="dataTables-example">
 									<thead>
 										<tr>
-										<th>Nombre de Usuario</th>
+											<th>Nombre de Usuario</th>
 											<th>Apellido</th>
 											<th>Nombre</th>
 											<th>DNI</th>
@@ -78,14 +78,15 @@
 												<td>${user.telefonoParticular }</td>
 												<td>${user.email }</td>
 												<td>
-													<button type="button" data-idusuario="${user.idUsuario }" id="btnEditarUsuario"
-														name="btnEditarUsuario" class="btn btn-info btnEditarUsuario">
+													<button type="button" data-idusuario="${user.idUsuario }"
+														id="btnEditarUsuario" name="btnEditarUsuario"
+														class="btn btn-info btnEditarUsuario">
 														<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 													</button>
-													<button type="button" data-idusuario="${user.idUsuario }" data-toggle="confirmation" 
-													data-singleton="true"
-													id="btnEliminarUsuario"
-														name="btnEliminarUsuario" class="btn btn-danger btnEliminarUsuario">
+													<button type="button" data-idusuario="${user.idUsuario }"
+														data-toggle="confirmation" data-singleton="true"
+														id="btnEliminarUsuario" name="btnEliminarUsuario"
+														class="btn btn-danger btnEliminarUsuario">
 														<i class="fa fa-trash" aria-hidden="true"></i>
 													</button>
 												</td>
@@ -94,7 +95,7 @@
 
 									</tbody>
 								</table>
-								
+
 								<div id="modalUsuario" class="modal fade" role="dialog">
 									<div class="modal-dialog-center modal-lg">
 
@@ -105,43 +106,83 @@
 												<h4 class="modal-title">Administrar Usuario</h4>
 											</div>
 											<div class="modal-body">
-												<form:form method="POST"
-													action="/reservas-webapp/saveUsuario"
-													modelAttribute="usuarioDTO">
-													<div class="form-group">
-														<form:label path="apellido">Apellido</form:label>
-														<form:hidden path="idUsuario"/>
-														<form:input path="apellido" class="form-control"
-															placeholder="Ingrese Apellido" />
-													</div>
-													<div class="form-group">
-														<form:label path="nombre">Nombre</form:label>
-														<form:input path="nombre" class="form-control"
-															placeholder="Ingrese Nombre"  />
-													</div>
-													<div class="form-group">
-														<form:label path="nroDocumento">DNI</form:label>
-														<form:input path="nroDocumento" class="form-control"
-															placeholder="Ingrese DNI"   />
-													</div>
-													<div class="form-group">
-														<form:label path="telefonoParticular">Telefono</form:label>
-														<form:input path="telefonoParticular" class="form-control"
-															placeholder="Ingrese Telefono" />
-													</div>
-													<div class="form-group">
-														<form:label path="email">Email</form:label>
-														<form:input path="email" class="form-control"
-															placeholder="Ingrese Email"   />
-													</div>
+												<div class="clearfix"></div>
+												<div class="panel panel-default">													
+													<div class="panel-body">
+														<form:form method="POST"
+															action="/reservas-webapp/saveUsuario"
+															modelAttribute="usuarioDTO">
+															<div class="col-sm-6 col-xs-12">
+																<div class="form-group">
+																	<form:label path="apellido">Apellido</form:label>
+																	<form:hidden path="idUsuario" />
+																	<form:input path="apellido" class="form-control"
+																		placeholder="Ingrese Apellido" />
+																</div>
+																<div class="form-group">
+																	<form:label path="nombre">Nombre</form:label>
+																	<form:input path="nombre" class="form-control"
+																		placeholder="Ingrese Nombre" />
+																</div>
+																<div class="form-group">
+																	<form:label path="nroDocumento">DNI</form:label>
+																	<form:input path="nroDocumento" class="form-control"
+																		placeholder="Ingrese DNI" />
+																</div>
+																<div class="form-group">
+																	<form:label path="">Estado Civil</form:label>
+																	<select id="detalleEstadoCivil" class="form-control"
+																		name="detalleEstadoCivil">
+																		<option value="" selected="">- Seleccionar -</option>
 
-													<div class="modal-footer">
-														<button type="submit" id="btnGuardarUsuario"
-															class="btn btn-success">Guardar</button>
-														<button type="button" class="btn btn-default"
-															data-dismiss="modal">Close</button>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<form:label path="">Fecha de Nacimiento</form:label>
+																	<div class="input-group date">
+																		<input type="text" id="detalleFechaNacimiento"
+																			name="detalleFechaNacimiento" class="form-control"
+																			value=""> <span class="input-group-addon"><i
+																			class="glyphicon glyphicon-calendar"></i></span>
+																	</div>
+																</div>
+
+																<div class="form-group">
+																	<form:label path="">Estado</form:label>
+																	<select id="detalleEstado" class="form-control"
+																		name="detalleEstado" disabled="">
+
+																	</select>
+																</div>
+
+
+															</div>
+															<div class="col-sm-6 col-xs-12">
+																<div class="form-group">
+																	<form:label path="telefonoParticular">Telefono Particular</form:label>
+																	<form:input path="telefonoParticular"
+																		class="form-control" placeholder="Ingrese Telefono" />
+																</div>
+																<div class="form-group">
+																	<form:label path="telefonoLaboral">Telefono Laboral</form:label>
+																	<form:input path="telefonoLaboral" class="form-control"
+																		placeholder="Ingrese Telefono" />
+																</div>
+																<div class="form-group">
+																	<form:label path="email">Email</form:label>
+																	<form:input path="email" class="form-control"
+																		placeholder="Ingrese Email" />
+																</div>
+																<div class="modal-footer">
+																	<button type="submit" id="btnGuardarUsuario"
+																		class="btn btn-success">Guardar</button>
+																	<button type="button" class="btn btn-default"
+																		data-dismiss="modal">Close</button>
+																</div>
+															</div>
+														</form:form>
 													</div>
-												</form:form>
+												</div>
 											</div>
 										</div>
 
@@ -170,34 +211,38 @@
 	<script src="js/dataTables.responsive.js"></script>
 	<script src="reservas/abmUsuarios.js"></script>
 	<script>
-		$(document).ready(function() {
-			$('#dataTables-example').DataTable({
-				responsive : true,
-				language: {
-                    processing:     "Procesando...",
-                    search:         "Buscar:",
-                    lengthMenu:    "Mostrar _MENU_ registros",
-                    info:           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    infoEmpty:      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    infoFiltered:   "((filtrado de un total de _MAX_ registros)",
-                    infoPostFix:    "",
-                    loadingRecords: "Cargando...",
-                    zeroRecords:    "No se encontraron resultados",
-                    emptyTable:     "Ningún dato disponible en esta tabla",
-                    paginate: {
-                        first:      "Primero",
-                        previous:   "Ultimo",
-                        next:       "Siguiente",
-                        last:       "Anterior"
-                    },
-                    aria: {
-                        sortAscending:  ": Activar para ordenar la columna de manera ascendente",
-                        sortDescending: ": Activar para ordenar la columna de manera descendente"
-                    }
-                }
-				
-			});
-		});
+		$(document)
+				.ready(
+						function() {
+							$('#dataTables-example')
+									.DataTable(
+											{
+												responsive : true,
+												language : {
+													processing : "Procesando...",
+													search : "Buscar:",
+													lengthMenu : "Mostrar _MENU_ registros",
+													info : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+													infoEmpty : "Mostrando registros del 0 al 0 de un total de 0 registros",
+													infoFiltered : "((filtrado de un total de _MAX_ registros)",
+													infoPostFix : "",
+													loadingRecords : "Cargando...",
+													zeroRecords : "No se encontraron resultados",
+													emptyTable : "Ningún dato disponible en esta tabla",
+													paginate : {
+														first : "Primero",
+														previous : "Ultimo",
+														next : "Siguiente",
+														last : "Anterior"
+													},
+													aria : {
+														sortAscending : ": Activar para ordenar la columna de manera ascendente",
+														sortDescending : ": Activar para ordenar la columna de manera descendente"
+													}
+												}
+
+											});
+						});
 	</script>
 
 </body>

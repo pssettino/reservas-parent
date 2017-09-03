@@ -9,6 +9,12 @@ import com.reservas.dao.ClienteDAO;
 import com.reservas.model.ClienteBO;
 import com.reservas.service.ClienteService;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Service
 @Transactional
 public class ClienteSeviceImpl extends BaseServiceImpl<Long, ClienteBO> implements ClienteService {

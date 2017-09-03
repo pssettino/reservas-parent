@@ -3,6 +3,12 @@ package com.reservas.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 public class ClienteDTO implements Serializable {
 
 	private Integer id;

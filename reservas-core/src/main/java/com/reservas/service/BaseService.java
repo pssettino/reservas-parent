@@ -1,6 +1,12 @@
 package com.reservas.service;
 
 import java.io.Serializable;
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 import java.util.List;
 
 import com.reservas.dao.BaseDAO;

@@ -6,6 +6,12 @@ import org.springframework.stereotype.Repository;
 import com.reservas.dao.UsuarioDAO;
 import com.reservas.model.UsuarioBO;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Repository
 public class UsuarioDAOImpl extends BaseDAOImpl<Long, UsuarioBO> implements UsuarioDAO {
 

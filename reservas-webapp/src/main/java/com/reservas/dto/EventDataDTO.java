@@ -2,6 +2,12 @@ package com.reservas.dto;
 
 import java.io.Serializable;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 public class EventDataDTO implements Serializable {
 
 	private Long id;

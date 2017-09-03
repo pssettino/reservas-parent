@@ -25,6 +25,11 @@ import com.reservas.model.ClienteBO;
 import com.reservas.service.ClienteService;
 import com.reservas.utils.JsonResponse;
 
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Controller
 public class AdmClientesController extends AbstractBaseController {
 	@Autowired

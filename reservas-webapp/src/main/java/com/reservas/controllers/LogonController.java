@@ -26,6 +26,12 @@ import com.reservas.model.UsuarioBO;
 import com.reservas.service.UsuarioService;
 import com.reservas.utils.Constantes;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Controller
 public class LogonController extends AbstractBaseController {
 

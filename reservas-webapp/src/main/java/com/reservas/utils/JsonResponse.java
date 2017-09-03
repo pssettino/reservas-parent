@@ -3,6 +3,12 @@ package com.reservas.utils;
 import java.io.Serializable;
 import java.util.List;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 public class JsonResponse<T extends Serializable> {
 
 	private Boolean success;

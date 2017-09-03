@@ -2,7 +2,11 @@ package com.reservas.model;
 
 import java.sql.Date;
 
-
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 public class PersistentTokenBO {
 	
 	private UsuarioBO usuario;

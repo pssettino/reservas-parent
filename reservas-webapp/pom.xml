@@ -12,7 +12,7 @@
 	<artifactId>reservas-webapp</artifactId>
 
 	<packaging>war</packaging>
-	<name>reservas-webapp</name>
+	<name>Eventos Online</name>
 
 
 	<dependencies>
@@ -407,5 +407,9 @@
 			</resource>
 		</resources>
 	</build>
+	<description>Sistema de  reserva de enventos online</description>
+	<organization>
+		<name>Pablo Gabriel Settino</name>
+	</organization>
 </project>
 

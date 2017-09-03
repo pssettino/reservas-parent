@@ -16,11 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
  * Copyright 2017
  */
 @Controller
-public class ReportesController extends AbstractBaseController {
-
-	@RequestMapping(value = "/reportes", method = RequestMethod.GET)
+public class UsuarioConfiguracionController {
+	
+	@RequestMapping(value = "/usuarioConfiguracion", method = RequestMethod.GET)
 	public ModelAndView reportes(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
-		return new ModelAndView("reportes");
+		return new ModelAndView("usuarioConfiguracion");
 	}
 
 }

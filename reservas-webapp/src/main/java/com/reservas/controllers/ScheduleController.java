@@ -25,6 +25,12 @@ import com.reservas.exeptions.BusinessExeption;
 import com.reservas.model.EventoBO;
 import com.reservas.service.EventoService;
 
+
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Controller
 public class ScheduleController extends AbstractBaseController {
 

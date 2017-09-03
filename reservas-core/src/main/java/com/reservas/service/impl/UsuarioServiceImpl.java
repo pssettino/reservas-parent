@@ -11,7 +11,11 @@ import com.reservas.model.UsuarioBO;
 import com.reservas.service.UsuarioService;
 
 
-
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 @Service
 @Transactional
 public class UsuarioServiceImpl extends BaseServiceImpl<Long, UsuarioBO> implements UsuarioService {

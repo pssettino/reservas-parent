@@ -244,4 +244,9 @@
 
 	</dependencies>
 
+	<name>Eventos Online</name>
+	<description>Sistema de reservas de eventos online</description>
+	<organization>
+		<name>Pablo Gabriel Settino</name>
+	</organization>
 </project>

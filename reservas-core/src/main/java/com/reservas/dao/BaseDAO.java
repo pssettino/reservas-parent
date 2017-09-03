@@ -2,6 +2,11 @@ package com.reservas.dao;
 
 import java.util.List;
 
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 public interface BaseDAO<KeyType, EntityClass> {
 
 	public EntityClass get(KeyType id);

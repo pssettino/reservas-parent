@@ -8,6 +8,11 @@ import org.apache.log4j.Logger;
 import com.reservas.model.UsuarioBO;
 import com.reservas.utils.Constantes;
 
+/**
+ * @author pablo gabriel settino
+ * Fecha: 2017-07-22 
+ * Copyright 2017
+ */
 public abstract class AbstractBaseController {
 	Logger logger = Logger.getLogger(this.getClass());
 

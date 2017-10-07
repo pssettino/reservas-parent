@@ -4,12 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author pablo gabriel settino
- * Fecha: 2017-07-22 
- * Copyright 2017
+ * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 public class UsuarioDTO implements Serializable {
-	
 
 	/**
 	 * 
@@ -28,11 +25,9 @@ public class UsuarioDTO implements Serializable {
 
 	private String nroDocumento;
 
-	private String idioma;
-
 	private String email;
 
-	private Date fechaNacimiento;
+	private String fechaNacimiento;
 
 	private Boolean estado;
 
@@ -44,8 +39,6 @@ public class UsuarioDTO implements Serializable {
 
 	private Integer intentosFallidos = 0;
 
-	private String cuit;
-
 	private String perfil;
 
 	public UsuarioDTO() {
@@ -53,16 +46,14 @@ public class UsuarioDTO implements Serializable {
 	}
 
 	public UsuarioDTO(Long idUsuario, String apellido, String nombre, String userName, String password,
-			String nroDocumento, String idioma, String email, Date fechaNacimiento, Boolean estado,
-			String telefonoParticular, String telefonoLaboral, Date fechaUltModifClave, Integer intentosFallidos,
-			String cuit, String perfil) {
+			String nroDocumento, String email, String fechaNacimiento, Boolean estado, String telefonoParticular,
+			String telefonoLaboral, Date fechaUltModifClave, Integer intentosFallidos, String perfil) {
 		this.idUsuario = idUsuario;
 		this.apellido = apellido;
 		this.nombre = nombre;
 		this.userName = userName;
 		this.password = password;
 		this.nroDocumento = nroDocumento;
-		this.idioma = idioma;
 		this.email = email;
 		this.fechaNacimiento = fechaNacimiento;
 		this.estado = estado;
@@ -70,7 +61,6 @@ public class UsuarioDTO implements Serializable {
 		this.telefonoLaboral = telefonoLaboral;
 		this.fechaUltModifClave = fechaUltModifClave;
 		this.intentosFallidos = intentosFallidos;
-		this.cuit = cuit;
 		this.perfil = perfil;
 	}
 
@@ -122,14 +112,6 @@ public class UsuarioDTO implements Serializable {
 		this.nroDocumento = nroDocumento;
 	}
 
-	public String getIdioma() {
-		return idioma;
-	}
-
-	public void setIdioma(String idioma) {
-		this.idioma = idioma;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -138,11 +120,11 @@ public class UsuarioDTO implements Serializable {
 		this.email = email;
 	}
 
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
@@ -186,14 +168,6 @@ public class UsuarioDTO implements Serializable {
 		this.intentosFallidos = intentosFallidos;
 	}
 
-	public String getCuit() {
-		return cuit;
-	}
-
-	public void setCuit(String cuit) {
-		this.cuit = cuit;
-	}
-
 	public String getPerfil() {
 		return perfil;
 	}
@@ -207,13 +181,11 @@ public class UsuarioDTO implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
-		result = prime * result + ((cuit == null) ? 0 : cuit.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
 		result = prime * result + ((fechaUltModifClave == null) ? 0 : fechaUltModifClave.hashCode());
 		result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
-		result = prime * result + ((idioma == null) ? 0 : idioma.hashCode());
 		result = prime * result + ((intentosFallidos == null) ? 0 : intentosFallidos.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((nroDocumento == null) ? 0 : nroDocumento.hashCode());
@@ -239,11 +211,6 @@ public class UsuarioDTO implements Serializable {
 				return false;
 		} else if (!apellido.equals(other.apellido))
 			return false;
-		if (cuit == null) {
-			if (other.cuit != null)
-				return false;
-		} else if (!cuit.equals(other.cuit))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -268,11 +235,6 @@ public class UsuarioDTO implements Serializable {
 			if (other.idUsuario != null)
 				return false;
 		} else if (!idUsuario.equals(other.idUsuario))
-			return false;
-		if (idioma == null) {
-			if (other.idioma != null)
-				return false;
-		} else if (!idioma.equals(other.idioma))
 			return false;
 		if (intentosFallidos == null) {
 			if (other.intentosFallidos != null)
@@ -320,14 +282,10 @@ public class UsuarioDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "UsuarioDTO [idUsuario=" + idUsuario + ", apellido=" + apellido + ", nombre=" + nombre + ", userName="
-				+ userName + ", password=" + password + ", nroDocumento=" + nroDocumento + ", idioma=" + idioma
-				+ ", email=" + email + ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado
-				+ ", telefonoParticular=" + telefonoParticular + ", telefonoLaboral=" + telefonoLaboral
-				+ ", fechaUltModifClave=" + fechaUltModifClave + ", intentosFallidos=" + intentosFallidos + ", cuit="
-				+ cuit + ", perfil=" + perfil + "]";
+				+ userName + ", password=" + password + ", nroDocumento=" + nroDocumento + ", email=" + email
+				+ ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado + ", telefonoParticular="
+				+ telefonoParticular + ", telefonoLaboral=" + telefonoLaboral + ", fechaUltModifClave="
+				+ fechaUltModifClave + ", intentosFallidos=" + intentosFallidos + ", perfil=" + perfil + "]";
 	}
 
-	
-	
-	
 }

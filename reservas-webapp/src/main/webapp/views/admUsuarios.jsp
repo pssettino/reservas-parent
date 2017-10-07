@@ -109,13 +109,17 @@
 												<div class="clearfix"></div>
 												<div class="panel panel-default">													
 													<div class="panel-body">
-														<form:form method="POST"
-															action="/reservas-webapp/saveUsuario"
+														<form:form method="POST"															
 															modelAttribute="usuarioDTO">
 															<div class="col-sm-6 col-xs-12">
 																<div class="form-group">
+																	<form:label path="userName">Nombre de Usuario</form:label>
+																	<form:input path="userName" class="form-control"
+																		placeholder="Ingrese Nombre de Usuario" />
+																</div>
+																<div class="form-group">
 																	<form:label path="apellido">Apellido</form:label>
-																	<form:hidden path="idUsuario" />
+																	<form:hidden path="idUsuario" name="idUsuario" id="idUsuario"/>
 																	<form:input path="apellido" class="form-control"
 																		placeholder="Ingrese Apellido" />
 																</div>
@@ -129,19 +133,12 @@
 																	<form:input path="nroDocumento" class="form-control"
 																		placeholder="Ingrese DNI" />
 																</div>
-																<div class="form-group">
-																	<form:label path="">Estado Civil</form:label>
-																	<select id="detalleEstadoCivil" class="form-control"
-																		name="detalleEstadoCivil">
-																		<option value="" selected="">- Seleccionar -</option>
-
-																	</select>
-																</div>
+																
 																<div class="form-group">
 																	<form:label path="">Fecha de Nacimiento</form:label>
 																	<div class="input-group date">
-																		<input type="text" id="detalleFechaNacimiento"
-																			name="detalleFechaNacimiento" class="form-control"
+																		<input type="text" id="fechaNacimiento"
+																			name="fechaNacimiento" class="form-control"
 																			value=""> <span class="input-group-addon"><i
 																			class="glyphicon glyphicon-calendar"></i></span>
 																	</div>
@@ -151,13 +148,19 @@
 																	<form:label path="">Estado</form:label>
 																	<select id="detalleEstado" class="form-control"
 																		name="detalleEstado" disabled="">
-
+																		<option value="1">Activo</option>
 																	</select>
 																</div>
-
-
+																
 															</div>
 															<div class="col-sm-6 col-xs-12">
+																<div class="form-group">
+																	<form:label path="">Perfil</form:label>
+																	<select id="perfil" class="form-control"
+																		name="perfil" disabled="">
+																		<option value="1">Administrador</option>
+																	</select>
+																</div>
 																<div class="form-group">
 																	<form:label path="telefonoParticular">Telefono Particular</form:label>
 																	<form:input path="telefonoParticular"
@@ -174,7 +177,7 @@
 																		placeholder="Ingrese Email" />
 																</div>
 																<div class="modal-footer">
-																	<button type="submit" id="btnGuardarUsuario"
+																	<button type="button" id="btnGuardarUsuario" name ="btnGuardarUsuario"
 																		class="btn btn-success">Guardar</button>
 																	<button type="button" class="btn btn-default"
 																		data-dismiss="modal">Close</button>

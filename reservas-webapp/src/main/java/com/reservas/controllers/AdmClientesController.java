@@ -35,6 +35,9 @@ public class AdmClientesController extends AbstractBaseController {
 	@Autowired
 	private ClienteService clienteService;
 
+	
+	
+	
 	@RequestMapping(value = "/admClientes", method = RequestMethod.GET)
 	public ModelAndView admClientes(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		try {

@@ -1,17 +1,18 @@
 package com.reservas.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,21 +21,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.reservas.dto.UsuarioDTO;
 import com.reservas.exeptions.BusinessExeption;
-import com.reservas.model.PerfilBO;
 import com.reservas.model.UsuarioBO;
+import com.reservas.service.PerfilService;
 import com.reservas.service.UsuarioService;
 import com.reservas.utils.JsonResponse;
 
 /**
- * @author pablo gabriel settino
- * Fecha: 2017-07-22 
- * Copyright 2017
+ * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 @Controller
 public class AdmUsuariosController extends AbstractBaseController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+
+	@Autowired
+	private PerfilService perfilService;
 
 	@RequestMapping(value = "/admUsuarios", method = RequestMethod.GET)
 	public ModelAndView admUsuarios(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
@@ -73,26 +75,30 @@ public class AdmUsuariosController extends AbstractBaseController {
 
 	private UsuarioDTO usuarioBOToDTO(UsuarioBO usuarioBO) {
 		return new UsuarioDTO(usuarioBO.getIdUsuario(), usuarioBO.getApellido(), usuarioBO.getNombre(),
-				usuarioBO.getUserName(), usuarioBO.getPassword(), usuarioBO.getNroDocumento(), usuarioBO.getIdioma(),
-				usuarioBO.getEmail(), usuarioBO.getFechaNacimiento(), usuarioBO.getEstado(),
-				usuarioBO.getTelefonoParticular(), usuarioBO.getTelefonoLaboral(), usuarioBO.getFechaUltModifClave(),
-				usuarioBO.getIntentosFallidos(), usuarioBO.getCuit(), usuarioBO.getPerfil().getDescripcion());
+				usuarioBO.getUserName(), usuarioBO.getPassword(), usuarioBO.getNroDocumento(), usuarioBO.getEmail(),
+				usuarioBO.getFechaNacimiento().toString(), usuarioBO.getEstado(), usuarioBO.getTelefonoParticular(),
+				usuarioBO.getTelefonoLaboral(), usuarioBO.getFechaUltModifClave(), usuarioBO.getIntentosFallidos(),
+				usuarioBO.getPerfil().getDescripcion());
 	}
 
-	@RequestMapping(value = "/saveUsuario", method = RequestMethod.POST)
-	public ModelAndView saveUsuario(@Valid @ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO, BindingResult result,
-			ModelMap model) {
+	@RequestMapping(value = "/saveUsuario", method = RequestMethod.POST, consumes = { "application/json" })
+	@ResponseBody
+	public JsonResponse saveUsuario(@RequestBody UsuarioDTO usuarioDTO, BindingResult result, ModelMap model) {
 		try {
 
 			ModelAndView modelo = new ModelAndView("admUsuarios");
 			UsuarioBO usuarioBO;
 			if (usuarioDTO.getIdUsuario() == null) {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+
 				usuarioBO = new UsuarioBO(usuarioDTO.getIdUsuario(), usuarioDTO.getApellido(), usuarioDTO.getNombre(),
 						usuarioDTO.getUserName(), usuarioDTO.getPassword(), usuarioDTO.getNroDocumento(),
-						usuarioDTO.getIdioma(), usuarioDTO.getEmail(), usuarioDTO.getFechaNacimiento(),
-						usuarioDTO.getEstado(), usuarioDTO.getTelefonoParticular(), usuarioDTO.getTelefonoLaboral(),
-						usuarioDTO.getFechaUltModifClave(), usuarioDTO.getIntentosFallidos(), usuarioDTO.getCuit(),
-						new PerfilBO());
+						usuarioDTO.getEmail(), sdf.parse(usuarioDTO.getFechaNacimiento()), usuarioDTO.getEstado(),
+						usuarioDTO.getTelefonoParticular(), usuarioDTO.getTelefonoLaboral(),
+						usuarioDTO.getFechaUltModifClave(), usuarioDTO.getIntentosFallidos(),
+						perfilService.findByProperty("id", new Integer(usuarioDTO.getPerfil())).get(0));
+
+				usuarioBO.setPassword(UUID.randomUUID().toString().substring(0, 8));
 			} else {
 				usuarioBO = usuarioService.findByProperty("id", usuarioDTO.getIdUsuario()).get(0);
 				usuarioBO.setApellido(usuarioDTO.getApellido());
@@ -100,6 +106,10 @@ public class AdmUsuariosController extends AbstractBaseController {
 				usuarioBO.setNroDocumento(usuarioDTO.getNroDocumento());
 				usuarioBO.setEmail(usuarioDTO.getEmail());
 				usuarioBO.setTelefonoLaboral(usuarioDTO.getTelefonoLaboral());
+				usuarioBO.setTelefonoParticular(usuarioDTO.getTelefonoParticular());
+				usuarioBO.setEstado(usuarioDTO.getEstado());
+				usuarioBO.setUserName(usuarioDTO.getUserName());
+				usuarioBO.setPerfil(perfilService.findByProperty("id", new Integer(usuarioDTO.getPerfil())).get(0));
 			}
 
 			usuarioService.save(usuarioBO);
@@ -115,7 +125,11 @@ public class AdmUsuariosController extends AbstractBaseController {
 
 			modelo.addObject("usuarios", dtos);
 			modelo.addObject("usuarioDTO", new UsuarioDTO());
-			return modelo;
+			
+			JsonResponse response = new JsonResponse<>();
+			response.setRows(dtos);
+			response.setSuccess(true);
+			return response;
 		} catch (Exception e) {
 			return null;
 		}

@@ -15,11 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-
 /**
- * @author pablo gabriel settino
- * Fecha: 2017-07-22 
- * Copyright 2017
+ * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 @Entity
 @Table(name = "users")
@@ -45,9 +42,6 @@ public class UsuarioBO {
 	@Column(name = "user_numero_documento")
 	private String nroDocumento;
 
-	@Column(name = "user_idioma")
-	private String idioma;
-
 	@Column(name = "user_email")
 	private String email;
 
@@ -69,9 +63,6 @@ public class UsuarioBO {
 	@Column(name = "user_cantidad_intentos_fallidos")
 	private Integer intentosFallidos = 0;
 
-	@Column(name = "user_cuit")
-	private String cuit;
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_per_id", nullable = true)
 	// @JsonFilter("Perfil")
@@ -86,14 +77,9 @@ public class UsuarioBO {
 	public UsuarioBO() {
 	}
 
-	
-	
-	
-	
 	public UsuarioBO(Long idUsuario, String apellido, String nombre, String userName, String password,
-			String nroDocumento, String idioma, String email, Date fechaNacimiento, Boolean estado,
-			String telefonoParticular, String telefonoLaboral, Date fechaUltModifClave, Integer intentosFallidos,
-			String cuit, PerfilBO perfil) {
+			String nroDocumento, String email, Date fechaNacimiento, Boolean estado, String telefonoParticular,
+			String telefonoLaboral, Date fechaUltModifClave, Integer intentosFallidos, PerfilBO perfil) {
 		super();
 		this.idUsuario = idUsuario;
 		this.apellido = apellido;
@@ -101,7 +87,6 @@ public class UsuarioBO {
 		this.userName = userName;
 		this.password = password;
 		this.nroDocumento = nroDocumento;
-		this.idioma = idioma;
 		this.email = email;
 		this.fechaNacimiento = fechaNacimiento;
 		this.estado = estado;
@@ -109,13 +94,8 @@ public class UsuarioBO {
 		this.telefonoLaboral = telefonoLaboral;
 		this.fechaUltModifClave = fechaUltModifClave;
 		this.intentosFallidos = intentosFallidos;
-		this.cuit = cuit;
 		this.perfil = perfil;
 	}
-
-
-
-
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -147,14 +127,6 @@ public class UsuarioBO {
 
 	public void setNroDocumento(String nroDocumento) {
 		this.nroDocumento = nroDocumento;
-	}
-
-	public String getIdioma() {
-		return idioma;
-	}
-
-	public void setIdioma(String idioma) {
-		this.idioma = idioma;
 	}
 
 	public String getEmail() {
@@ -211,14 +183,6 @@ public class UsuarioBO {
 
 	public void setIntentosFallidos(Integer intentosFallidos) {
 		this.intentosFallidos = intentosFallidos;
-	}
-
-	public String getCuit() {
-		return cuit;
-	}
-
-	public void setCuit(String cuit) {
-		this.cuit = cuit;
 	}
 
 	public Boolean estaBloqueado() {

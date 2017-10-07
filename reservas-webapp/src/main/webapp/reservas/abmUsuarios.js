@@ -3,6 +3,41 @@
  */
 $(function() {
 	'use strict';
+	$("#btnGuardarUsuario").click(function() {				
+		var usuarioDTO = {
+				idUsuario:$("#idUsuario").val(),		
+				apellido : $("#apellido").val(),
+				nombre : $("#nombre").val(),
+				userName : $("#userName").val(),				
+				nroDocumento : $("#nroDocumento").val(),				
+				fechaNacimiento : $("#fechaNacimiento").val(),
+				estado : true,			
+				telefonoParticular : $("#telefonoParticular").val(),
+				telefonoLaboral : $("#telefonoLaboral").val(),
+				perfil: $("#perfil").val(),
+				email : $("#email").val()		
+		};
+				
+		
+		
+		$.ajax({
+			url : "./saveUsuario",
+			type : "POST",
+			data : JSON.stringify(usuarioDTO),
+			contentType: 'application/json',		    
+			dataType : "json",		
+			success : function(data) {
+				if(data.success){
+					
+					$("#modalUsuario").modal("hide");
+				}
+			},
+			error : function(data) {
+
+			}
+		});
+
+	});
 	$(".btnEditarUsuario").click(function() {
 		var form = {"id": $(this).data("idusuario")};
 		$.ajax({
@@ -13,13 +48,16 @@ $(function() {
 			success : function(data) {
 				if(data.success){
 					var usuario = data.item;
+					$("#idUsuario").val(usuario.idUsuario);
 					$("#id").val(usuario.id);
 					$("#apellido").val(usuario.apellido);
 					$("#nombre").val(usuario.nombre);
-					$("#dni").val(usuario.nroDocumento);
-					$("#telefono").val(usuario.telefonoParticular);
+					$("#nroDocumento").val(usuario.nroDocumento);
+					$("#telefonoParticular").val(usuario.telefonoParticular);
+					$("#telefonoLaboral").val(usuario.telefonoLaboral);
+					$("#fechaNacimiento").val(usuario.fechaNacimiento);
 					$("#email").val(usuario.email);
-					
+					$("#userName").val(usuario.userName);
 					$("#modalUsuario").modal("show");
 				}
 			},

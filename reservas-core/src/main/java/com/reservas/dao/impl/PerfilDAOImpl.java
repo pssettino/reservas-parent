@@ -12,6 +12,6 @@ import com.reservas.model.PerfilBO;
  * Copyright 2017
  */
 @Repository
-public class PerfilDAOImpl extends BaseDAOImpl<Long, PerfilBO> implements PerfilDAO {
+public class PerfilDAOImpl extends BaseDAOImpl<Integer, PerfilBO> implements PerfilDAO {
 
 }

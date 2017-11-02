@@ -75,6 +75,18 @@ public class ClienteBO implements Serializable {
 		this.email = email;
 		this.localidad = localidad;
 	}
+	public ClienteBO( String nombre, String apellido, Long dni, String telefono, Date fechaAlta,
+			Boolean eliminado, String email, LocalidadBO localidad) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.telefono = telefono;
+		this.fechaAlta = fechaAlta;
+		this.eliminado = eliminado;
+		this.email = email;
+		this.localidad = localidad;
+	}
 
 	public ClienteBO(String nombre, String apellido, Long dni, String telefono, Date fechaAlta, Boolean eliminado,
 			String email) {

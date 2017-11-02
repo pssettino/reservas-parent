@@ -1,6 +1,9 @@
 package com.reservas.dao;
 
+import java.util.List;
+
 import com.reservas.model.LocalidadBO;
+import com.reservas.model.ProvinciaBO;
 
 
 /**
@@ -9,5 +12,5 @@ import com.reservas.model.LocalidadBO;
  * Copyright 2017
  */
 public interface LocalidadDAO extends BaseDAO<Long, LocalidadBO>{
-
+		public List<LocalidadBO> findLocalidadByProvincia(ProvinciaBO prov);
 }

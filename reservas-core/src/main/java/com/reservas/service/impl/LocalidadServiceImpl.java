@@ -22,7 +22,7 @@ public class LocalidadServiceImpl extends BaseServiceImpl<Long, LocalidadBO> imp
 	}
 
 	public List<LocalidadBO> findByProvincia(ProvinciaBO prov) {
-		return this.dao.findByProperty("provincia.id", prov.getId());
+		return this.dao.findLocalidadByProvincia(prov);
 	}
 
 }

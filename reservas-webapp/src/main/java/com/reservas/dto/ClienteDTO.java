@@ -3,11 +3,8 @@ package com.reservas.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-
 /**
- * @author pablo gabriel settino
- * Fecha: 2017-07-22 
- * Copyright 2017
+ * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 public class ClienteDTO implements Serializable {
 
@@ -27,7 +24,17 @@ public class ClienteDTO implements Serializable {
 
 	private String localidad;
 
+	private String provincia;
+
 	private Boolean eliminado;
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
 
 	public String getLocalidad() {
 		return localidad;
@@ -50,7 +57,7 @@ public class ClienteDTO implements Serializable {
 	}
 
 	public ClienteDTO(Integer id, String apellido, String nombre, Long dni, String telefono, String email,
-			Date fechaAlta, String localidad, Boolean eliminado) {
+			Date fechaAlta, String localidad, Boolean eliminado, String provincia) {
 		super();
 		this.id = id;
 		this.apellido = apellido;
@@ -61,6 +68,7 @@ public class ClienteDTO implements Serializable {
 		this.fechaAlta = fechaAlta;
 		this.localidad = localidad;
 		this.eliminado = eliminado;
+		this.provincia = provincia;
 	}
 
 	public Integer getId() {

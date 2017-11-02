@@ -81,14 +81,15 @@
 												<td>${cliente.telefono }</td>
 												<td>${cliente.email }</td>
 												<td>
-													<button type="button" data-idcliente="${cliente.id }" id="btnEditarCliente"
-														name="btnEditarCliente" class="btn btn-info btnEditarCliente">
+													<button type="button" data-idcliente="${cliente.id }"
+														id="btnEditarCliente" name="btnEditarCliente"
+														class="btn btn-info btnEditarCliente">
 														<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 													</button>
-													<button type="button" data-idcliente="${cliente.id }" data-toggle="confirmation" 
-													data-singleton="true"
-													id="btnEliminarCliente"
-														name="btnEliminarCliente" class="btn btn-danger btnEliminarCliente">
+													<button type="button" data-idcliente="${cliente.id }"
+														data-toggle="confirmation" data-singleton="true"
+														id="btnEliminarCliente" name="btnEliminarCliente"
+														class="btn btn-danger btnEliminarCliente">
 														<i class="fa fa-trash" aria-hidden="true"></i>
 													</button>
 												</td>
@@ -112,43 +113,69 @@
 												<h4 class="modal-title">Administrar Cliente</h4>
 											</div>
 											<div class="modal-body">
-												<form:form method="POST"
-													action="/reservas-webapp/saveCliente"
+											<div class="clearfix"></div>
+												<div class="panel panel-default">													
+													<div class="panel-body">
+												<form:form method="POST"											
 													modelAttribute="clienteDTO">
-													<div class="form-group">
-														<form:label path="apellido">Apellido</form:label>
-														<form:hidden path="id"/>
-														<form:input path="apellido" class="form-control"
-															placeholder="Ingrese Apellido" />
-													</div>
-													<div class="form-group">
-														<form:label path="nombre">Nombre</form:label>
-														<form:input path="nombre" class="form-control"
-															placeholder="Ingrese Nombre"  />
-													</div>
-													<div class="form-group">
-														<form:label path="dni">DNI</form:label>
-														<form:input path="dni" class="form-control"
-															placeholder="Ingrese DNI"   />
-													</div>
-													<div class="form-group">
-														<form:label path="telefono">Telefono</form:label>
-														<form:input path="telefono" class="form-control"
-															placeholder="Ingrese Telefono" />
-													</div>
-													<div class="form-group">
-														<form:label path="email">Email</form:label>
-														<form:input path="email" class="form-control"
-															placeholder="Ingrese Email"   />
-													</div>
+													<div class="col-sm-6 col-xs-12">
+														<div class="form-group">
+															<form:label path="apellido">Apellido</form:label>
+															<form:hidden path="id" />
+															<form:input path="apellido" class="form-control"
+																placeholder="Ingrese Apellido" />
+														</div>
+														<div class="form-group">
+															<form:label path="nombre">Nombre</form:label>
+															<form:input path="nombre" class="form-control"
+																placeholder="Ingrese Nombre" />
+														</div>
+														<div class="form-group">
+															<form:label path="dni">DNI</form:label>
+															<form:input path="dni" class="form-control"
+																placeholder="Ingrese DNI" />
+														</div>
+														<div class="form-group">
+																	<form:label path="">Provincia</form:label>
+																	<select id="provincia" class="form-control"
+																		name="provincia" >
+																		<option value="-1">-Seleccionar-</option>
+																		<c:forEach items="${provincias}" var="provincia">
+																		<option value="${provincia.id}">${provincia.descripcion}</option>
+																		</c:forEach>
 
-													<div class="modal-footer">
-														<button type="submit" id="btnGuardarCliente"
-															class="btn btn-success">Guardar</button>
-														<button type="button" class="btn btn-default"
-															data-dismiss="modal">Close</button>
+																	</select>
+  																</div> 
+																<div class="form-group">
+																	<form:label path="">Localidad</form:label>
+																	<select id="localidad" class="form-control"
+																		name="localidad" >
+																		<option value="-1">-Seleccionar-</option>
+																	</select>
+																</div>
+													</div>
+													<div class="col-sm-6 col-xs-12">
+														<div class="form-group">
+															<form:label path="telefono">Telefono</form:label>
+															<form:input path="telefono" class="form-control"
+																placeholder="Ingrese Telefono" />
+														</div>
+														<div class="form-group">
+															<form:label path="email">Email</form:label>
+															<form:input path="email" class="form-control"
+																placeholder="Ingrese Email" />
+														</div>
+
+														<div class="modal-footer">
+															<button type="button" id="btnGuardarCliente"
+																class="btn btn-success">Guardar</button>
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Close</button>
+														</div>
 													</div>
 												</form:form>
+												</div>
+												</div>
 											</div>
 										</div>
 
@@ -177,42 +204,44 @@
 
 	<jsp:include page="commons.jsp"></jsp:include>
 	<!-- DataTables JavaScript -->
-	
+
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script src="js/dataTables.responsive.js"></script>
 	<script src="reservas/abmClientes.js"></script>
 
 	<script>
-		$(document).ready(function() {
-			$('#dataTables-example').DataTable({
-				responsive : true,
-				language: {
-                    processing:     "Procesando...",
-                    search:         "Buscar:",
-                    lengthMenu:    "Mostrar _MENU_ registros",
-                    info:           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    infoEmpty:      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    infoFiltered:   "((filtrado de un total de _MAX_ registros)",
-                    infoPostFix:    "",
-                    loadingRecords: "Cargando...",
-                    zeroRecords:    "No se encontraron resultados",
-                    emptyTable:     "Ningún dato disponible en esta tabla",
-                    paginate: {
-                        first:      "Primero",
-                        previous:   "Ultimo",
-                        next:       "Siguiente",
-                        last:       "Anterior"
-                    },
-                    aria: {
-                        sortAscending:  ": Activar para ordenar la columna de manera ascendente",
-                        sortDescending: ": Activar para ordenar la columna de manera descendente"
-                    }
-                }
-			});
-		});
-		
-		
+		$(document)
+				.ready(
+						function() {
+							$('#dataTables-example')
+									.DataTable(
+											{
+												responsive : true,
+												language : {
+													processing : "Procesando...",
+													search : "Buscar:",
+													lengthMenu : "Mostrar _MENU_ registros",
+													info : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+													infoEmpty : "Mostrando registros del 0 al 0 de un total de 0 registros",
+													infoFiltered : "((filtrado de un total de _MAX_ registros)",
+													infoPostFix : "",
+													loadingRecords : "Cargando...",
+													zeroRecords : "No se encontraron resultados",
+													emptyTable : "Ningún dato disponible en esta tabla",
+													paginate : {
+														first : "Primero",
+														previous : "Ultimo",
+														next : "Siguiente",
+														last : "Anterior"
+													},
+													aria : {
+														sortAscending : ": Activar para ordenar la columna de manera ascendente",
+														sortDescending : ": Activar para ordenar la columna de manera descendente"
+													}
+												}
+											});
+						});
 	</script>
 
 </body>

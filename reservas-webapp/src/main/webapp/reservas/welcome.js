@@ -39,6 +39,13 @@ $(document).ready(function() {
 										center : 'title',
 										right : 'month,agendaWeek,agendaDay,listWeek'
 									},
+									eventClick: function (calEvent, jsEvent, view) {
+							            $("#name").val(calEvent.id);
+
+							            $("#title").val(calEvent.title);
+
+							            $("#evtModal").modal("show");
+							        },
 									locale:'es',
 									defaultDate : '2017-07-09',
 									navLinks : true,

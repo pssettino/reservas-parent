@@ -55,30 +55,56 @@ body {
 					<div class="col-lg-12">
 
 
-
+						<div class="clearfix"></div>
+						
 						<div id='calendar'></div>
-
+						
+						<div class="clearfix"></div>
 					 
 						<div id="evtModal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
+			<div class="modal-dialog-center modal-lg">
 			
 			  <!-- Modal content-->
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal">&times;</button>
-			        <h4 class="modal-title">Modal Header</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>			        
 			      </div>
 			      <div class="modal-body">
 			         <form>
 					        <fieldset>
 					            <label for="Id">Id</label>
-					            <input type="text" name="name" id="name" class="form-control">
+					            <input type="hidden" name="evtId" id="evtId" class="form-control">
 					            <label for="Id">Title</label>
-					            <input type="text" name="title" id="title" class="form-control">
+					            <input type="text" name="evtTitle" id="evtTitle" class="form-control">
+					            <label for="fechaDesde">Fecha desde</label>
+					            <div class="form-group"
+												id="sandbox-container">
+												 <div class='input-group date' id='evtFechaDesde'>
+								    <input type='text' class="form-control" />
+								    <span class="input-group-addon">
+								        <span class="glyphicon glyphicon-calendar"></span>
+								    </span>
+								</div>
+												</div>
+								
+					            <label for="fechaHasta">Fecha hasta</label>
+					            <div class="form-group"
+												id="sandbox-container">
+								 <div class='input-group date' id='evtFechaHasta'>
+								    <input type='text' class="form-control" />
+								    <span class="input-group-addon">
+								        <span class="glyphicon glyphicon-calendar"></span>
+								    </span>
+								</div>
+								
+								</div>
+								<label for="allDay">
+								<input type="checkbox" value="allDay">Todo el día?</label>
 					        </fieldset>
 					    </form>
 			      </div>
 			      <div class="modal-footer">
+			      <button id="btnAceptarEvt" name="btnAceptarEvt" type="button" class="btn btn-default">Aceptar</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			      </div>
 			    </div>
@@ -108,6 +134,15 @@ body {
 	<script src='calendar/locale-all.js'></script>
 	<script src='reservas/welcome.js'></script>
 
+	<script type="application/javascript">			  
+	
+		$('#sandbox-container input').datepicker({
+			language: "es",
+			autoclose: true,
+			clearBtn: true
+		});  
+	
+	</script>
 
 </body>
 

@@ -15,3 +15,8 @@
 <script src="js/sb-admin-2.js"></script>
 
 <script src="js/bootstrap-confirmation.min.js"></script>
+
+<!-- Datepicker -->
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker.es.js"></script>
+

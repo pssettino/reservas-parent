@@ -40,9 +40,9 @@ $(document).ready(function() {
 										right : 'month,agendaWeek,agendaDay,listWeek'
 									},
 									eventClick: function (calEvent, jsEvent, view) {
-							            $("#name").val(calEvent.id);
+							            $("#evtId").val(calEvent.id);
 
-							            $("#title").val(calEvent.title);
+							            $("#evtTitle").val(calEvent.title);
 
 							            $("#evtModal").modal("show");
 							        },
@@ -149,5 +149,29 @@ $(document).ready(function() {
 							error : function(e) {
 								console.log(e);
 							}
-						});						
+						});	
+						
+						$("#btnAceptarEvt").click(function() {
+							var eventData = {
+									id : $("#evtId").val(),
+									title : $("#evtTitle").val(),
+									start : $("#evtFechaDesde").val(),
+									end : $("#evtFechaHasta").val(),
+									allDay : $("#allDay").val()
+								};
+				
+								$.ajax({
+											url : "./updateEvent",
+											type : "POST",
+											data : JSON.stringify(eventData),
+											contentType : 'application/json',
+											dataType : "json",
+											success : function(data) {
+												$('#calendar').fullCalendar('updateEvent',data);
+											},
+											error : function(e) {
+												console.log(e);
+											}
+										});
+						});
 				});

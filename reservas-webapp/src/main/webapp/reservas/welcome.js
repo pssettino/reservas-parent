@@ -43,6 +43,14 @@ $(document).ready(function() {
 							            $("#evtId").val(calEvent.id);
 
 							            $("#evtTitle").val(calEvent.title);
+							            
+							            if(calEvent.start!=null && calEvent.start!=''){
+							            	$("#evtFechaDesde").val($.fullCalendar.formatDate(calEvent.start, 'YYYY-MM-DD HH:mm:ss'));
+							            } 
+							            if(calEvent.end!=null && calEvent.end!=''){							            	
+							            	$("#evtFechaHasta").val($.fullCalendar.formatDate(calEvent.end, 'YYYY-MM-DD HH:mm:ss'));
+							            }
+							            $("#evtAllDay").val(calEvent.allDay);
 
 							            $("#evtModal").modal("show");
 							        },
@@ -152,12 +160,15 @@ $(document).ready(function() {
 						});	
 						
 						$("#btnAceptarEvt").click(function() {
+							
+							
+							
 							var eventData = {
 									id : $("#evtId").val(),
 									title : $("#evtTitle").val(),
 									start : $("#evtFechaDesde").val(),
 									end : $("#evtFechaHasta").val(),
-									allDay : $("#allDay").val()
+									allDay :$("#evtAllDay").val()
 								};
 				
 								$.ajax({

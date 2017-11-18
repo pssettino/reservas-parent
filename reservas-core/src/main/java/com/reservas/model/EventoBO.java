@@ -5,16 +5,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 /**
- * @author pablo gabriel settino
- * Fecha: 2017-07-22 
- * Copyright 2017
+ * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 @Entity
 @Table(name = "evento")
@@ -45,8 +45,18 @@ public class EventoBO implements Serializable {
 	@Column(name = "eve_descripcion")
 	private String descripcion;
 
-	// @OneToOne
-	// private TipoEventoBO tipoEvento;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "evt_estado_fk")
+	private EstadoBO estado;
+	
+
+	public EstadoBO getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoBO estado) {
+		this.estado = estado;
+	}
 
 	public Long getId() {
 		return id;
@@ -101,6 +111,7 @@ public class EventoBO implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((fechaDesde == null) ? 0 : fechaDesde.hashCode());
 		result = prime * result + ((fechaHasta == null) ? 0 : fechaHasta.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -122,6 +133,11 @@ public class EventoBO implements Serializable {
 			if (other.descripcion != null)
 				return false;
 		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (estado == null) {
+			if (other.estado != null)
+				return false;
+		} else if (!estado.equals(other.estado))
 			return false;
 		if (fechaDesde == null) {
 			if (other.fechaDesde != null)
@@ -154,7 +170,7 @@ public class EventoBO implements Serializable {
 	@Override
 	public String toString() {
 		return "EventoBO [id=" + id + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + ", todoDia="
-				+ todoDia + ", titulo=" + titulo + ", descripcion=" + descripcion + "]";
+				+ todoDia + ", titulo=" + titulo + ", descripcion=" + descripcion + ", estado=" + estado + "]";
 	}
 
 }

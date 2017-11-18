@@ -22,14 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.base.Strings;
 import com.reservas.dto.EventDataDTO;
 import com.reservas.exeptions.BusinessExeption;
+import com.reservas.model.EstadoBO;
 import com.reservas.model.EventoBO;
+import com.reservas.service.EstadoService;
 import com.reservas.service.EventoService;
 
-
 /**
- * @author pablo gabriel settino
- * Fecha: 2017-07-22 
- * Copyright 2017
+ * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 @Controller
 public class ScheduleController extends AbstractBaseController {
@@ -38,6 +37,9 @@ public class ScheduleController extends AbstractBaseController {
 
 	@Autowired
 	private EventoService eventoService;
+
+	@Autowired
+	private EstadoService estadoService;
 
 	@RequestMapping(value = "/saveEvent", method = RequestMethod.POST)
 	@ResponseBody
@@ -91,6 +93,9 @@ public class ScheduleController extends AbstractBaseController {
 
 		evt.setTodoDia(Strings.isNullOrEmpty(end));
 
+		EstadoBO estado = estadoService.findByProperty("id", eventData.getEstadoId() + 1).get(0);
+		evt.setEstado(estado);
+
 		return eventoService.save(evt);
 	}
 
@@ -113,11 +118,12 @@ public class ScheduleController extends AbstractBaseController {
 				fechaDesde = sdf.format(desde).replace(" ", "T");
 			}
 			if (hasta != null) {
-				fechaHasta = sdf.format(hasta).replace(" ", "T");;
+				fechaHasta = sdf.format(hasta).replace(" ", "T");
+				;
 			}
 
 			eventosDTO.add(new EventDataDTO(eventoBO.getId(), eventoBO.getTitulo(), fechaDesde, fechaHasta,
-					eventoBO.getTodoDia()));
+					eventoBO.getTodoDia(), eventoBO.getEstado().getId()));
 		}
 
 		return eventosDTO;

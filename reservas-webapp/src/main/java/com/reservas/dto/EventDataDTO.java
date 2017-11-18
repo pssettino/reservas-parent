@@ -2,11 +2,8 @@ package com.reservas.dto;
 
 import java.io.Serializable;
 
-
 /**
- * @author pablo gabriel settino
- * Fecha: 2017-07-22 
- * Copyright 2017
+ * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 public class EventDataDTO implements Serializable {
 
@@ -15,19 +12,20 @@ public class EventDataDTO implements Serializable {
 	private String start;
 	private String end;
 	private Boolean allDay;
+	private Long estadoId;
 
-	public EventDataDTO(Long id, String title, String start, String end, Boolean allDay) {
+	public EventDataDTO(Long id, String title, String start, String end, Boolean allDay, Long estadoId) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.start = start;
 		this.end = end;
 		this.allDay = allDay;
+		this.estadoId = estadoId;
 	}
 
 	public EventDataDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -68,6 +66,14 @@ public class EventDataDTO implements Serializable {
 
 	public void setEnd(String end) {
 		this.end = end;
+	}
+
+	public Long getEstadoId() {
+		return estadoId;
+	}
+
+	public void setEstadoId(Long estadoId) {
+		this.estadoId = estadoId;
 	}
 
 }

@@ -2,13 +2,25 @@
  * 
  */
 $(document).ready(function() {
-						var eventDataList = [];
-						$.ajax({
-						url : "./getAllEvents",
-						type : "POST",
-						contentType : 'application/json',
-						dataType : "json",
-						success : function(data) {
+						getAllEvents();
+						
+						function getAllEvents() {
+							var eventDataList = [];
+							$.ajax({
+							url : "./getAllEvents",
+							type : "POST",
+							contentType : 'application/json',
+							dataType : "json",
+							success : function(data) {
+								renderFullCalendar(data);										
+								},
+								error : function(e) {
+									console.log(e);
+								}
+							});		
+						}
+						
+						function renderFullCalendar(data){
 							var finalData = [];
 							$.each(data, function(index, value) {
 								var obj = {};
@@ -17,21 +29,27 @@ $(document).ready(function() {
 										id : value.id,
 										title : value.title,
 										start : value.start,
-										end : value.end
+										end : value.end,
+										estadoId: value.estadoId
 									};
 						
 								} else {
 									obj = {
 										id : value.id,
 										title : value.title,
-										start : value.start.substring(0, 10)
+										start : value.start.substring(0, 10),
+										estadoId: value.estadoId
 									};
 						
 								}
 								finalData.push(obj);
+								$('#calendar').fullCalendar( 'removeEvents');
+								 $('#calendar').fullCalendar( 'addEventSource', finalData);
+								 $('#calendar').fullCalendar( 'rerenderEvents' );
 							});
 						
 							eventDataList = finalData;
+							var today = new Date();
 							$('#calendar').fullCalendar(
 								{
 									header : {
@@ -45,17 +63,17 @@ $(document).ready(function() {
 							            $("#evtTitle").val(calEvent.title);
 							            
 							            if(calEvent.start!=null && calEvent.start!=''){
-							            	$("#evtFechaDesde").val($.fullCalendar.formatDate(calEvent.start, 'YYYY-MM-DD HH:mm:ss'));
+							            	$("#evtFechaDesde").val(calEvent.start.toISOString());
 							            } 
 							            if(calEvent.end!=null && calEvent.end!=''){							            	
-							            	$("#evtFechaHasta").val($.fullCalendar.formatDate(calEvent.end, 'YYYY-MM-DD HH:mm:ss'));
+							            	$("#evtFechaHasta").val(calEvent.end.toISOString());
 							            }
 							            $("#evtAllDay").val(calEvent.allDay);
-
+							            $("#evtEstado").prop("checked",calEvent.estadoId > 1);
 							            $("#evtModal").modal("show");
 							        },
 									locale:'es',
-									defaultDate : '2017-07-09',
+									defaultDate : today.toISOString(),
 									navLinks : true,
 									selectable : true,
 									selectHelper : true,
@@ -67,12 +85,14 @@ $(document).ready(function() {
 												eventData = {
 													title : title,
 													start : start,
-													end : end
+													end : end,
+													estadoId:0
 												};
 											} else {
 												eventData = {
 													title : title,
-													start : start
+													start : start,
+													estadoId:false
 												};
 											}
 						
@@ -102,7 +122,8 @@ $(document).ready(function() {
 											title : event.title,
 											start : event.start,
 											end : event.end,
-											allDay : event.allDay
+											allDay : event.allDay,
+											estadoId:event.estadoId
 										};
 						
 										$.ajax({
@@ -126,7 +147,8 @@ $(document).ready(function() {
 											title : event.title,
 											start : event.start,
 											end : event.end,
-											allDay : event.allDay
+											allDay : event.allDay,
+											estadoId:event.estadoId
 										};
 						
 										$.ajax({
@@ -152,23 +174,17 @@ $(document).ready(function() {
 									eventLimit : true, 
 													events : eventDataList
 												});
+
+						}
 						
-							},
-							error : function(e) {
-								console.log(e);
-							}
-						});	
-						
-						$("#btnAceptarEvt").click(function() {
-							
-							
-							
+						$("#btnAceptarEvt").click(function() {																				
 							var eventData = {
 									id : $("#evtId").val(),
 									title : $("#evtTitle").val(),
 									start : $("#evtFechaDesde").val(),
 									end : $("#evtFechaHasta").val(),
-									allDay :$("#evtAllDay").val()
+									allDay :$("#evtAllDay").val(),
+									estadoId:$("#evtEstado").prop("checked") ?1:0
 								};
 				
 								$.ajax({
@@ -178,11 +194,16 @@ $(document).ready(function() {
 											contentType : 'application/json',
 											dataType : "json",
 											success : function(data) {
-												$('#calendar').fullCalendar('updateEvent',data);
+												$("#evtModal").modal("hide");
+												getAllEvents();
+											
 											},
 											error : function(e) {
 												console.log(e);
 											}
 										});
 						});
+						
+						
+					
 				});

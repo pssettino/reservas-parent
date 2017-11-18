@@ -25,8 +25,7 @@ public class UsuarioConfiguracionController {
 		UsuarioBO usuario = (UsuarioBO) request.getSession().getAttribute("usuarioBO");
 
 		modelView.addObject("id", usuario.getIdUsuario());
-		modelView.addObject("userName",
-				usuario.getUserName() + " - " + usuario.getApellido() + ", " + usuario.getNombre());
+		
 		modelView.addObject("nroDocumento", usuario.getNroDocumento());
 		modelView.addObject("telefonoParticular", usuario.getTelefonoParticular());
 		modelView.addObject("telefonoLaboral", usuario.getTelefonoLaboral());

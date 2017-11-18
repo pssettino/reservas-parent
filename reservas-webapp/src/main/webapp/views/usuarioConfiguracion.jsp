@@ -53,7 +53,7 @@
 					<div class="col-lg-12">
 						<br>
 						<div class="panel panel-default">
-							<div class="panel-heading">Usuario: ${userName}</div>
+							<div class="panel-heading">Usuario: </div>
 							<!-- /.panel-heading -->
 							<div class="panel-body">
 								<form id="frmUsrConfiguracion">

@@ -41,13 +41,17 @@ public class UsuarioDTO implements Serializable {
 
 	private String perfil;
 
+	private String localidad;
+
+	private String provincia;
+	
 	public UsuarioDTO() {
 
 	}
 
 	public UsuarioDTO(Long idUsuario, String apellido, String nombre, String userName, String password,
 			String nroDocumento, String email, String fechaNacimiento, Boolean estado, String telefonoParticular,
-			String telefonoLaboral, Date fechaUltModifClave, Integer intentosFallidos, String perfil) {
+			String telefonoLaboral, Date fechaUltModifClave, Integer intentosFallidos, String perfil, String provincia) {
 		this.idUsuario = idUsuario;
 		this.apellido = apellido;
 		this.nombre = nombre;
@@ -62,6 +66,7 @@ public class UsuarioDTO implements Serializable {
 		this.fechaUltModifClave = fechaUltModifClave;
 		this.intentosFallidos = intentosFallidos;
 		this.perfil = perfil;
+		this.provincia = provincia;
 	}
 
 	public Long getIdUsuario() {
@@ -172,120 +177,25 @@ public class UsuarioDTO implements Serializable {
 		return perfil;
 	}
 
+	public String getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((apellido == null) ? 0 : apellido.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-		result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
-		result = prime * result + ((fechaUltModifClave == null) ? 0 : fechaUltModifClave.hashCode());
-		result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
-		result = prime * result + ((intentosFallidos == null) ? 0 : intentosFallidos.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((nroDocumento == null) ? 0 : nroDocumento.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((perfil == null) ? 0 : perfil.hashCode());
-		result = prime * result + ((telefonoLaboral == null) ? 0 : telefonoLaboral.hashCode());
-		result = prime * result + ((telefonoParticular == null) ? 0 : telefonoParticular.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UsuarioDTO other = (UsuarioDTO) obj;
-		if (apellido == null) {
-			if (other.apellido != null)
-				return false;
-		} else if (!apellido.equals(other.apellido))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (estado == null) {
-			if (other.estado != null)
-				return false;
-		} else if (!estado.equals(other.estado))
-			return false;
-		if (fechaNacimiento == null) {
-			if (other.fechaNacimiento != null)
-				return false;
-		} else if (!fechaNacimiento.equals(other.fechaNacimiento))
-			return false;
-		if (fechaUltModifClave == null) {
-			if (other.fechaUltModifClave != null)
-				return false;
-		} else if (!fechaUltModifClave.equals(other.fechaUltModifClave))
-			return false;
-		if (idUsuario == null) {
-			if (other.idUsuario != null)
-				return false;
-		} else if (!idUsuario.equals(other.idUsuario))
-			return false;
-		if (intentosFallidos == null) {
-			if (other.intentosFallidos != null)
-				return false;
-		} else if (!intentosFallidos.equals(other.intentosFallidos))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (nroDocumento == null) {
-			if (other.nroDocumento != null)
-				return false;
-		} else if (!nroDocumento.equals(other.nroDocumento))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (perfil == null) {
-			if (other.perfil != null)
-				return false;
-		} else if (!perfil.equals(other.perfil))
-			return false;
-		if (telefonoLaboral == null) {
-			if (other.telefonoLaboral != null)
-				return false;
-		} else if (!telefonoLaboral.equals(other.telefonoLaboral))
-			return false;
-		if (telefonoParticular == null) {
-			if (other.telefonoParticular != null)
-				return false;
-		} else if (!telefonoParticular.equals(other.telefonoParticular))
-			return false;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "UsuarioDTO [idUsuario=" + idUsuario + ", apellido=" + apellido + ", nombre=" + nombre + ", userName="
-				+ userName + ", password=" + password + ", nroDocumento=" + nroDocumento + ", email=" + email
-				+ ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado + ", telefonoParticular="
-				+ telefonoParticular + ", telefonoLaboral=" + telefonoLaboral + ", fechaUltModifClave="
-				+ fechaUltModifClave + ", intentosFallidos=" + intentosFallidos + ", perfil=" + perfil + "]";
-	}
-
+	 
 }

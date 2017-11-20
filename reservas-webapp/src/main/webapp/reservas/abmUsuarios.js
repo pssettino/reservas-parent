@@ -15,7 +15,9 @@ $(function() {
 				telefonoParticular : $("#telefonoParticular").val(),
 				telefonoLaboral : $("#telefonoLaboral").val(),
 				perfil: $("#perfil").val(),
-				email : $("#email").val()		
+				email : $("#email").val(),
+				localidad: $("#localidad").val(),
+				provincia: $("#provincia").val()
 		};
 				
 		
@@ -87,4 +89,28 @@ $(function() {
 				});
 			  }
 		});
+	
+	$("#provincia").change(function() {
+		 var id = parseInt(this.value);
+		$.ajax({
+			url : "./usuario/findByProvinciaId/"+id,
+			type : "GET",			
+			contentType: 'application/json',		    
+			dataType : "json",		
+			success : function(data) {
+				if(data.success){
+					var items = data.rows;
+					$.each(items, function (i, item) {
+					    $('#localidad').append($('<option>', { 
+					        value: item.id,
+					        text : item.descripcion 
+					    }));
+					});		
+				}
+			},
+			error : function(data) {
+
+			}
+		});
+	});
 });

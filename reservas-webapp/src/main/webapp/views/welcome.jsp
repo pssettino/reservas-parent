@@ -82,6 +82,7 @@ body {
 													class="form-control">
 													<input type="hidden" name="evtAllDay" id="evtAllDay"
 													class="form-control">
+													
 													<label><input type="checkbox" value="2" id="evtEstado" name="evtEstado">Confirmar</label>
 											</fieldset>
 										</form>

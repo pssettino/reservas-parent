@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -68,6 +69,12 @@ public class UsuarioBO {
 	// @JsonFilter("Perfil")
 	private PerfilBO perfil;
 
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_localidad_fk", nullable = true)
+	private LocalidadBO localidad;
+	
+	
 	@Transient
 	private static final Integer MESES_VIGENCIA_CLAVE = 6;
 
@@ -79,7 +86,7 @@ public class UsuarioBO {
 
 	public UsuarioBO(Long idUsuario, String apellido, String nombre, String userName, String password,
 			String nroDocumento, String email, Date fechaNacimiento, Boolean estado, String telefonoParticular,
-			String telefonoLaboral, Date fechaUltModifClave, Integer intentosFallidos, PerfilBO perfil) {
+			String telefonoLaboral, Date fechaUltModifClave, Integer intentosFallidos, PerfilBO perfil, LocalidadBO localidad) {
 		super();
 		this.idUsuario = idUsuario;
 		this.apellido = apellido;
@@ -95,6 +102,7 @@ public class UsuarioBO {
 		this.fechaUltModifClave = fechaUltModifClave;
 		this.intentosFallidos = intentosFallidos;
 		this.perfil = perfil;
+		this.localidad = localidad;
 	}
 
 	public Long getIdUsuario() {
@@ -240,4 +248,13 @@ public class UsuarioBO {
 		this.perfil = perfil;
 	}
 
+	public LocalidadBO getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(LocalidadBO localidad) {
+		this.localidad = localidad;
+	}
+
+	
 }

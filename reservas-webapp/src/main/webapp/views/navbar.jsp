@@ -44,9 +44,9 @@
 						<li><a href="#"><i class="fa fa-wrench fa-fw"></i>
 								Administracion</a>
 								 <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="admClientes">Adm Clientes</a>
-                                </li>
+<!--                                 <li> -->
+<!--                                     <a href="admClientes">Adm Clientes</a> -->
+<!--                                 </li> -->
                                 <li>
                                     <a href="admUsuarios">Adm Usuarios</a>
                                 </li>

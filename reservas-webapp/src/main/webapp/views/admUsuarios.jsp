@@ -152,8 +152,27 @@
 																	</select>
 																</div>
 																
+																
 															</div>
 															<div class="col-sm-6 col-xs-12">
+															<div class="form-group">
+																	<form:label path="">Provincia</form:label>
+																	<select id="provincia" class="form-control"
+																		name="provincia" >
+																		<option value="-1">-Seleccionar-</option>
+																		<c:forEach items="${provincias}" var="provincia">
+																		<option value="${provincia.id}">${provincia.descripcion}</option>
+																		</c:forEach>
+
+																	</select>
+  																</div> 
+																<div class="form-group">
+																	<form:label path="">Localidad</form:label>
+																	<select id="localidad" class="form-control"
+																		name="localidad" >
+																		<option value="-1">-Seleccionar-</option>
+																	</select>
+																</div>
 																<div class="form-group">
 																	<form:label path="">Perfil</form:label>
 																	<select id="perfil" class="form-control"

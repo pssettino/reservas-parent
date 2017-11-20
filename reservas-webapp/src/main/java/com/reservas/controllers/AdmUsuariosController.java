@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +22,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.reservas.dto.UsuarioDTO;
 import com.reservas.exeptions.BusinessExeption;
+import com.reservas.model.LocalidadBO;
+import com.reservas.model.ProvinciaBO;
 import com.reservas.model.UsuarioBO;
+import com.reservas.service.LocalidadService;
 import com.reservas.service.PerfilService;
+import com.reservas.service.ProvinciaService;
 import com.reservas.service.UsuarioService;
 import com.reservas.utils.JsonResponse;
 
@@ -38,6 +43,12 @@ public class AdmUsuariosController extends AbstractBaseController {
 	@Autowired
 	private PerfilService perfilService;
 
+	@Autowired
+	private ProvinciaService proviciaService;
+
+	@Autowired
+	private LocalidadService localidadService;
+
 	@RequestMapping(value = "/admUsuarios", method = RequestMethod.GET)
 	public ModelAndView admUsuarios(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		try {
@@ -51,6 +62,7 @@ public class AdmUsuariosController extends AbstractBaseController {
 			}
 
 			modelo.addObject("usuarios", dtos);
+			modelo.addObject("provincias", proviciaService.getAll());
 			modelo.addObject("usuarioDTO", new UsuarioDTO());
 			return modelo;
 
@@ -78,7 +90,7 @@ public class AdmUsuariosController extends AbstractBaseController {
 				usuarioBO.getUserName(), usuarioBO.getPassword(), usuarioBO.getNroDocumento(), usuarioBO.getEmail(),
 				usuarioBO.getFechaNacimiento().toString(), usuarioBO.getEstado(), usuarioBO.getTelefonoParticular(),
 				usuarioBO.getTelefonoLaboral(), usuarioBO.getFechaUltModifClave(), usuarioBO.getIntentosFallidos(),
-				usuarioBO.getPerfil().getDescripcion());
+				usuarioBO.getPerfil().getDescripcion(), usuarioBO.getLocalidad().getProvincia().getDescripcion());
 	}
 
 	@RequestMapping(value = "/saveUsuario", method = RequestMethod.POST, consumes = { "application/json" })
@@ -90,13 +102,13 @@ public class AdmUsuariosController extends AbstractBaseController {
 			UsuarioBO usuarioBO;
 			if (usuarioDTO.getIdUsuario() == null) {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
-
+				LocalidadBO loc = localidadService.findByProperty("id", new Integer(usuarioDTO.getLocalidad())).get(0);
 				usuarioBO = new UsuarioBO(usuarioDTO.getIdUsuario(), usuarioDTO.getApellido(), usuarioDTO.getNombre(),
 						usuarioDTO.getUserName(), usuarioDTO.getPassword(), usuarioDTO.getNroDocumento(),
 						usuarioDTO.getEmail(), sdf.parse(usuarioDTO.getFechaNacimiento()), usuarioDTO.getEstado(),
 						usuarioDTO.getTelefonoParticular(), usuarioDTO.getTelefonoLaboral(),
 						usuarioDTO.getFechaUltModifClave(), usuarioDTO.getIntentosFallidos(),
-						perfilService.findByProperty("id", new Integer(usuarioDTO.getPerfil())).get(0));
+						perfilService.findByProperty("id", new Integer(usuarioDTO.getPerfil())).get(0), loc);
 
 				usuarioBO.setPassword(UUID.randomUUID().toString().substring(0, 8));
 			} else {
@@ -125,7 +137,7 @@ public class AdmUsuariosController extends AbstractBaseController {
 
 			modelo.addObject("usuarios", dtos);
 			modelo.addObject("usuarioDTO", new UsuarioDTO());
-			
+
 			JsonResponse response = new JsonResponse<>();
 			response.setRows(dtos);
 			response.setSuccess(true);
@@ -158,6 +170,23 @@ public class AdmUsuariosController extends AbstractBaseController {
 			usuarioBO.setEstado(false);
 			usuarioService.save(usuarioBO);
 			return bindAdmUsuarios(modelo);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@RequestMapping(value = "/usuario/findByProvinciaId/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public JsonResponse<LocalidadBO> findByProvinciaId(@PathVariable(value = "id") Integer id, ModelMap model) {
+		try {
+
+			ProvinciaBO prov = proviciaService.findByProperty("id", id).get(0);
+			List<LocalidadBO> localidades = localidadService.findByProvincia(prov);
+
+			JsonResponse<LocalidadBO> response = new JsonResponse<LocalidadBO>();
+			response.setSuccess(true);
+			response.setRows(localidades);
+			return response;
 		} catch (Exception e) {
 			return null;
 		}

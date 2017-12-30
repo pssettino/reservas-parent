@@ -65,16 +65,99 @@
 									<input class="form-control" placeholder="Password"
 										name="password" type="password" value="">
 								</div>
-<!-- 								<div class="checkbox"> -->
-<!-- 									<label> <input name="remember" type="checkbox" -->
-<!-- 										value="Remember Me">Remember Me -->
-<!-- 									</label> -->
-<!-- 								</div> -->
+								<!-- 								<div class="checkbox"> -->
+								<!-- 									<label> <input name="remember" type="checkbox" -->
+								<!-- 										value="Remember Me">Remember Me -->
+								<!-- 									</label> -->
+								<!-- 								</div> -->
 								<!-- Change this to a button or input when using this as a form -->
-								<input type="submit" id="login" name="login" value="Iniciar sessión"
-									onclick="this.submit();">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="form-group">
+											<input type="submit" id="login" name="login"
+												class="btn btn-primary" value="Iniciar sessión"
+												onclick="this.submit();">
+										</div>
+									</div>
+									<div class="col-sm-8">
+										<div class="form-group">
+											<a href="#" id="linkRegUsurio" name="linkRegUsurio"
+												onclick="showModal();" >Registrar Usuario</a>
+										</div>
+									</div>
 							</fieldset>
 						</form>
+
+						<div id="modaRegUsuario" class="modal fade" role="dialog">
+							<div class="modal-dialog-center modal-lg">
+
+								<!-- Modal content-->
+								<div class="modal-content" style="left: 235px;">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Registrar Usuario</h4>
+									</div>
+									<div class="modal-body">
+										<div class="clearfix"></div>
+										<div class="panel panel-default">
+											<div class="panel-body">
+												<form method="POST" id="frmRegUsuario" action="./registrar">
+													<div class="col-sm-6 col-xs-12">
+														<div class="form-group">
+															<label path="userName">Nombre de Usuario</label> <input
+																id="userName" class="form-control"
+																placeholder="Ingrese Nombre de Usuario" />
+														</div>
+														<div class="form-group">
+															<label path="apellido">Apellido</label>
+															<hidden path="idUsuario" name="idUsuario" id="idUsuario" />
+															<input id="apellido" class="form-control" name="apellido"
+																placeholder="Ingrese Apellido" />
+														</div>
+														<div class="form-group">
+															<label path="nombre">Nombre</label> <input id="nombre" name="nombre"
+																class="form-control" placeholder="Ingrese Nombre" />
+														</div>
+														<div class="form-group">
+															<label path="nroDocumento">DNI</label> <input
+																id="nroDocumento" class="form-control"
+																placeholder="Ingrese DNI" />
+														</div>
+
+													</div>
+													<div class="col-sm-6 col-xs-12">
+														<div class="form-group">
+															<label path="telefonoParticular">Telefono
+																Particular</label> <input id="telefonoParticular"
+																class="form-control" placeholder="Ingrese Telefono" />
+														</div>
+														<div class="form-group">
+															<label path="telefonoLaboral">Telefono Laboral</label> <input
+																id="telefonoLaboral" class="form-control"
+																placeholder="Ingrese Telefono" />
+														</div>
+														<div class="form-group">
+															<label path="email">Email</label> <input id="email"
+																class="form-control" placeholder="Ingrese Email" />
+														</div>
+														<div class="modal-footer">
+
+															<button type="button" id="btnRegUsuario"
+																name="btnRegUsuario" class="btn btn-success" onclick="registrarUsuario();">Guardar</button>
+
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Close</button>
+
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -92,6 +175,48 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
+	
+	<script type="text/javascript">
+		
+	function showModal() {
+			$("#modaRegUsuario").modal("show");
+	}			
+	
+	function registrarUsuario() {
+		var usuarioDTO = {
+				idUsuario:$("#idUsuario").val(),		
+				apellido : $("#apellido").val(),
+				nombre : $("#nombre").val(),
+				userName : $("#userName").val(),				
+				nroDocumento : $("#nroDocumento").val(),				 
+				estado : true,			
+				telefonoParticular : $("#telefonoParticular").val(),
+				telefonoLaboral : $("#telefonoLaboral").val(),
+				email : $("#email").val()
+		};
+				
+		
+		
+		$.ajax({
+			url : "./registrar",
+			type : "POST",
+			data : JSON.stringify(usuarioDTO),
+			contentType: 'application/json',		    
+			dataType : "json",		
+			success : function(data) {
+				if(data.success){
+					$("#modaRegUsuario").modal("hide");					
+				}
+			},
+			error : function(data) {
+
+			}
+		});
+
+
+	}	
+ 
+	</script>
 </body>
 
 </html>

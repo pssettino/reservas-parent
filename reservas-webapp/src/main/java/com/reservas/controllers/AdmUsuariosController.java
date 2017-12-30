@@ -86,11 +86,23 @@ public class AdmUsuariosController extends AbstractBaseController {
 	}
 
 	private UsuarioDTO usuarioBOToDTO(UsuarioBO usuarioBO) {
-		return new UsuarioDTO(usuarioBO.getIdUsuario(), usuarioBO.getApellido(), usuarioBO.getNombre(),
-				usuarioBO.getUserName(), usuarioBO.getPassword(), usuarioBO.getNroDocumento(), usuarioBO.getEmail(),
-				usuarioBO.getFechaNacimiento().toString(), usuarioBO.getEstado(), usuarioBO.getTelefonoParticular(),
-				usuarioBO.getTelefonoLaboral(), usuarioBO.getFechaUltModifClave(), usuarioBO.getIntentosFallidos(),
-				usuarioBO.getPerfil().getDescripcion(), usuarioBO.getLocalidad().getProvincia().getDescripcion());
+		UsuarioDTO usuario;
+		if (usuarioBO.getFechaNacimiento() == null && usuarioBO.getLocalidad() == null) {
+
+			usuario = new UsuarioDTO(usuarioBO.getIdUsuario(), usuarioBO.getApellido(), usuarioBO.getNombre(),
+					usuarioBO.getUserName(), usuarioBO.getPassword(), usuarioBO.getNroDocumento(), usuarioBO.getEmail(),
+					null, usuarioBO.getEstado(), usuarioBO.getTelefonoParticular(), usuarioBO.getTelefonoLaboral(),
+					usuarioBO.getFechaUltModifClave(), usuarioBO.getIntentosFallidos(),
+					usuarioBO.getPerfil().getDescripcion(), null);
+		} else {
+			usuario = new UsuarioDTO(usuarioBO.getIdUsuario(), usuarioBO.getApellido(), usuarioBO.getNombre(),
+					usuarioBO.getUserName(), usuarioBO.getPassword(), usuarioBO.getNroDocumento(), usuarioBO.getEmail(),
+					usuarioBO.getFechaNacimiento().toString(), usuarioBO.getEstado(), usuarioBO.getTelefonoParticular(),
+					usuarioBO.getTelefonoLaboral(), usuarioBO.getFechaUltModifClave(), usuarioBO.getIntentosFallidos(),
+					usuarioBO.getPerfil().getDescripcion(), usuarioBO.getLocalidad().getProvincia().getDescripcion());
+
+		}
+		return usuario;
 	}
 
 	@RequestMapping(value = "/saveUsuario", method = RequestMethod.POST, consumes = { "application/json" })

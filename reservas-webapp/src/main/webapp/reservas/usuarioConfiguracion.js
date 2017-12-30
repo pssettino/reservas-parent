@@ -3,6 +3,8 @@
  */
 $(function() {
 	'use strict';
+	$(".alert-success").hide();
+	$(".alert-danger").hide();
 	
 	$(".btnGuardarUsuConf").click(function() {	
 		var usuarioDTO = {
@@ -31,12 +33,19 @@ $(function() {
 			dataType : "json",		
 			success : function(data) {
 				if(data.success){
-					
-					$("#modalUsuario").modal("hide");
+					$("#okMsg").text("Los datos fueron actualizados correctamente");
+					$(".alert-success").show();
+					$(".alert-danger").hide();					
+				}else{
+					$("#errorMsg").text(data.message);
+					$(".alert-danger").show();
+					$(".alert-success").hide();
 				}
 			},
 			error : function(data) {
-
+				$("#errorMsg").text(data.responseText);
+				$(".alert-danger").show();
+				$(".alert-success").hide();
 			}
 		});
 
@@ -63,13 +72,19 @@ $(function() {
 			dataType : "json",		
 			success : function(data) {
 				if(data.success){
-					console.log("OK");
+					$("#okMsg").text("Los datos fueron actualizados correctamente");
+					$(".alert-success").show();
+					$(".alert-danger").hide();
 				}else{
-					console.log("error");
+					$("#errorMsg").text(data.message);
+					$(".alert-danger").show();
+					$(".alert-success").hide();
 				}
 			},
 			error : function(data) {
-
+				$("#errorMsg").text(data.responseText);
+				$(".alert-danger").show();
+				$(".alert-success").hide();
 			}
 		});				
 	});

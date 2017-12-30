@@ -53,6 +53,14 @@
 					<div class="col-lg-12">
 						<br>
 						<div class="panel panel-default">
+							<div class="alert alert-danger alert-dismissable">
+							  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  								<strong>Error!</strong> <div id="errorMsg"></div>
+							</div>
+							<div class="alert alert-success alert-dismissable">
+							  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  								<strong>Correcto!</strong> <div id="okMsg"></div>
+							</div>
 							<div class="panel-heading">Usuario:</div>
 							<!-- /.panel-heading -->
 							<div class="panel-body">
@@ -183,9 +191,8 @@
 												class="btn btn-primary f-right btnCambiarContraseña">
 												<i id="spinner-enviar"
 													class="fa fa-spinner fa-pulse btn-spinner hide"></i>
-												Guardar
+												Cambiar Contraseña
 											</button>
-											<button type="reset" class="btn btn-md">Borrar</button>
 										</div>
 									</form>
 

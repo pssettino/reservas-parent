@@ -1,7 +1,9 @@
-																			package com.reservas.controllers;
+package com.reservas.controllers;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,21 +18,25 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Strings;
+import com.reservas.dto.UsuarioDTO;
 import com.reservas.exeptions.BusinessExeption;
 import com.reservas.model.UsuarioBO;
+import com.reservas.service.PerfilService;
 import com.reservas.service.UsuarioService;
 import com.reservas.utils.Constantes;
-
+import com.reservas.utils.JsonResponse;
+import com.reservas.utils.SendHTMLEmail;
 
 /**
- * @author pablo gabriel settino
- * Fecha: 2017-07-22 
- * Copyright 2017
+ * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 @Controller
 public class LogonController extends AbstractBaseController {
@@ -39,6 +45,9 @@ public class LogonController extends AbstractBaseController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+
+	@Autowired
+	private PerfilService perfilService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, ModelMap model)
@@ -139,6 +148,34 @@ public class LogonController extends AbstractBaseController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView welcome(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		return new ModelAndView("welcome");
+	}
+
+	@RequestMapping(value = "/registrar", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResponse registrar(@RequestBody UsuarioDTO usuarioDTO, BindingResult result, ModelMap model)
+			throws ParseException, BusinessExeption {
+
+		UsuarioBO usuarioBO;
+		usuarioBO = new UsuarioBO(usuarioDTO.getIdUsuario(), usuarioDTO.getApellido(), usuarioDTO.getNombre(),
+				usuarioDTO.getUserName(), usuarioDTO.getPassword(), usuarioDTO.getNroDocumento(), usuarioDTO.getEmail(),
+				null, usuarioDTO.getEstado(), usuarioDTO.getTelefonoParticular(), usuarioDTO.getTelefonoLaboral(),
+				usuarioDTO.getFechaUltModifClave(), usuarioDTO.getIntentosFallidos(),
+				perfilService.findByProperty("id", new Integer(2)).get(0), null);
+
+		String pass = UUID.randomUUID().toString().substring(0, 8);
+		usuarioBO.setPassword(pass);
+
+		usuarioService.save(usuarioBO);
+		SendHTMLEmail mail = new SendHTMLEmail();
+		mail.setHost(usuarioBO.getEmail());
+		mail.setFrom("pablo.settino@gmail.com");
+		mail.setSubject("Eventos OnLine!");
+		mail.setContent("<h1>Usuario: </h1>" + usuarioBO.getUserName() + " <br/>" + "<h1>Contraseña: </h1>" + pass);
+
+		JsonResponse response = new JsonResponse<>();
+		response.setSuccess(true);
+		return response;
+
 	}
 
 }

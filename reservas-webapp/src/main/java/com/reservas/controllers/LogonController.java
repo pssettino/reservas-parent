@@ -167,11 +167,12 @@ public class LogonController extends AbstractBaseController {
 
 		usuarioService.save(usuarioBO);
 		SendHTMLEmail mail = new SendHTMLEmail();
-		mail.setHost(usuarioBO.getEmail());
+		mail.setHost("pablo.settino@gmail.com");
 		mail.setFrom("pablo.settino@gmail.com");
+		mail.setTo(usuarioBO.getEmail());
 		mail.setSubject("Eventos OnLine!");
 		mail.setContent("<h1>Usuario: </h1>" + usuarioBO.getUserName() + " <br/>" + "<h1>Contraseña: </h1>" + pass);
-
+		mail.sendMail();
 		JsonResponse response = new JsonResponse<>();
 		response.setSuccess(true);
 		return response;

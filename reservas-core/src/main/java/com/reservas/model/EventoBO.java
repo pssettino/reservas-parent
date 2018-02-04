@@ -105,6 +105,24 @@ public class EventoBO implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	
+
+	public EventoBO() {
+		super();
+	}
+
+	public EventoBO(Long id, Date fechaDesde, Date fechaHasta, Boolean todoDia, String titulo, String descripcion,
+			EstadoBO estado) {
+		super();
+		this.id = id;
+		this.fechaDesde = fechaDesde;
+		this.fechaHasta = fechaHasta;
+		this.todoDia = todoDia;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.estado = estado;
+	}
 
 	@Override
 	public int hashCode() {

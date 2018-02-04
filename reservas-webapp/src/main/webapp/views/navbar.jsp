@@ -37,10 +37,17 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="login"><i class="fa fa-dashboard fa-fw"></i>
-								Eventos</a></li>
-<!-- 						<li><a href="reportes"><i -->
-<!-- 								class="fa fa-bar-chart-o fa-fw"></i> Reportes</a></li> -->
+						
+						<li><a href="#"><i class="fa fa-dashboard fa-fw"></i>
+								Eventos</a>
+						<ul class="nav nav-second-level">
+								
+						<li><a href="login"><i
+								class="fa fa-bar-chart-o fa-fw"></i> Calendario</a></li>
+						<li><a href="admEventos"><i
+								class="fa fa-bar-chart-o fa-fw"></i> Eventos</a></li>
+						</ul>		
+						</li>
 						<li><a href="#"><i class="fa fa-wrench fa-fw"></i>
 								Administracion</a>
 								 <ul class="nav nav-second-level">

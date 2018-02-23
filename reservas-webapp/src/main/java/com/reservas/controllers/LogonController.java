@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.base.Strings;
+import com.reservas.dao.MailSenderService;
 import com.reservas.dto.UsuarioDTO;
 import com.reservas.exeptions.BusinessExeption;
 import com.reservas.model.UsuarioBO;
@@ -33,7 +34,6 @@ import com.reservas.service.PerfilService;
 import com.reservas.service.UsuarioService;
 import com.reservas.utils.Constantes;
 import com.reservas.utils.JsonResponse;
-import com.reservas.utils.SendHTMLEmail;
 
 /**
  * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
@@ -48,6 +48,9 @@ public class LogonController extends AbstractBaseController {
 
 	@Autowired
 	private PerfilService perfilService;
+
+	@Autowired
+	private MailSenderService mailSenderService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, ModelMap model)
@@ -166,13 +169,12 @@ public class LogonController extends AbstractBaseController {
 		usuarioBO.setPassword(pass);
 
 		usuarioService.save(usuarioBO);
-		SendHTMLEmail mail = new SendHTMLEmail();
-		mail.setHost("pablo.settino@gmail.com");
-		mail.setFrom("pablo.settino@gmail.com");
-		mail.setTo(usuarioBO.getEmail());
-		mail.setSubject("Eventos OnLine!");
-		mail.setContent("<h1>Usuario: </h1>" + usuarioBO.getUserName() + " <br/>" + "<h1>Contraseña: </h1>" + pass);
-		mail.sendMail();
+		String mensaje = "<h1>Usuario: </h1>" + usuarioBO.getUserName() + " <br/>" + "<h1>Contraseña: </h1>" + pass;
+		try {
+			mailSenderService.sendMail("Eventos OnLine!", "", mensaje, usuarioBO.getEmail(), "");
+		} catch (Exception e) {
+		}
+
 		JsonResponse response = new JsonResponse<>();
 		response.setSuccess(true);
 		return response;

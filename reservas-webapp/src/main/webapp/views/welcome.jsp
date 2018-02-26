@@ -123,7 +123,7 @@ body {
 	<script type="application/javascript">
 					  
 	
-		$('#sandbox-container input').datepicker({
+		$('#sandbox-container input').datetimepicker({
 			language: "es",
 			autoclose: true,
 			clearBtn: true

@@ -236,6 +236,14 @@
 		$(document)
 				.ready(
 						function() {
+							
+							$('#fechaNacimiento').datetimepicker({
+						        language: "es",
+						        autoclose: true,
+						        clearBtn: true,
+						        format: "dd/mm/yyyy"
+						    });
+							
 							$('#dataTables-example')
 									.DataTable(
 											{

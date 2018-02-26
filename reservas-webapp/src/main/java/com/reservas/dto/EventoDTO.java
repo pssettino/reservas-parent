@@ -1,15 +1,14 @@
 package com.reservas.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class EventoDTO implements Serializable {
 
 	private Long id;
 
-	private Date fechaDesde;
+	private String fechaDesde;
 
-	private Date fechaHasta;
+	private String fechaHasta;
 
 	private String titulo;
 
@@ -23,19 +22,19 @@ public class EventoDTO implements Serializable {
 		this.id = id;
 	}
 
-	public Date getFechaDesde() {
+	public String getFechaDesde() {
 		return fechaDesde;
 	}
 
-	public void setFechaDesde(Date fechaDesde) {
+	public void setFechaDesde(String fechaDesde) {
 		this.fechaDesde = fechaDesde;
 	}
 
-	public Date getFechaHasta() {
+	public String getFechaHasta() {
 		return fechaHasta;
 	}
 
-	public void setFechaHasta(Date fechaHasta) {
+	public void setFechaHasta(String fechaHasta) {
 		this.fechaHasta = fechaHasta;
 	}
 
@@ -55,7 +54,7 @@ public class EventoDTO implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public EventoDTO(Long id, Date fechaDesde, Date fechaHasta, String titulo, String descripcion) {
+	public EventoDTO(Long id, String fechaDesde, String fechaHasta, String titulo, String descripcion) {
 		super();
 		this.id = id;
 		this.fechaDesde = fechaDesde;

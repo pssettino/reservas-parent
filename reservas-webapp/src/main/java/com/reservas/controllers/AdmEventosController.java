@@ -1,7 +1,9 @@
 package com.reservas.controllers;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +46,7 @@ public class AdmEventosController extends AbstractBaseController {
 			List<EventoDTO> dtos = new ArrayList<EventoDTO>();
 			for (EventoBO eventoBO : eventos) {
 				EventoDTO eventoDTO = eventoBOToDTO(eventoBO);
+
 				dtos.add(eventoDTO);
 			}
 
@@ -57,7 +60,7 @@ public class AdmEventosController extends AbstractBaseController {
 
 	}
 
-	private ModelAndView bindAdmEventos(ModelAndView modelo) throws BusinessExeption {
+	private ModelAndView bindAdmEventos(ModelAndView modelo) throws BusinessExeption, ParseException {
 		List<EventoBO> eventos = eventoService.getAll();
 		List<EventoDTO> dtos = new ArrayList<EventoDTO>();
 		for (EventoBO eventoBO : eventos) {
@@ -70,11 +73,14 @@ public class AdmEventosController extends AbstractBaseController {
 		return modelo;
 	}
 
-	private EventoDTO eventoBOToDTO(EventoBO eventoBO) {
+	private EventoDTO eventoBOToDTO(EventoBO eventoBO) throws ParseException {
 		EventoDTO evento;
 
-		evento = new EventoDTO(eventoBO.getId(), eventoBO.getFechaDesde(), eventoBO.getFechaHasta(),
-				eventoBO.getTitulo(), eventoBO.getDescripcion());
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		String fechaDesde = eventoBO.getFechaDesde() != null ? sdf.format(eventoBO.getFechaDesde()) : "";
+		String fechaHasta = eventoBO.getFechaHasta() != null ? sdf.format(eventoBO.getFechaHasta()) : "";
+		evento = new EventoDTO(eventoBO.getId(), fechaDesde, fechaHasta, eventoBO.getTitulo(),
+				eventoBO.getDescripcion());
 		return evento;
 	}
 
@@ -85,19 +91,26 @@ public class AdmEventosController extends AbstractBaseController {
 
 			ModelAndView modelo = new ModelAndView("admEventos");
 			EventoBO eventoBO;
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
 			if (eventoDTO.getId() == null) {
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
 
 				EstadoBO estado = estadoService.findByProperty("id", 1L).get(0);
 
-				eventoBO = new EventoBO(eventoDTO.getId(), eventoDTO.getFechaDesde(), eventoDTO.getFechaHasta(), false,
-						eventoDTO.getTitulo(), eventoDTO.getDescripcion(), estado);
+				Date fechaDesde = sdf.parse(eventoDTO.getFechaDesde());
+				Date fechaHasta = sdf.parse(eventoDTO.getFechaHasta());
+
+				eventoBO = new EventoBO(eventoDTO.getId(), fechaDesde, fechaHasta, false, eventoDTO.getTitulo(),
+						eventoDTO.getDescripcion(), estado);
 
 			} else {
 				eventoBO = eventoService.findByProperty("id", eventoDTO.getId()).get(0);
+
+				Date fechaDesde = sdf.parse(eventoDTO.getFechaDesde());
+				Date fechaHasta = sdf.parse(eventoDTO.getFechaHasta());
+
 				eventoBO.setTitulo(eventoDTO.getTitulo());
-				eventoBO.setFechaDesde(eventoDTO.getFechaDesde());
-				eventoBO.setFechaHasta(eventoDTO.getFechaHasta());
+				eventoBO.setFechaDesde(fechaDesde);
+				eventoBO.setFechaHasta(fechaHasta);
 				eventoBO.setDescripcion(eventoDTO.getDescripcion());
 			}
 
@@ -143,6 +156,7 @@ public class AdmEventosController extends AbstractBaseController {
 			EventoBO eventoBO = eventoService.findByProperty("id", new Long(id)).get(0);
 			// eventoBO.setEstado(estado);
 			// usuarioService.save(usuarioBO);
+			eventoService.delete(eventoBO);
 			return bindAdmEventos(modelo);
 		} catch (Exception e) {
 			return null;

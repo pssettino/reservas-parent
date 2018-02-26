@@ -17,6 +17,8 @@
 <script src="js/bootstrap-confirmation.min.js"></script>
 
 <!-- Datepicker -->
-<script src="js/bootstrap-datepicker.js"></script>
-<script src="js/bootstrap-datepicker.es.js"></script>
+<!-- <script src="js/bootstrap-datepicker.js"></script> -->
+<!-- <script src="js/bootstrap-datepicker.es.js"></script> -->
+<script src="js/bootstrap-datetimepicker.js"></script>
+<script src="js/bootstrap-datetimepicker.es.js"></script>
 

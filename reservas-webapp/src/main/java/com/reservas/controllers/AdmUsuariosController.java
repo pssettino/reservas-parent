@@ -2,6 +2,7 @@ package com.reservas.controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -100,6 +101,8 @@ public class AdmUsuariosController extends AbstractBaseController {
 					usuarioBO.getFechaNacimiento().toString(), usuarioBO.getEstado(), usuarioBO.getTelefonoParticular(),
 					usuarioBO.getTelefonoLaboral(), usuarioBO.getFechaUltModifClave(), usuarioBO.getIntentosFallidos(),
 					usuarioBO.getPerfil().getDescripcion(), usuarioBO.getLocalidad().getProvincia().getDescripcion());
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			usuario.setFechaNacimiento(sdf.format(usuarioBO.getFechaNacimiento()));
 
 		}
 		return usuario;
@@ -134,6 +137,10 @@ public class AdmUsuariosController extends AbstractBaseController {
 				usuarioBO.setEstado(usuarioDTO.getEstado());
 				usuarioBO.setUserName(usuarioDTO.getUserName());
 				usuarioBO.setPerfil(perfilService.findByProperty("id", new Integer(usuarioDTO.getPerfil())).get(0));
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				Date fechaNac = sdf.parse(usuarioDTO.getFechaNacimiento());
+				usuarioBO.setFechaNacimiento(fechaNac);
+
 			}
 
 			usuarioService.save(usuarioBO);

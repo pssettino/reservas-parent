@@ -120,20 +120,21 @@
 																</div>																																
 																<div class="form-group">
 																	<form:label path="">Fecha Desde</form:label>
-																	<div class="input-group date">
-																		<input type="text" id="fechaDesde"
+																	<div class="input-append date form_datetime">
+																	    <input type="text" id="fechaDesde"
 																			name="fechaDesde" class="form-control"
-																			value=""> <span class="input-group-addon"><i
-																			class="glyphicon glyphicon-calendar"></i></span>
+																			value="">
+																	    <span class="add-on"><i class="icon-th"></i></span>
 																	</div>
+																	
 																</div>
 																<div class="form-group">
 																	<form:label path="">Fecha Hasta</form:label>
-																	<div class="input-group date">
-																		<input type="text" id="fechaHasta"
+																	<div class="input-append date form_datetime">
+																	    <input type="text" id="fechaHasta"
 																			name="fechaHasta" class="form-control"
-																			value=""> <span class="input-group-addon"><i
-																			class="glyphicon glyphicon-calendar"></i></span>
+																			value="">
+																	  <span class="add-on"><i class="icon-th"></i></span>
 																	</div>
 																</div>
 																<div class="form-group">
@@ -186,6 +187,15 @@
 		$(document)
 				.ready(
 						function() {
+							
+							$('.form_datetime').datetimepicker({
+						        language: "es",
+						        autoclose: true,
+						        clearBtn: true,
+						        format: "dd/mm/yyyy hh:ii"
+						    });
+
+
 							$('#dataTables-example')
 									.DataTable(
 											{

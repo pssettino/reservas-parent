@@ -34,10 +34,14 @@ $(document).ready(function() {
 									};
 						
 								} else {
+									var startStr = "";
+									if(value.start!=null){
+										startStr = value.start.substring(0, 10);
+									}
 									obj = {
 										id : value.id,
 										title : value.title,
-										start : value.start.substring(0, 10),
+										start : startStr,
 										estadoId: value.estadoId
 									};
 						

@@ -59,7 +59,9 @@ public class AdmUsuariosController extends AbstractBaseController {
 			List<UsuarioDTO> dtos = new ArrayList<UsuarioDTO>();
 			for (UsuarioBO usuarioBO : usuarios) {
 				UsuarioDTO usuarioDTO = usuarioBOToDTO(usuarioBO);
-				dtos.add(usuarioDTO);
+				if (usuarioBO.getEstado()) {
+					dtos.add(usuarioDTO);
+				}
 			}
 
 			modelo.addObject("usuarios", dtos);

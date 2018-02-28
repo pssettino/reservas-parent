@@ -12,7 +12,7 @@ $(function() {
 				fechaHasta : $("#fechaHasta").val()								
 		};
 				
-		
+		$('#frmEvento').data('formValidation').validate();
 		
 		$.ajax({
 			url : "./saveEvento",
@@ -33,6 +33,7 @@ $(function() {
 	});
 	$(".btnEditarEvento").click(function() {
 		var form = {"id": $(this).data("idevento")};
+		$('#frmEvento').data('formValidation').validate();
 		$.ajax({
 			url : "./editarEvento",
 			type : "POST",

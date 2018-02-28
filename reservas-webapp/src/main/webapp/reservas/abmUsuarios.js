@@ -20,7 +20,7 @@ $(function() {
 				provincia: $("#provincia").val()
 		};
 				
-		
+		$('#frmUsuario').data('formValidation').validate();
 		
 		$.ajax({
 			url : "./saveUsuario",
@@ -42,6 +42,7 @@ $(function() {
 	});
 	$(".btnEditarUsuario").click(function() {
 		var form = {"id": $(this).data("idusuario")};
+		$('#frmUsuario').data('formValidation').validate();
 		$.ajax({
 			url : "./editarUsuario",
 			type : "POST",

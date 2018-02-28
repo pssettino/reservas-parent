@@ -18,8 +18,7 @@
 	href="components/bootstrap3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="components/bootstrap3/css/bootstrap-theme.min.css">
-<link rel="stylesheet"
-	href="css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
 <link rel="stylesheet" href="css/calendar.css">
 
 <style type="text/css">
@@ -65,7 +64,7 @@
 											<th>Titulo</th>
 											<th>Descripcion</th>
 											<th>Desde</th>
-											<th>Hasta</th>											
+											<th>Hasta</th>
 											<th>Acciones</th>
 										</tr>
 									</thead>
@@ -75,7 +74,7 @@
 												<td>${evt.titulo }</td>
 												<td>${evt.descripcion }</td>
 												<td>${evt.fechaDesde }</td>
-												<td>${evt.fechaHasta }</td>												
+												<td>${evt.fechaHasta }</td>
 												<td>
 													<button type="button" data-idevento="${evt.id }"
 														id="btnEditarEvento" name="btnEditarEvento"
@@ -105,9 +104,9 @@
 											</div>
 											<div class="modal-body">
 												<div class="clearfix"></div>
-												<div class="panel panel-default">													
+												<div class="panel panel-default">
 													<div class="panel-body">
-														<form:form method="POST"															
+														<form:form method="POST" id="frmEvento" name="frmEvento"
 															modelAttribute="eventoDTO">
 															<div class="col-sm-6 col-xs-12">
 																<div class="form-group">
@@ -117,28 +116,26 @@
 																</div>
 																<div class="form-group">
 																	<form:label path="descripcion">Descripcion</form:label>
-																	<form:hidden path="id" name="id" id="id"/>
+																	<form:hidden path="id" name="id" id="id" />
 																	<form:input path="descripcion" class="form-control"
 																		placeholder="Ingrese Descripcion" />
-																</div>																																
+																</div>
 																<div class="form-group">
 																	<form:label path="">Fecha Desde</form:label>
 																	<div class="input-group date formDatetime">
-																	    <input type="text" id="fechaDesde"
-																			name="fechaDesde" class="form-control"
-																			value="">
-																	    <span class="input-group-addon"><i
+																		<input type="text" id="fechaDesde" name="fechaDesde"
+																			class="form-control" value=""> <span
+																			class="input-group-addon"><i
 																			class="glyphicon glyphicon-calendar"></i></span>
 																	</div>
-																	
+
 																</div>
 																<div class="form-group">
 																	<form:label path="">Fecha Hasta</form:label>
 																	<div class="input-group date formDatetime">
-																	    <input type="text" id="fechaHasta"
-																			name="fechaHasta" class="form-control"
-																			value="">
-																	  <span class="input-group-addon"><i
+																		<input type="text" id="fechaHasta" name="fechaHasta"
+																			class="form-control" value=""> <span
+																			class="input-group-addon"><i
 																			class="glyphicon glyphicon-calendar"></i></span>
 																	</div>
 																</div>
@@ -149,15 +146,15 @@
 																		<option value="1">Activo</option>
 																	</select>
 																</div>
-															 	<div class="modal-footer">
-																	<button type="button" id="btnGuardarEvento" name ="btnGuardarEvento"
-																		class="btn btn-success">Guardar</button>
+																<div class="modal-footer">
+																	<button type="button" id="btnGuardarEvento"
+																		name="btnGuardarEvento" class="btn btn-success">Guardar</button>
 																	<button type="button" class="btn btn-default"
 																		data-dismiss="modal">Close</button>
-																</div>																	
+																</div>
 															</div>
-															
-															
+
+
 														</form:form>
 													</div>
 												</div>
@@ -192,14 +189,13 @@
 		$(document)
 				.ready(
 						function() {
-							
-							$('.formDatetime').datetimepicker({
-						        language: "es",
-						        autoclose: true,
-						        clearBtn: true,
-						        format: "dd/mm/yyyy hh:ii"
-						    });
 
+							$('.formDatetime').datetimepicker({
+								language : "es",
+								autoclose : true,
+								clearBtn : true,
+								format : "dd/mm/yyyy hh:ii"
+							});
 
 							$('#dataTables-example')
 									.DataTable(
@@ -229,6 +225,52 @@
 												}
 
 											});
+
+							$('#frmEvento')
+									.formValidation(
+											{
+												framework : 'bootstrap',
+												icon : {
+													//valid: 'glyphicon glyphicon-ok',
+													invalid : 'glyphicon glyphicon-remove',
+													validating : 'glyphicon glyphicon-refresh'
+												},
+												// This option will not ignore invisible fields which belong to inactive panels
+												excluded : [ ':disabled',
+														':hidden',
+														':not(:visible)' ],
+												fields : {
+													titulo : {
+														validators : {
+															notEmpty : {
+																message : 'Campo requerido'
+															}
+														}
+													},
+													descripcion : {
+														validators : {
+															notEmpty : {
+																message : 'Campo requerido'
+															}
+														}
+													},
+													fechaDesde : {
+														validators : {
+															notEmpty : {
+																message : 'Campo requerido'
+															}
+														}
+													},
+													fechaHasta : {
+														validators : {
+															notEmpty : {
+																message : 'Campo requerido'
+															}
+														}
+													}
+												}
+											});
+
 						});
 	</script>
 

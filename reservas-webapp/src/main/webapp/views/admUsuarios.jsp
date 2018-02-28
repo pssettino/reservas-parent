@@ -111,7 +111,7 @@
 												<div class="clearfix"></div>
 												<div class="panel panel-default">													
 													<div class="panel-body">
-														<form:form method="POST"															
+														<form:form method="POST" id="frmUsuario" name="frmUsuario"															
 															modelAttribute="usuarioDTO">
 															<div class="col-sm-6 col-xs-12">
 																<div class="form-group">
@@ -274,6 +274,85 @@
 												}
 
 											});
+											
+							$('#frmUsuario').formValidation({
+								framework : 'bootstrap',
+								icon : {
+									//valid: 'glyphicon glyphicon-ok',
+									invalid : 'glyphicon glyphicon-remove',
+									validating : 'glyphicon glyphicon-refresh'
+								},
+								// This option will not ignore invisible fields which belong to inactive panels
+								excluded : [':disabled', ':hidden', ':not(:visible)'],
+								fields : {
+									userName: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									apellido: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									nombre: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									nroDocumento: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									fechaNacimiento: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									detalleEstado: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									provincia: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									localidad: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									email: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									}
+								}
+							});
+
+											
+											
 						});
 	</script>
 

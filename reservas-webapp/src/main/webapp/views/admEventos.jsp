@@ -13,10 +13,13 @@
 
 <jsp:include page="header.jsp"></jsp:include>
 
+
 <link rel="stylesheet"
 	href="components/bootstrap3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="components/bootstrap3/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="css/bootstrap-datetimepicker.css">
 <link rel="stylesheet" href="css/calendar.css">
 
 <style type="text/css">
@@ -120,21 +123,23 @@
 																</div>																																
 																<div class="form-group">
 																	<form:label path="">Fecha Desde</form:label>
-																	<div class="input-append date form_datetime">
+																	<div class="input-group date formDatetime">
 																	    <input type="text" id="fechaDesde"
 																			name="fechaDesde" class="form-control"
 																			value="">
-																	    <span class="add-on"><i class="icon-th"></i></span>
+																	    <span class="input-group-addon"><i
+																			class="glyphicon glyphicon-calendar"></i></span>
 																	</div>
 																	
 																</div>
 																<div class="form-group">
 																	<form:label path="">Fecha Hasta</form:label>
-																	<div class="input-append date form_datetime">
+																	<div class="input-group date formDatetime">
 																	    <input type="text" id="fechaHasta"
 																			name="fechaHasta" class="form-control"
 																			value="">
-																	  <span class="add-on"><i class="icon-th"></i></span>
+																	  <span class="input-group-addon"><i
+																			class="glyphicon glyphicon-calendar"></i></span>
 																	</div>
 																</div>
 																<div class="form-group">
@@ -188,7 +193,7 @@
 				.ready(
 						function() {
 							
-							$('.form_datetime').datetimepicker({
+							$('.formDatetime').datetimepicker({
 						        language: "es",
 						        autoclose: true,
 						        clearBtn: true,

@@ -17,6 +17,8 @@
 	href="components/bootstrap3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="components/bootstrap3/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="css/bootstrap-datetimepicker.css">
 <link rel="stylesheet" href="css/calendar.css">
 
 <style type="text/css">

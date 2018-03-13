@@ -331,6 +331,12 @@
 										validators : {
 											notEmpty : {
 												message : 'Campo requerido'
+											},
+											callback : {
+												message : 'Campo requerido',
+												callback : function(value, validator) {													
+													return value!='-1';
+												}
 											}
 										}
 									},
@@ -338,6 +344,12 @@
 										validators : {
 											notEmpty : {
 												message : 'Campo requerido'
+											},
+											callback : {
+												message : 'Campo requerido',
+												callback : function(value, validator) {													
+													return value!='-1';
+												}
 											}
 										}
 									},
@@ -345,7 +357,10 @@
 										validators : {
 											notEmpty : {
 												message : 'Campo requerido'
-											}
+											},
+											emailAddress: {
+						                        message: 'Email invalido'
+						                    }
 										}
 									}
 								}

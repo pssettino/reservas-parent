@@ -105,7 +105,7 @@
 													<div class="col-sm-6 col-xs-12">
 														<div class="form-group">
 															<label path="userName">Nombre de Usuario</label> <input
-																id="userName" class="form-control"
+																id="userName" name="userName"class="form-control"
 																placeholder="Ingrese Nombre de Usuario" />
 														</div>
 														<div class="form-group">
@@ -120,7 +120,7 @@
 														</div>
 														<div class="form-group">
 															<label path="nroDocumento">DNI</label> <input
-																id="nroDocumento" class="form-control"
+																id="nroDocumento" name="nroDocumento" class="form-control"
 																placeholder="Ingrese DNI" />
 														</div>
 
@@ -128,16 +128,16 @@
 													<div class="col-sm-6 col-xs-12">
 														<div class="form-group">
 															<label path="telefonoParticular">Telefono
-																Particular</label> <input id="telefonoParticular"
+																Particular</label> <input id="telefonoParticular" name="telefonoParticular"  
 																class="form-control" placeholder="Ingrese Telefono" />
 														</div>
 														<div class="form-group">
 															<label path="telefonoLaboral">Telefono Laboral</label> <input
-																id="telefonoLaboral" class="form-control"
+																id="telefonoLaboral" name="telefonoLaboral" class="form-control"
 																placeholder="Ingrese Telefono" />
 														</div>
 														<div class="form-group">
-															<label path="email">Email</label> <input id="email"
+															<label path="email">Email</label> <input id="email" name="email"
 																class="form-control" placeholder="Ingrese Email" />
 														</div>
 														<div class="modal-footer">
@@ -176,6 +176,10 @@
 	<!-- Custom Theme JavaScript -->
 	<script src="js/sb-admin-2.js"></script>
 	
+	<script src="js/formValidation.js"></script>
+	<script src="js/formValidation-bootstrap.js"></script>
+	
+	
 	<script type="text/javascript">
 		
 	function showModal() {
@@ -195,27 +199,100 @@
 				email : $("#email").val()
 		};
 				
+		$('#frmRegUsuario').data('formValidation').validate();
+		var esValido = $('#frmRegUsuario').data('formValidation').isValid();
+		if(esValido){
+			$.ajax({
+				url : "./registrar",
+				type : "POST",
+				data : JSON.stringify(usuarioDTO),
+				contentType: 'application/json',		    
+				dataType : "json",		
+				success : function(data) {
+					if(data.success){
+						$("#modaRegUsuario").modal("hide");					
+					}
+				},
+				error : function(data) {
+
+				}
+			});
+		}
+		
+
 		
 		
-		$.ajax({
-			url : "./registrar",
-			type : "POST",
-			data : JSON.stringify(usuarioDTO),
-			contentType: 'application/json',		    
-			dataType : "json",		
-			success : function(data) {
-				if(data.success){
-					$("#modaRegUsuario").modal("hide");					
+	}	
+	
+	$(document)
+	.ready(
+			function() {
+	$('#frmRegUsuario').formValidation({
+		framework : 'bootstrap',
+		icon : {
+			//valid: 'glyphicon glyphicon-ok',
+			invalid : 'glyphicon glyphicon-remove',
+			validating : 'glyphicon glyphicon-refresh'
+		},
+		// This option will not ignore invisible fields which belong to inactive panels
+		excluded : [':disabled', ':hidden', ':not(:visible)'],
+		fields : {
+			userName: {
+				validators : {
+					notEmpty : {
+						message : 'Campo requerido'
+					}
 				}
 			},
-			error : function(data) {
-
+			apellido: {
+				validators : {
+					notEmpty : {
+						message : 'Campo requerido'
+					}
+				}
+			},
+			nombre: {
+				validators : {
+					notEmpty : {
+						message : 'Campo requerido'
+					}
+				}
+			},
+			nroDocumento: {
+				validators : {
+					notEmpty : {
+						message : 'Campo requerido'
+					}
+				}
+			},
+			telefonoParticular: {
+				validators : {
+					notEmpty : {
+						message : 'Campo requerido'
+					}
+				}
+			},
+			telefonoLaboral: {
+				validators : {
+					notEmpty : {
+						message : 'Campo requerido'
+					}
+				}
+			},
+			email: {
+				validators : {
+					notEmpty : {
+						message : 'Campo requerido'
+					},
+					emailAddress: {
+                        message: 'Email invalido'
+                    }
+				}
 			}
-		});
-
-
-	}	
- 
+		}
+	});
+	});
+	
 	</script>
 </body>
 

@@ -171,7 +171,7 @@ public class LogonController extends AbstractBaseController {
 		usuarioService.save(usuarioBO);
 		String mensaje = "<h1>Usuario: </h1>" + usuarioBO.getUserName() + " <br/>" + "<h1>Contraseña: </h1>" + pass;
 		try {
-			mailSenderService.sendMail("Eventos OnLine!", "", mensaje, usuarioBO.getEmail(), "");
+			mailSenderService.sendMail("Eventos OnLine!", mensaje, "Un texto", usuarioBO.getEmail(), "pablo.settino@gmail.com");
 		} catch (Exception e) {
 		}
 

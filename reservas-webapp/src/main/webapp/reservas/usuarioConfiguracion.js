@@ -23,7 +23,10 @@ $(function() {
 				provincia: $("#provincia").val()
 		};
 				
-		
+		$('#frmUsrConfiguracion').data('formValidation').validate();
+		var esValido = $('#frmUsrConfiguracion').data('formValidation').isValid();
+		if(esValido){
+			
 		
 		$.ajax({
 			url : "./usuarioConfiguracion/saveUsuario",
@@ -50,7 +53,7 @@ $(function() {
 		});
 
 		
-		
+		}
 		
 		
 	});
@@ -62,7 +65,10 @@ $(function() {
 				inputPassword2 : $("#inputPassword2").val()
 		};
 				
-		
+		$('#frmCambiarPwd').data('formValidation').validate();
+		var esValido = $('#frmCambiarPwd').data('formValidation').isValid();
+		if(esValido){
+			
 		
 		$.ajax({
 			url : "./usuarioConfiguracion/changePassword",
@@ -86,7 +92,9 @@ $(function() {
 				$(".alert-danger").show();
 				$(".alert-success").hide();
 			}
-		});				
+		});
+		}
+		
 	});
 	
 	$("#provincia").change(function() {

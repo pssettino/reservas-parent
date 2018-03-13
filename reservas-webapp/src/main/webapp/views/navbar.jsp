@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
@@ -44,10 +45,15 @@
 								
 						<li><a href="login"><i
 								class="fa fa-bar-chart-o fa-fw"></i> Calendario</a></li>
-						<li><a href="admEventos"><i
+						<sec:authorize access="hasAnyRole('1')">
+							<li><a href="admEventos"><i
 								class="fa fa-bar-chart-o fa-fw"></i> Eventos</a></li>
+						</sec:authorize>
+						
 						</ul>		
 						</li>
+						
+						<sec:authorize access="hasAnyRole('1')">
 						<li><a href="#"><i class="fa fa-wrench fa-fw"></i>
 								Administracion</a>
 								 <ul class="nav nav-second-level">
@@ -59,6 +65,8 @@
                                 </li>
                             </ul>
 								</li>
+						</sec:authorize>
+						
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->

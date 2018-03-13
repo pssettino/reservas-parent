@@ -65,7 +65,7 @@
 							<!-- /.panel-heading -->
 							<div class="panel-body">
 							
-								<form id="frmUsrConfiguracion">
+								<form id="frmUsrConfiguracion" name="frmUsrConfiguracion">
 									<div class="col-sm-8 mtop15">
 										<fieldset>
 											<div class="form-group col-sm-4 col-xs-4">
@@ -167,23 +167,23 @@
 								</form>
 
 								<div class="col-sm-4 mtop15">
-									<form id="password" method="post" novalidate="novalidate"
+									<form id="frmCambiarPwd" name="frmCambiarPwd" method="post" 
 										class="fv-form fv-form-bootstrap">
 										<div class="form-group col-sm-9 col-xs-4">
 											<label for="disabledTextInput">Contraseña actual</label> <input
 												type="password" id="inputOldPassword" class="form-control"
-												placeholder="" name="oldpassword">
+												placeholder="" name="inputOldPassword">
 										</div>
 										<div class="form-group col-sm-9 col-xs-4">
 											<label for="disabledTextInput">Nueva contraseña</label> <input
 												type="password" id="inputPassword" class="form-control"
-												name="password" data-fv-field="password"> 
+												name="inputPassword" data-fv-field="password"> 
 										</div>
 
 										<div class="col-sm-9 col-xs-9 form-group">
 											<label for="disabledTextInput">Repetir contraseña</label> <input
 												type="password" id="inputPassword2" class="form-control"
-												name="password2">
+												name="inputPassword2">
 										</div>
 
 										<div class="col-sm-9 col-xs-12">
@@ -222,6 +222,142 @@
 	<jsp:include page="commons.jsp"></jsp:include>
 	<!-- DataTables JavaScript -->
 	<script src="reservas/usuarioConfiguracion.js"></script>
+	
+	<script>
+	$(document)
+	.ready(
+			function() {
+				
+				$('#frmUsrConfiguracion').formValidation({
+					framework : 'bootstrap',
+					icon : {
+						//valid: 'glyphicon glyphicon-ok',
+						invalid : 'glyphicon glyphicon-remove',
+						validating : 'glyphicon glyphicon-refresh'
+					},
+					// This option will not ignore invisible fields which belong to inactive panels
+					excluded : [':disabled', ':hidden', ':not(:visible)'],
+					fields : {
+						userName: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								}
+							}
+						},
+						apellido: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								}
+							}
+						},
+						nombre: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								}
+							}
+						},
+						nroDocumento: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								}
+							}
+						},
+						fechaNacimiento: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								}
+							}
+						},
+						detalleEstado: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								}
+							}
+						},
+						provincia: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								},
+								callback : {
+									message : 'Campo requerido',
+									callback : function(value, validator) {													
+										return value!='-1';
+									}
+								}
+							}
+						},
+						localidad: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								},
+								callback : {
+									message : 'Campo requerido',
+									callback : function(value, validator) {													
+										return value!='-1';
+									}
+								}
+							}
+						},
+						email: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								},
+								emailAddress: {
+			                        message: 'Email invalido'
+			                    }
+							}
+						}
+					}
+				});
+
+			
+			
+				$('#frmCambiarPwd').formValidation({
+					framework : 'bootstrap',
+					icon : {
+						//valid: 'glyphicon glyphicon-ok',
+						invalid : 'glyphicon glyphicon-remove',
+						validating : 'glyphicon glyphicon-refresh'
+					},
+					// This option will not ignore invisible fields which belong to inactive panels
+					excluded : [':disabled', ':hidden', ':not(:visible)'],
+					fields : {
+						inputOldPassword: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								}
+							}
+						},
+						inputPassword: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								}
+							}
+						},
+						inputPassword2: {
+							validators : {
+								notEmpty : {
+									message : 'Campo requerido'
+								}
+							}
+						}
+					}
+				});
+				
+			});
+						
+	</script>
 
 </body>
 

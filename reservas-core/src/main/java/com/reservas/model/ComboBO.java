@@ -1,20 +1,29 @@
 package com.reservas.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
 
 /**
  * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 @Entity
 @Table(name = "combo")
+@NaturalIdCache
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ComboBO {
 
 	@Id
@@ -22,15 +31,22 @@ public class ComboBO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_producto", nullable = true)
-	private ProductoBO producto;
-
-	@Column(name = "descripcion")
+	@NaturalId
 	private String descripcion;
 
 	@Column(name = "descuento")
 	private Double descuento;
+
+	@OneToMany(mappedBy = "combo", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ComboProductoBO> comboProducto = new ArrayList<ComboProductoBO>();
+
+	public List<ComboProductoBO> getComboProducto() {
+		return comboProducto;
+	}
+
+	public void setComboProducto(List<ComboProductoBO> comboProducto) {
+		this.comboProducto = comboProducto;
+	}
 
 	public Long getId() {
 		return id;
@@ -38,14 +54,6 @@ public class ComboBO {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public ProductoBO getProducto() {
-		return producto;
-	}
-
-	public void setProducto(ProductoBO producto) {
-		this.producto = producto;
 	}
 
 	public String getDescripcion() {
@@ -66,8 +74,64 @@ public class ComboBO {
 
 	@Override
 	public String toString() {
-		return "ComboBO [id=" + id + ", producto=" + producto + ", descripcion=" + descripcion + ", descuento="
-				+ descuento + "]";
+		return "ComboBO [id=" + id + ", descripcion=" + descripcion + ", descuento=" + descuento + ", comboProducto="
+				+ comboProducto + "]";
+	}
+
+	public ComboBO(Long id, String descripcion, Double descuento, List<ComboProductoBO> comboProducto) {
+		super();
+		this.id = id;
+		this.descripcion = descripcion;
+		this.descuento = descuento;
+		this.comboProducto = comboProducto;
+	}
+
+	public ComboBO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((comboProducto == null) ? 0 : comboProducto.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((descuento == null) ? 0 : descuento.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ComboBO other = (ComboBO) obj;
+		if (comboProducto == null) {
+			if (other.comboProducto != null)
+				return false;
+		} else if (!comboProducto.equals(other.comboProducto))
+			return false;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (descuento == null) {
+			if (other.descuento != null)
+				return false;
+		} else if (!descuento.equals(other.descuento))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

@@ -51,6 +51,8 @@ public class ProductoBO {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
 	public ProductoBO(Long id, CategoriaBO categoria, Double precio, String nombre, Integer stock,
 			List<FacturaDetalleBO> facturaDetalle, List<ComboProductoBO> comboProducto) {
 		super();

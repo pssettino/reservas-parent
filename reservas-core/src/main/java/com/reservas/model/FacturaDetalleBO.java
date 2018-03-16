@@ -170,6 +170,13 @@ public class FacturaDetalleBO implements Serializable {
 		this.cantidad = cantidad;
 	}
 
+	public FacturaDetalleBO(FacturaBO factura, ProductoBO producto) {
+		this.factura = factura;
+		this.producto = producto;
+		this.id = new FacturaProductoId(factura.getId(), producto.getId());
+	}
+		
+
 	@Override
 	public String toString() {
 		return "FacturaDetalleBO [idFacturaDetalle=" + idFacturaDetalle + ", id=" + id + ", factura=" + factura

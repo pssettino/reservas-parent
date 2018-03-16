@@ -76,6 +76,12 @@ public class ComboProductoBO implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	public ComboProductoBO(ComboBO combo, ProductoBO producto) {
+		this.producto = producto;
+		this.combo = combo;
+		this.id = new ComboProductoId(combo.getId(), producto.getId());
+	}
+
 	@Override
 	public String toString() {
 		return "ComboProductoBO [idComboProducto=" + idComboProducto + ", id=" + id + ", combo=" + combo + ", producto="

@@ -1,6 +1,7 @@
 package com.reservas.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -100,6 +101,25 @@ public class ComboBO {
 		result = prime * result + ((descuento == null) ? 0 : descuento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
+	}
+
+	public void addProducto(ProductoBO producto) {
+		ComboProductoBO fd = new ComboProductoBO(this, producto);
+		comboProducto.add(fd);
+		producto.getComboProducto().add(fd);
+	}
+
+	public void removeProducto(ProductoBO producto) {
+		for (Iterator<ComboProductoBO> iterator = comboProducto.iterator(); iterator.hasNext();) {
+			ComboProductoBO fd = iterator.next();
+
+			if (fd.getCombo().equals(this) && fd.getProducto().equals(producto)) {
+				iterator.remove();
+				fd.getProducto().getComboProducto().remove(fd);
+				fd.setCombo(null);
+				fd.setProducto(null);
+			}
+		}
 	}
 
 	@Override

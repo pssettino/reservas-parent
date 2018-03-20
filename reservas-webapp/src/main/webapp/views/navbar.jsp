@@ -57,12 +57,15 @@
 						<li><a href="#"><i class="fa fa-wrench fa-fw"></i>
 								Administracion</a>
 								 <ul class="nav nav-second-level">
-<!--                                 <li> -->
-<!--                                     <a href="admClientes">Adm Clientes</a> -->
-<!--                                 </li> -->
                                 <li>
                                     <a href="admUsuarios">Adm Usuarios</a>
                                 </li>
+                                <li>
+                                    <a href="admProductos">Adm Productos</a>
+                                </li>
+								<li>
+                                    <a href="admCombos">Adm Combos</a>
+                                </li>                                
                             </ul>
 								</li>
 						</sec:authorize>

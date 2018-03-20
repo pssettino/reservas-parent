@@ -13,18 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NaturalIdCache;
-
 /**
  * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 @Entity
 @Table(name = "combo")
-@NaturalIdCache
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ComboBO {
 
 	@Id
@@ -32,7 +25,7 @@ public class ComboBO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NaturalId
+	@Column(name = "descripcion")
 	private String descripcion;
 
 	@Column(name = "descuento")

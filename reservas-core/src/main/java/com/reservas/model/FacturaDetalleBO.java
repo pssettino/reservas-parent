@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 @Table(name = "factura_detalle")
 public class FacturaDetalleBO implements Serializable {
 
+	
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idFacturaDetalle;
@@ -175,7 +177,6 @@ public class FacturaDetalleBO implements Serializable {
 		this.producto = producto;
 		this.id = new FacturaProductoId(factura.getId(), producto.getId());
 	}
-		
 
 	@Override
 	public String toString() {

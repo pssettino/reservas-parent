@@ -17,18 +17,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NaturalIdCache;
-
 /**
  * @author pablo gabriel settino Fecha: 2017-07-22 Copyright 2017
  */
 @Entity
 @Table(name = "factura")
-@NaturalIdCache
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class FacturaBO {
 
 	@Id
@@ -40,7 +33,7 @@ public class FacturaBO {
 	@JoinColumn(name = "fk_usuario", nullable = true)
 	private UsuarioBO usuario;
 
-	@NaturalId
+	@Column(name = "fecha")
 	private Date fecha;
 
 	@OneToOne(fetch = FetchType.EAGER)

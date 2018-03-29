@@ -46,6 +46,7 @@ public class AdmProductosController extends AbstractBaseController {
 				dtos.add(productoDTO);
 			}
 
+			modelo.addObject("categorias", categoriaService.getAll());
 			modelo.addObject("productos", dtos);
 			modelo.addObject("productoDTO", new ProductoDTO());
 			return modelo;

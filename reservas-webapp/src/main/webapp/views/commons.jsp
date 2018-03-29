@@ -23,4 +23,4 @@
 <script src="js/bootstrap-datetimepicker.es.js"></script>
 <script src="js/formValidation.js"></script>
 <script src="js/formValidation-bootstrap.js"></script>
-
+<script src="js/bootstrap-select.js"></script>

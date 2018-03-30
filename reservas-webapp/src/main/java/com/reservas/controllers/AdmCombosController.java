@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.reservas.dto.ComboDTO;
 import com.reservas.exeptions.BusinessExeption;
 import com.reservas.model.ComboBO;
+import com.reservas.model.ComboProductoBO;
+import com.reservas.model.ProductoBO;
 import com.reservas.service.ComboService;
 import com.reservas.service.ProductoService;
 import com.reservas.utils.JsonResponse;
@@ -85,13 +87,13 @@ public class AdmCombosController extends AbstractBaseController {
 			if (comboDTO.getId() == null) {
 
 				comboBO = new ComboBO(comboDTO.getId(), comboDTO.getDescripcion(), comboDTO.getDescuento(), null);
-
+				
 			} else {
 				comboBO = comboService.findByProperty("id", comboDTO.getId()).get(0);
 				comboBO.setDescripcion(comboDTO.getDescripcion());
 				comboBO.setDescuento(comboDTO.getDescuento());
 			}
-
+			asignarComboProducto(comboDTO, comboBO);
 			comboService.save(comboBO);
 
 			List<ComboBO> combos = comboService.getAll();
@@ -111,6 +113,16 @@ public class AdmCombosController extends AbstractBaseController {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	private void asignarComboProducto(ComboDTO comboDTO, ComboBO comboBO) throws BusinessExeption {
+		List<ComboProductoBO> comboProductoListBO = new ArrayList<ComboProductoBO>();
+		for (String prodId : comboDTO.getProductos()) {
+			ProductoBO prod = productoService.findByProperty("id", Long.valueOf(prodId)).get(0);
+			ComboProductoBO comboProductoBO = new ComboProductoBO(comboBO, prod);
+			comboProductoListBO.add(comboProductoBO);
+		}
+		comboBO.setComboProducto(comboProductoListBO);
 	}
 
 	@RequestMapping(value = "/editarCombo", method = RequestMethod.POST)

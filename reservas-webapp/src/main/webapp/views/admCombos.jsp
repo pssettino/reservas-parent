@@ -17,12 +17,11 @@
 	href="components/bootstrap3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="components/bootstrap3/css/bootstrap-theme.min.css">
-
-<!-- DataTables CSS -->
-<link href="css/dataTables.bootstrap.css" rel="stylesheet">
-
-<!-- DataTables Responsive CSS -->
-<link href="css/dataTables.responsive.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="css/bootstrap-datetimepicker.css">
+	<link rel="stylesheet"
+	href="css/bootstrap-select.css">
+<link rel="stylesheet" href="css/calendar.css">
 
 <style type="text/css">
 .btn-twitter {
@@ -64,11 +63,8 @@
 									id="dataTables-example">
 									<thead>
 										<tr>
-											<th>Apellido</th>
-											<th>Nombre</th>
-											<th>DNI</th>
-											<th>Telefono</th>
-											<th>Email</th>
+											<th>Descripcion</th>
+											<th>Descuento</th>
 											<th>Acciones</th>
 										</tr>
 									</thead>
@@ -134,10 +130,16 @@
 																		name="producto" multiple>
 																		<option value="-1">-Seleccionar-</option>
 																		<c:forEach items="${productos}" var="producto">
-																		<option data-tokens="${producto.id}" value="${producto.id}">${producto.descripcion}</option>
+																		<option data-tokens="${producto.id}" value="${producto.id}">${producto.nombre}</option>
 																		</c:forEach>
 																	</select>
   																</div> 
+  																<div class="modal-footer">
+																	<button type="button" id="btnGuardarCombo" name ="btnGuardarCombo"
+																		class="btn btn-success">Guardar</button>
+																	<button type="button" class="btn btn-default"
+																		data-dismiss="modal">Close</button>
+													</div>
 													</div>
 												</form:form>
 												</div>
@@ -168,8 +170,6 @@
 
 
 	<jsp:include page="commons.jsp"></jsp:include>
-	<!-- DataTables JavaScript -->
-
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script src="js/dataTables.responsive.js"></script>
@@ -179,33 +179,35 @@
 		$(document)
 				.ready(
 						function() {
+							
 							$('#dataTables-example')
-									.DataTable(
-											{
-												responsive : true,
-												language : {
-													processing : "Procesando...",
-													search : "Buscar:",
-													lengthMenu : "Mostrar _MENU_ registros",
-													info : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-													infoEmpty : "Mostrando registros del 0 al 0 de un total de 0 registros",
-													infoFiltered : "((filtrado de un total de _MAX_ registros)",
-													infoPostFix : "",
-													loadingRecords : "Cargando...",
-													zeroRecords : "No se encontraron resultados",
-													emptyTable : "Ningún dato disponible en esta tabla",
-													paginate : {
-														first : "Primero",
-														previous : "Ultimo",
-														next : "Siguiente",
-														last : "Anterior"
-													},
-													aria : {
-														sortAscending : ": Activar para ordenar la columna de manera ascendente",
-														sortDescending : ": Activar para ordenar la columna de manera descendente"
-													}
-												}
-											});
+							.DataTable(
+									{
+										responsive : true,
+										language : {
+											processing : "Procesando...",
+											search : "Buscar:",
+											lengthMenu : "Mostrar _MENU_ registros",
+											info : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+											infoEmpty : "Mostrando registros del 0 al 0 de un total de 0 registros",
+											infoFiltered : "((filtrado de un total de _MAX_ registros)",
+											infoPostFix : "",
+											loadingRecords : "Cargando...",
+											zeroRecords : "No se encontraron resultados",
+											emptyTable : "Ningún dato disponible en esta tabla",
+											paginate : {
+												first : "Primero",
+												previous : "Ultimo",
+												next : "Siguiente",
+												last : "Anterior"
+											},
+											aria : {
+												sortAscending : ": Activar para ordenar la columna de manera ascendente",
+												sortDescending : ": Activar para ordenar la columna de manera descendente"
+											}
+										}
+
+									});
 						});
 	</script>
 

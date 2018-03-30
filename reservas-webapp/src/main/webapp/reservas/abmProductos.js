@@ -8,7 +8,8 @@ $(function() {
 				nombre : $("#nombre").val(),
 				precio : $("#precio").val(),
 				stock : $("#stock").val(),								
-				categoria: $("#categoria").val()
+				categoria: $("#categoria").text(),
+				categoriaId: $("#categoria").val(),
 		};				
 		
 		$.ajax({

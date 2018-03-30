@@ -17,12 +17,9 @@
 	href="components/bootstrap3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="components/bootstrap3/css/bootstrap-theme.min.css">
-
-<!-- DataTables CSS -->
-<link href="css/dataTables.bootstrap.css" rel="stylesheet">
-
-<!-- DataTables Responsive CSS -->
-<link href="css/dataTables.responsive.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="css/calendar.css">
 
 <style type="text/css">
 .btn-twitter {
@@ -64,22 +61,20 @@
 									id="dataTables-example">
 									<thead>
 										<tr>
-											<th>Apellido</th>
 											<th>Nombre</th>
-											<th>DNI</th>
-											<th>Telefono</th>
-											<th>Email</th>
+											<th>Precio</th>
+											<th>Categoria</th>
+											<th>Stock</th>
 											<th>Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${productos}" var="producto" varStatus="index">
 											<tr>
-												<td>${producto.apellido }</td>
 												<td>${producto.nombre }</td>
-												<td>${producto.dni }</td>
-												<td>${producto.telefono }</td>
-												<td>${producto.email }</td>
+												<td>${producto.precio }</td>
+												<td>${producto.categoria }</td>
+												<td>${producto.stock }</td>
 												<td>
 													<button type="button" data-idproducto="${producto.id }"
 														id="btnEditarProducto" name="btnEditarProducto"
@@ -149,6 +144,12 @@
 																placeholder="Ingrese Stock" />
 														</div>
 													</div>
+													<div class="modal-footer">
+																	<button type="button" id="btnGuardarProducto" name ="btnGuardarProducto"
+																		class="btn btn-success">Guardar</button>
+																	<button type="button" class="btn btn-default"
+																		data-dismiss="modal">Close</button>
+													</div>
 												</form:form>
 												</div>
 												</div>
@@ -176,8 +177,6 @@
 
 
 	<jsp:include page="commons.jsp"></jsp:include>
-	<!-- DataTables JavaScript -->
-
 	<script src="js/jquery.dataTables.min.js"></script>
 	<script src="js/dataTables.bootstrap.min.js"></script>
 	<script src="js/dataTables.responsive.js"></script>
@@ -187,33 +186,36 @@
 		$(document)
 				.ready(
 						function() {
+							
+							
 							$('#dataTables-example')
-									.DataTable(
-											{
-												responsive : true,
-												language : {
-													processing : "Procesando...",
-													search : "Buscar:",
-													lengthMenu : "Mostrar _MENU_ registros",
-													info : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-													infoEmpty : "Mostrando registros del 0 al 0 de un total de 0 registros",
-													infoFiltered : "((filtrado de un total de _MAX_ registros)",
-													infoPostFix : "",
-													loadingRecords : "Cargando...",
-													zeroRecords : "No se encontraron resultados",
-													emptyTable : "Ningún dato disponible en esta tabla",
-													paginate : {
-														first : "Primero",
-														previous : "Ultimo",
-														next : "Siguiente",
-														last : "Anterior"
-													},
-													aria : {
-														sortAscending : ": Activar para ordenar la columna de manera ascendente",
-														sortDescending : ": Activar para ordenar la columna de manera descendente"
-													}
-												}
-											});
+							.DataTable(
+									{
+										responsive : true,
+										language : {
+											processing : "Procesando...",
+											search : "Buscar:",
+											lengthMenu : "Mostrar _MENU_ registros",
+											info : "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+											infoEmpty : "Mostrando registros del 0 al 0 de un total de 0 registros",
+											infoFiltered : "((filtrado de un total de _MAX_ registros)",
+											infoPostFix : "",
+											loadingRecords : "Cargando...",
+											zeroRecords : "No se encontraron resultados",
+											emptyTable : "Ningún dato disponible en esta tabla",
+											paginate : {
+												first : "Primero",
+												previous : "Ultimo",
+												next : "Siguiente",
+												last : "Anterior"
+											},
+											aria : {
+												sortAscending : ": Activar para ordenar la columna de manera ascendente",
+												sortDescending : ": Activar para ordenar la columna de manera descendente"
+											}
+										}
+
+									});
 						});
 	</script>
 

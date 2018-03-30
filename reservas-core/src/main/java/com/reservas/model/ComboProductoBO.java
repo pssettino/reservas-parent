@@ -28,7 +28,7 @@ public class ComboProductoBO implements Serializable {
 	private ComboBO combo;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("producto")
+	@MapsId("productoId")
 	private ProductoBO producto;
 
 	public Long getIdComboProducto() {

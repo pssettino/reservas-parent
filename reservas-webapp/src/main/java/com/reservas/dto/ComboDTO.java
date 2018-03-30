@@ -1,11 +1,7 @@
 package com.reservas.dto;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
 
 public class ComboDTO implements Serializable {
 	private Long id;
@@ -13,6 +9,16 @@ public class ComboDTO implements Serializable {
 	private String descripcion;
 
 	private Double descuento;
+
+	private List<String> productos;
+
+	public List<String> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<String> productos) {
+		this.productos = productos;
+	}
 
 	public Long getId() {
 		return id;
@@ -50,11 +56,17 @@ public class ComboDTO implements Serializable {
 		this.descuento = descuento;
 	}
 
+	public ComboDTO(Long id, String descripcion, Double descuento, List<String> productos) {
+		super();
+		this.id = id;
+		this.descripcion = descripcion;
+		this.descuento = descuento;
+		this.productos = productos;
+	}
+
 	@Override
 	public String toString() {
 		return "ComboDTO [id=" + id + ", descripcion=" + descripcion + ", descuento=" + descuento + "]";
 	}
-	
-	
-	
+
 }

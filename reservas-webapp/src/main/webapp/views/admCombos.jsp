@@ -109,7 +109,7 @@
 											<div class="clearfix"></div>
 												<div class="panel panel-default">													
 													<div class="panel-body">
-												<form:form method="POST"											
+												<form:form method="POST"	id="frmCombo" name="frmCombo"											
 													modelAttribute="comboDTO">
 													<div class="col-sm-6 col-xs-12">
 														<div class="form-group">
@@ -208,6 +208,49 @@
 										}
 
 									});
+									
+							$('#frmCombo').formValidation({
+								framework : 'bootstrap',
+								icon : {
+									//valid: 'glyphicon glyphicon-ok',
+									invalid : 'glyphicon glyphicon-remove',
+									validating : 'glyphicon glyphicon-refresh'
+								},
+								// This option will not ignore invisible fields which belong to inactive panels
+								excluded : [':disabled', ':hidden', ':not(:visible)'],
+								fields : {
+									descripcion: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									descuento: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									 
+									producto: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											},
+											callback : {
+												message : 'Campo requerido',
+												callback : function(value, validator) {													
+													return value!='-1';
+												}
+											}
+										}
+									} 
+								}
+							
+							});
+									
 						});
 	</script>
 

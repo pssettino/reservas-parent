@@ -24,11 +24,11 @@ public class ComboProductoBO implements Serializable {
 	private ComboProductoId id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("comboId")
+	@MapsId("comboFk")
 	private ComboBO combo;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("productoId")
+	@MapsId("productoFk")
 	private ProductoBO producto;
 
 	public Long getIdComboProducto() {

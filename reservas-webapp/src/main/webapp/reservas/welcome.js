@@ -82,40 +82,23 @@ $(document).ready(function() {
 									selectable : true,
 									selectHelper : true,
 									select : function(start, end) {
-										var title = prompt('Titulo del Evento:');
-										var eventData;
-										if (title) {
-											if (end != "") {
-												eventData = {
-													title : title,
-													start : start,
-													end : end,
-													estadoId:0
-												};
-											} else {
-												eventData = {
-													title : title,
-													start : start,
-													estadoId:false
-												};
-											}
-						
-											$.ajax({
-														url : "./saveEvent",
-														type : "POST",
-														data : JSON.stringify(eventData),
-														contentType : 'application/json',
-														dataType : "json",
-														success : function(data) {
-															$('#calendar').fullCalendar('renderEvent',data,true);
-															$('#calendar').fullCalendar('updateEvent',data);
-														},
-														error : function(e) {
-															console.log(e);
-														}
-													});
-										}
-										$('#calendar').fullCalendar('unselect');
+										//var title = prompt('Titulo del Evento:');
+										$("#evtId1").val('');
+
+							            $("#evtTitle1").val('');
+							            
+							            
+							            if(start!=null && start!=''){
+							            	$("#evtFechaDesde1").val(start.toISOString());
+							            } 
+							            if(end!=null && end!=''){							            	
+							            	$("#evtFechaHasta1").val(end.toISOString());
+							            }
+							            $("#evtAllDay1").val('');
+							            $("#evtEstado1").prop("checked",false);
+							            $("#evtModalSave").modal("show");
+							            
+										
 									},
 									eventResize : function(
 											event, delta,
@@ -181,7 +164,51 @@ $(document).ready(function() {
 
 						}
 						
-						$("#btnAceptarEvt").click(function() {																				
+						
+					 
+						
+						$("#btnAceptarEvtSave").click(function() {	
+							var eventData;
+							var start = $("#evtFechaDesde1").val();
+							var end = $("#evtFechaHasta1").val();
+							if ($("#evtTitle1").val()!='') {
+								if (end != "") {
+									eventData = {
+										title : $("#evtTitle1").val(),
+										start : start,
+										end : end,
+										estadoId:$("#evtEstado1").prop("checked") ?1:0
+									};
+								} else {
+									eventData = {
+										title : $("#evtTitle1").val(),
+										start : start,
+										estadoId:$("#evtEstado1").prop("checked") ?1:0
+									};
+								}
+			
+								$.ajax({
+											url : "./saveEvent",
+											type : "POST",
+											data : JSON.stringify(eventData),
+											contentType : 'application/json',
+											dataType : "json",
+											success : function(data) {
+												$('#calendar').fullCalendar('renderEvent',data,true);
+												$("#evtModalSave").modal("hide");
+												getAllEvents();
+											},
+											error : function(e) {
+												console.log(e);
+											}
+										});
+							}
+							$('#calendar').fullCalendar('unselect');
+							 
+						});
+						
+						$("#btnAceptarEvt").click(function() {	
+							
 							var eventData = {
 									id : $("#evtId").val(),
 									title : $("#evtTitle").val(),

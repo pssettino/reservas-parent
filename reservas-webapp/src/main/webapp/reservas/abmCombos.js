@@ -12,7 +12,7 @@ $(function() {
 				descuento : $("#descuento").val(),
 				productos: $("#producto").val()
 		};				
-		
+		$('#frmCombo').data('formValidation').validate();
 		$.ajax({
 			url : "./saveCombo",
 			type : "POST",
@@ -35,6 +35,7 @@ $(function() {
 	
 	$(".btnEditarCombo").click(function() {
 		var form = {"id": $(this).data("idcombo")};
+		$('#frmCombo').data('formValidation').validate();
 		$.ajax({
 			url : "./editarCombo",
 			type : "POST",

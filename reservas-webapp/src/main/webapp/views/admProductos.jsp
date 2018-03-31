@@ -17,8 +17,7 @@
 	href="components/bootstrap3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="components/bootstrap3/css/bootstrap-theme.min.css">
-<link rel="stylesheet"
-	href="css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
 <link rel="stylesheet" href="css/calendar.css">
 
 <style type="text/css">
@@ -69,7 +68,8 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${productos}" var="producto" varStatus="index">
+										<c:forEach items="${productos}" var="producto"
+											varStatus="index">
 											<tr>
 												<td>${producto.nombre }</td>
 												<td>${producto.precio }</td>
@@ -108,50 +108,49 @@
 												<h4 class="modal-title">Administrar Producto</h4>
 											</div>
 											<div class="modal-body">
-											<div class="clearfix"></div>
-												<div class="panel panel-default">													
+												<div class="clearfix"></div>
+												<div class="panel panel-default">
 													<div class="panel-body">
-												<form:form method="POST"											
-													modelAttribute="productoDTO">
-													<div class="col-sm-6 col-xs-12">
-														<div class="form-group">
-															<form:label path="nombre">Producto</form:label>
-															<form:hidden path="id" />
-															<form:input path="nombre" class="form-control"
-																placeholder="Ingrese Producto" />
-														</div>
-														 
-														<div class="form-group">
-															<form:label path="precio">Precio</form:label>
-															<form:input path="precio" class="form-control"
-																placeholder="Ingrese Precio" />
-														</div>
-														<div class="form-group">
+														<form:form method="POST" id="frmProducto" name="frmProducto" modelAttribute="productoDTO">
+															<div class="col-sm-6 col-xs-12">
+																<div class="form-group">
+																	<form:label path="nombre">Producto</form:label>
+																	<form:hidden path="id" />
+																	<form:input path="nombre" class="form-control"
+																		placeholder="Ingrese Producto" />
+																</div>
+
+																<div class="form-group">
+																	<form:label path="precio">Precio</form:label>
+																	<form:input path="precio" class="form-control"
+																		placeholder="Ingrese Precio" />
+																</div>
+																<div class="form-group">
 																	<form:label path="">Categoria</form:label>
 																	<select id="categoria" class="form-control"
-																		name="categoria" >
+																		name="categoria">
 																		<option value="-1">-Seleccionar-</option>
 																		<c:forEach items="${categorias}" var="categoria">
-																		<option value="${categoria.id}">${categoria.descripcion}</option>
+																			<option value="${categoria.id}">${categoria.descripcion}</option>
 																		</c:forEach>
 																	</select>
-  																</div> 
+																</div>
+															</div>
+															<div class="col-sm-6 col-xs-12">
+																<div class="form-group">
+																	<form:label path="stock">Stock</form:label>
+																	<form:input path="stock" class="form-control"
+																		placeholder="Ingrese Stock" />
+																</div>
+															</div>
+															<div class="modal-footer">
+																<button type="button" id="btnGuardarProducto"
+																	name="btnGuardarProducto" class="btn btn-success">Guardar</button>
+																<button type="button" class="btn btn-default"
+																	data-dismiss="modal">Close</button>
+															</div>
+														</form:form>
 													</div>
-													<div class="col-sm-6 col-xs-12">
-														<div class="form-group">
-															<form:label path="stock">Stock</form:label>
-															<form:input path="stock" class="form-control"
-																placeholder="Ingrese Stock" />
-														</div>
-													</div>
-													<div class="modal-footer">
-																	<button type="button" id="btnGuardarProducto" name ="btnGuardarProducto"
-																		class="btn btn-success">Guardar</button>
-																	<button type="button" class="btn btn-default"
-																		data-dismiss="modal">Close</button>
-													</div>
-												</form:form>
-												</div>
 												</div>
 											</div>
 										</div>
@@ -216,7 +215,58 @@
 										}
 
 									});
+							$('#frmProducto').formValidation({
+								framework : 'bootstrap',
+								icon : {
+									//valid: 'glyphicon glyphicon-ok',
+									invalid : 'glyphicon glyphicon-remove',
+									validating : 'glyphicon glyphicon-refresh'
+								},
+								// This option will not ignore invisible fields which belong to inactive panels
+								excluded : [':disabled', ':hidden', ':not(:visible)'],
+								fields : {
+									nombre: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									precio: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									},
+									stock: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											}
+										}
+									} ,
+									categoria: {
+										validators : {
+											notEmpty : {
+												message : 'Campo requerido'
+											},
+											callback : {
+												message : 'Campo requerido',
+												callback : function(value, validator) {													
+													return value!='-1';
+												}
+											}
+										}
+									} 
+								}
+							
+							});
 						});
+							
+						
+										
+					 
 	</script>
 
 </body>

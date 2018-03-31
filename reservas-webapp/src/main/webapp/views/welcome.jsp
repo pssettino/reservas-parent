@@ -61,6 +61,43 @@ body {
 
 						<div class="clearfix"></div>
 
+						<div id="evtModalSave" class="modal fade" role="dialog">
+							<div class="modal-dialog-center modal-lg">
+
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+									<div class="modal-body">
+										<form>
+											<fieldset>
+												 <input type="hidden" name="evtId1"
+													id="evtId1" class="form-control"> <label for="title">Evento</label>
+												<input type="text" name="evtTitle1" id="evtTitle1"
+													class="form-control">
+													<input type="hidden" name="evtFechaDesde1" id="evtFechaDesde1"
+													class="form-control">
+													<input type="hidden" name="evtFechaHasta1" id="evtFechaHasta1"
+													class="form-control">
+													<input type="hidden" name="evtAllDay1" id="evtAllDay1"
+													class="form-control">
+													
+													<label><input type="checkbox" value="2" id="evtEstado1" name="evtEstado1">Confirmar</label>
+											</fieldset>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button id="btnAceptarEvtSave" name="btnAceptarEvtSave" type="button"
+											class="btn btn-default">Aceptar</button>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						
 						<div id="evtModal" class="modal fade" role="dialog">
 							<div class="modal-dialog-center modal-lg">
 
@@ -72,8 +109,8 @@ body {
 									<div class="modal-body">
 										<form>
 											<fieldset>
-												<label for="Id">Id</label> <input type="hidden" name="evtId"
-													id="evtId" class="form-control"> <label for="Id">Title</label>
+												 <input type="hidden" name="evtId"
+													id="evtId" class="form-control"> <label for="title">Evento</label>
 												<input type="text" name="evtTitle" id="evtTitle"
 													class="form-control">
 													<input type="hidden" name="evtFechaDesde" id="evtFechaDesde"

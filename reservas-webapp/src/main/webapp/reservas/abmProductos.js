@@ -11,7 +11,7 @@ $(function() {
 				categoria: $("#categoria").text(),
 				categoriaId: $("#categoria").val(),
 		};				
-		
+		$('#frmProducto').data('formValidation').validate();
 		$.ajax({
 			url : "./saveProducto",
 			type : "POST",
@@ -34,6 +34,7 @@ $(function() {
 	
 	$(".btnEditarProducto").click(function() {
 		var form = {"id": $(this).data("idproducto")};
+		$('#frmProducto').data('formValidation').validate();
 		$.ajax({
 			url : "./editarProducto",
 			type : "POST",

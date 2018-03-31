@@ -29,8 +29,8 @@ public class FacturaBO {
 	private Long id;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_usuario", nullable = true)
-	private UsuarioBO usuario;
+	@JoinColumn(name = "fk_evento", nullable = true)
+	private EventoBO evento;
 
 	@Column(name = "fecha")
 	private Date fecha;
@@ -42,11 +42,11 @@ public class FacturaBO {
 	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<FacturaDetalleBO> facturaDetalle = new ArrayList<FacturaDetalleBO>();
 
-	public FacturaBO(Long id, UsuarioBO usuario, Date fecha, MedioPagoBO medioPago,
+	public FacturaBO(Long id, EventoBO evento, Date fecha, MedioPagoBO medioPago,
 			List<FacturaDetalleBO> facturaDetalle) {
 		super();
 		this.id = id;
-		this.usuario = usuario;
+		this.evento = evento;
 		this.fecha = fecha;
 		this.medioPago = medioPago;
 		this.facturaDetalle = facturaDetalle;
@@ -65,12 +65,12 @@ public class FacturaBO {
 		this.id = id;
 	}
 
-	public UsuarioBO getUsuario() {
-		return usuario;
+	public EventoBO getEvento() {
+		return evento;
 	}
 
-	public void setUsuario(UsuarioBO usuario) {
-		this.usuario = usuario;
+	public void setEvento(EventoBO evento) {
+		this.evento = evento;
 	}
 
 	public Date getFecha() {
@@ -91,7 +91,7 @@ public class FacturaBO {
 
 	@Override
 	public String toString() {
-		return "FacturaBO [id=" + id + ", usuario=" + usuario + ", fecha=" + fecha + ", medioPago=" + medioPago + "]";
+		return "FacturaBO [id=" + id + ", evento=" + evento + ", fecha=" + fecha + ", medioPago=" + medioPago + "]";
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class FacturaBO {
 		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((medioPago == null) ? 0 : medioPago.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		result = prime * result + ((evento == null) ? 0 : evento.hashCode());
 		return result;
 	}
 
@@ -135,10 +135,10 @@ public class FacturaBO {
 				return false;
 		} else if (!medioPago.equals(other.medioPago))
 			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
+		if (evento == null) {
+			if (other.evento != null)
 				return false;
-		} else if (!usuario.equals(other.usuario))
+		} else if (!evento.equals(other.evento))
 			return false;
 		return true;
 	}

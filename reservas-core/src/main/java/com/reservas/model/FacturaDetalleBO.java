@@ -1,17 +1,14 @@
 package com.reservas.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,23 +18,19 @@ import javax.persistence.Table;
 @Table(name = "factura_detalle")
 public class FacturaDetalleBO implements Serializable {
 
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idFacturaDetalle;
-
 	@EmbeddedId
 	private FacturaProductoId id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("facturaFk")
+	@MapsId("facturaId")
 	private FacturaBO factura;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("productoFk")
+	@MapsId("productoId")
 	private ProductoBO producto;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "combo_fk", nullable = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@MapsId("comboId")
 	private ComboBO combo;
 
 	@Column(name = "precio")
@@ -100,70 +93,26 @@ public class FacturaDetalleBO implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cantidad == null) ? 0 : cantidad.hashCode());
-		result = prime * result + ((combo == null) ? 0 : combo.hashCode());
-		result = prime * result + ((factura == null) ? 0 : factura.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((idFacturaDetalle == null) ? 0 : idFacturaDetalle.hashCode());
-		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-		result = prime * result + ((producto == null) ? 0 : producto.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		FacturaDetalleBO that = (FacturaDetalleBO) o;
+		return Objects.equals(factura, that.factura) && Objects.equals(producto, that.producto)
+				&& Objects.equals(combo, that.combo);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		FacturaDetalleBO other = (FacturaDetalleBO) obj;
-		if (cantidad == null) {
-			if (other.cantidad != null)
-				return false;
-		} else if (!cantidad.equals(other.cantidad))
-			return false;
-		if (combo == null) {
-			if (other.combo != null)
-				return false;
-		} else if (!combo.equals(other.combo))
-			return false;
-		if (factura == null) {
-			if (other.factura != null)
-				return false;
-		} else if (!factura.equals(other.factura))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (idFacturaDetalle == null) {
-			if (other.idFacturaDetalle != null)
-				return false;
-		} else if (!idFacturaDetalle.equals(other.idFacturaDetalle))
-			return false;
-		if (precio == null) {
-			if (other.precio != null)
-				return false;
-		} else if (!precio.equals(other.precio))
-			return false;
-		if (producto == null) {
-			if (other.producto != null)
-				return false;
-		} else if (!producto.equals(other.producto))
-			return false;
-		return true;
+	public int hashCode() {
+		return Objects.hash(factura, producto, combo);
 	}
 
 	public FacturaDetalleBO(Long idFacturaDetalle, FacturaProductoId id, FacturaBO factura, ProductoBO producto,
 			ComboBO combo, Double precio, Integer cantidad) {
 		super();
-		this.idFacturaDetalle = idFacturaDetalle;
 		this.id = id;
 		this.factura = factura;
 		this.producto = producto;
@@ -172,16 +121,17 @@ public class FacturaDetalleBO implements Serializable {
 		this.cantidad = cantidad;
 	}
 
-	public FacturaDetalleBO(FacturaBO factura, ProductoBO producto) {
+	public FacturaDetalleBO(FacturaBO factura, ProductoBO producto, ComboBO combo) {
 		this.factura = factura;
 		this.producto = producto;
-		this.id = new FacturaProductoId(factura.getId(), producto.getId());
+		this.combo = combo;
+		this.id = new FacturaProductoId(factura.getId(), producto.getId(), combo.getId());
 	}
 
 	@Override
 	public String toString() {
-		return "FacturaDetalleBO [idFacturaDetalle=" + idFacturaDetalle + ", id=" + id + ", factura=" + factura
-				+ ", producto=" + producto + ", combo=" + combo + ", precio=" + precio + ", cantidad=" + cantidad + "]";
+		return "FacturaDetalleBO [id=" + id + ", factura=" + factura + ", producto=" + producto + ", combo=" + combo
+				+ ", precio=" + precio + ", cantidad=" + cantidad + "]";
 	}
 
 }

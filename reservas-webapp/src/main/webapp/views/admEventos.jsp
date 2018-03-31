@@ -65,6 +65,7 @@
 											<th>Descripcion</th>
 											<th>Desde</th>
 											<th>Hasta</th>
+											<th>Usuario</th>
 											<th>Acciones</th>
 										</tr>
 									</thead>
@@ -75,6 +76,7 @@
 												<td>${evt.descripcion }</td>
 												<td>${evt.fechaDesde }</td>
 												<td>${evt.fechaHasta }</td>
+												<td>${evt.usuario }</td>
 												<td>
 													<button type="button" data-idevento="${evt.id }"
 														id="btnEditarEvento" name="btnEditarEvento"
@@ -139,6 +141,15 @@
 																			class="glyphicon glyphicon-calendar"></i></span>
 																	</div>
 																</div>
+																<div class="form-group">
+																	<form:label path="">Usuario</form:label>
+																	<select id="usuario" class="form-control " 	name="usuario" >
+																		<option value="-1">-Seleccionar-</option>
+																		<c:forEach items="${usuarios}" var="usuario">
+																		<option value="${usuario.idUsuario}">${usuario.userName}</option>
+																		</c:forEach>
+																	</select>
+  																</div>
 																<div class="form-group">
 																	<form:label path="">Estado</form:label>
 																	<select id="detalleEstado" class="form-control"
@@ -267,7 +278,20 @@
 																message : 'Campo requerido'
 															}
 														}
-													}
+													},
+													usuario: {
+														validators : {
+															notEmpty : {
+																message : 'Campo requerido'
+															},
+															callback : {
+																message : 'Campo requerido',
+																callback : function(value, validator) {													
+																	return value!='-1';
+																}
+															}
+														}
+													} 
 												}
 											});
 

@@ -24,8 +24,10 @@ import com.reservas.dto.EventoDTO;
 import com.reservas.exeptions.BusinessExeption;
 import com.reservas.model.EstadoBO;
 import com.reservas.model.EventoBO;
+import com.reservas.model.UsuarioBO;
 import com.reservas.service.EstadoService;
 import com.reservas.service.EventoService;
+import com.reservas.service.UsuarioService;
 import com.reservas.utils.JsonResponse;
 
 @Controller
@@ -36,6 +38,9 @@ public class AdmEventosController extends AbstractBaseController {
 
 	@Autowired
 	private EstadoService estadoService;
+
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@RequestMapping(value = "/admEventos", method = RequestMethod.GET)
 	public ModelAndView admEventos(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
@@ -49,7 +54,7 @@ public class AdmEventosController extends AbstractBaseController {
 
 				dtos.add(eventoDTO);
 			}
-
+			modelo.addObject("usuarios", usuarioService.getAll());
 			modelo.addObject("eventos", dtos);
 			modelo.addObject("eventoDTO", new EventoDTO());
 			return modelo;
@@ -68,6 +73,7 @@ public class AdmEventosController extends AbstractBaseController {
 			dtos.add(eventoDTO);
 		}
 
+		modelo.addObject("usuarios", usuarioService.getAll());
 		modelo.addObject("eventos", dtos);
 		modelo.addObject("eventoDTO", new EventoDTO());
 		return modelo;
@@ -80,7 +86,8 @@ public class AdmEventosController extends AbstractBaseController {
 		String fechaDesde = eventoBO.getFechaDesde() != null ? sdf.format(eventoBO.getFechaDesde()) : "";
 		String fechaHasta = eventoBO.getFechaHasta() != null ? sdf.format(eventoBO.getFechaHasta()) : "";
 		evento = new EventoDTO(eventoBO.getId(), fechaDesde, fechaHasta, eventoBO.getTitulo(),
-				eventoBO.getDescripcion());
+				eventoBO.getDescripcion(), eventoBO.getUsuario().getIdUsuario().toString(),
+				eventoBO.getUsuario().getUserName());
 		return evento;
 	}
 
@@ -92,15 +99,17 @@ public class AdmEventosController extends AbstractBaseController {
 			ModelAndView modelo = new ModelAndView("admEventos");
 			EventoBO eventoBO;
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+			UsuarioBO usuario = usuarioService.findByProperty("idUsuario", Long.valueOf(eventoDTO.getUsuarioId()))
+					.get(0);
 			if (eventoDTO.getId() == null) {
 
 				EstadoBO estado = estadoService.findByProperty("id", 1L).get(0);
-
+				
 				Date fechaDesde = sdf.parse(eventoDTO.getFechaDesde());
 				Date fechaHasta = sdf.parse(eventoDTO.getFechaHasta());
 
 				eventoBO = new EventoBO(eventoDTO.getId(), fechaDesde, fechaHasta, false, eventoDTO.getTitulo(),
-						eventoDTO.getDescripcion(), estado);
+						eventoDTO.getDescripcion(), estado, usuario);
 
 			} else {
 				eventoBO = eventoService.findByProperty("id", eventoDTO.getId()).get(0);
@@ -112,6 +121,7 @@ public class AdmEventosController extends AbstractBaseController {
 				eventoBO.setFechaDesde(fechaDesde);
 				eventoBO.setFechaHasta(fechaHasta);
 				eventoBO.setDescripcion(eventoDTO.getDescripcion());
+				eventoBO.setUsuario(usuario);
 			}
 
 			eventoService.save(eventoBO);
@@ -123,6 +133,7 @@ public class AdmEventosController extends AbstractBaseController {
 				dtos.add(evtDTO);
 			}
 
+			modelo.addObject("usuarios", usuarioService.getAll());
 			modelo.addObject("eventos", dtos);
 			modelo.addObject("eventoDTO", new EventoDTO());
 			JsonResponse response = new JsonResponse<>();

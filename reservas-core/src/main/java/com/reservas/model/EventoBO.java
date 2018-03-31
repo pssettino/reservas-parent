@@ -48,7 +48,20 @@ public class EventoBO implements Serializable {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "evt_estado_fk")
 	private EstadoBO estado;
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "evt_usuario_fk")
+	private UsuarioBO usuario;
+
 	
+	
+	public UsuarioBO getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioBO usuario) {
+		this.usuario = usuario;
+	}
 
 	public EstadoBO getEstado() {
 		return estado;
@@ -113,7 +126,7 @@ public class EventoBO implements Serializable {
 	}
 
 	public EventoBO(Long id, Date fechaDesde, Date fechaHasta, Boolean todoDia, String titulo, String descripcion,
-			EstadoBO estado) {
+			EstadoBO estado, UsuarioBO usuario) {
 		super();
 		this.id = id;
 		this.fechaDesde = fechaDesde;
@@ -122,6 +135,7 @@ public class EventoBO implements Serializable {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.estado = estado;
+		this.usuario = usuario;
 	}
 
 	@Override
@@ -135,6 +149,7 @@ public class EventoBO implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		result = prime * result + ((todoDia == null) ? 0 : todoDia.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -182,13 +197,21 @@ public class EventoBO implements Serializable {
 				return false;
 		} else if (!todoDia.equals(other.todoDia))
 			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "EventoBO [id=" + id + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + ", todoDia="
-				+ todoDia + ", titulo=" + titulo + ", descripcion=" + descripcion + ", estado=" + estado + "]";
+				+ todoDia + ", titulo=" + titulo + ", descripcion=" + descripcion + ", estado=" + estado + ", usuario="
+				+ usuario + "]";
 	}
+
+	 
 
 }

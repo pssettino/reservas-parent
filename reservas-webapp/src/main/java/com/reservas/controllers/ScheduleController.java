@@ -24,6 +24,7 @@ import com.reservas.dto.EventDataDTO;
 import com.reservas.exeptions.BusinessExeption;
 import com.reservas.model.EstadoBO;
 import com.reservas.model.EventoBO;
+import com.reservas.model.UsuarioBO;
 import com.reservas.service.EstadoService;
 import com.reservas.service.EventoService;
 
@@ -45,8 +46,11 @@ public class ScheduleController extends AbstractBaseController {
 	@ResponseBody
 	public EventDataDTO saveEvent(HttpServletRequest request, HttpServletResponse response, ModelMap model,
 			@RequestBody EventDataDTO eventData) throws Exception {
+		UsuarioBO usuario = (UsuarioBO) request.getSession().getAttribute("usuarioBO");
+		EventoBO evtBO = new EventoBO();
+		evtBO.setUsuario(usuario);
+		EventoBO evt = saveOrUpdateEvent(eventData, evtBO);
 
-		EventoBO evt = saveOrUpdateEvent(eventData, new EventoBO());
 		eventData.setId(evt.getId());
 		return eventData;
 	}
@@ -119,7 +123,6 @@ public class ScheduleController extends AbstractBaseController {
 			}
 			if (hasta != null) {
 				fechaHasta = sdf.format(hasta).replace(" ", "T");
-				;
 			}
 
 			eventosDTO.add(new EventDataDTO(eventoBO.getId(), eventoBO.getTitulo(), fechaDesde, fechaHasta,
@@ -135,8 +138,13 @@ public class ScheduleController extends AbstractBaseController {
 	public EventDataDTO updateEvent(HttpServletRequest request, HttpServletResponse response, ModelMap model,
 			@RequestBody EventDataDTO eventData) throws Exception {
 
+		UsuarioBO usuario = (UsuarioBO) request.getSession().getAttribute("usuarioBO");
 		EventoBO evt = eventoService.findByProperty("id", eventData.getId()).get(0);
-		saveOrUpdateEvent(eventData, evt);
+		if (evt.getUsuario().getIdUsuario() == usuario.getIdUsuario()) {
+			saveOrUpdateEvent(eventData, evt);
+		}else if(usuario.getPerfil().getId()==1) {
+			saveOrUpdateEvent(eventData, evt);
+		}
 		return eventData;
 	}
 

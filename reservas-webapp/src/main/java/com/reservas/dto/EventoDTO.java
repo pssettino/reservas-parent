@@ -14,6 +14,26 @@ public class EventoDTO implements Serializable {
 
 	private String descripcion;
 
+	private String usuarioId;
+
+	private String usuario;
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(String usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -54,13 +74,16 @@ public class EventoDTO implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public EventoDTO(Long id, String fechaDesde, String fechaHasta, String titulo, String descripcion) {
+	public EventoDTO(Long id, String fechaDesde, String fechaHasta, String titulo, String descripcion, String usuarioId,
+			String usuario) {
 		super();
 		this.id = id;
 		this.fechaDesde = fechaDesde;
 		this.fechaHasta = fechaHasta;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
+		this.usuarioId = usuarioId;
+		this.usuario = usuario;
 	}
 
 	public EventoDTO() {

@@ -8,9 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,7 +21,6 @@ import javax.persistence.Table;
 @Table(name = "factura_detalle")
 public class FacturaDetalleBO implements Serializable {
 
-	
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idFacturaDetalle;
@@ -29,15 +29,15 @@ public class FacturaDetalleBO implements Serializable {
 	private FacturaProductoId id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("facturaId")
+	@MapsId("facturaFk")
 	private FacturaBO factura;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("productoId")
+	@MapsId("productoFk")
 	private ProductoBO producto;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("comboId")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "combo_fk", nullable = true)
 	private ComboBO combo;
 
 	@Column(name = "precio")

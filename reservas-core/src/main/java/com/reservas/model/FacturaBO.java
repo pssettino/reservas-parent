@@ -2,7 +2,6 @@ package com.reservas.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -51,25 +50,6 @@ public class FacturaBO {
 		this.fecha = fecha;
 		this.medioPago = medioPago;
 		this.facturaDetalle = facturaDetalle;
-	}
-
-	public void addProducto(ProductoBO producto) {
-		FacturaDetalleBO fd = new FacturaDetalleBO(this, producto);
-		facturaDetalle.add(fd);
-		producto.getFacturaDetalle().add(fd);
-	}
-
-	public void removeProducto(ProductoBO producto) {
-		for (Iterator<FacturaDetalleBO> iterator = facturaDetalle.iterator(); iterator.hasNext();) {
-			FacturaDetalleBO fd = iterator.next();
-
-			if (fd.getFactura().equals(this) && fd.getProducto().equals(producto)) {
-				iterator.remove();
-				fd.getProducto().getFacturaDetalle().remove(fd);
-				fd.setFactura(null);
-				fd.setProducto(null);
-			}
-		}
 	}
 
 	public FacturaBO() {

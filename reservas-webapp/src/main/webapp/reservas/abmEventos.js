@@ -31,6 +31,7 @@ $(function() {
 		});
 
 	});
+	
 	$(".btnEditarEvento").click(function() {
 		var form = {"id": $(this).data("idevento")};
 		$('#frmEvento').data('formValidation').validate();
@@ -56,6 +57,8 @@ $(function() {
 		});
 
 	});
+	
+	
 	$('[data-toggle=confirmation]').confirmation({
 		  rootSelector: '[data-toggle=confirmation]',
 		  onConfirm: function() {

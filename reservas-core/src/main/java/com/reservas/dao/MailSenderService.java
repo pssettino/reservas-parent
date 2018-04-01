@@ -1,8 +1,5 @@
 package com.reservas.dao;
 
-import java.io.ByteArrayOutputStream;
-import java.util.Map;
-
 public interface MailSenderService {
 
 	public static final String SMTP_HOST_NAME = "SMTP_HOST_NAME";
@@ -24,19 +21,6 @@ public interface MailSenderService {
 	public static final String MAIL_COBERTURAS_DIRECTO_BODY = "MAIL_COBERTURAS_DIRECTO_BODY";
 	public static final String MAIL_COBERTURAS_POSTPLAN_BODY = "MAIL_COBERTURAS_POSTPLAN_BODY";
 
-	void sendMail(String subject, String HTML, String text, String to, String cc) throws Exception;
-
-	void sendMail(String subject, String HTML, String text, String to, String cc, int retries) throws Exception;
-
-	void sendMail(String subject, String HTML, String text, String to, String cc, int retries, int waitInterval)
-			throws Exception;
-
-	void sendMail(String subject, String HTML, String text, String to, String cc, int retries, int waitInterval,
-			ByteArrayOutputStream outputStream, String filename) throws Exception;
-
-	public void sendMail(String subject, String HTML, String text, String to, String cc, int retries, int waitInterval,
-			Map<String, ByteArrayOutputStream> files) throws Exception;
-
-	public void sendMail(String subject, String HTML, String text, String[] to, String[] cc) throws Exception;
+	public void sendMail(String to, String subject, String text) throws Exception;
 
 }

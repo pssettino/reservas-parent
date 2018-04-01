@@ -20,7 +20,8 @@
 	href="components/bootstrap3/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
 <link rel="stylesheet" href="css/calendar.css">
-
+	<link rel="stylesheet"
+	href="css/bootstrap-select.css">s
 <style type="text/css">
 .btn-twitter {
 	padding-left: 30px;
@@ -150,6 +151,25 @@
 																		</c:forEach>
 																	</select>
   																</div>
+  																<div class="form-group">
+																	<form:label path="">Productos</form:label>
+																	<select id="producto" class="form-control selectpicker" data-live-search="true" 
+																		name="producto" multiple>
+																		<option value="-1">-Seleccionar-</option>
+																		<c:forEach items="${productos}" var="producto">
+																		<option data-tokens="${producto.id}" value="${producto.id}">${producto.nombre}</option>
+																		</c:forEach>
+																	</select>
+  																</div> 
+  																<div class="form-group">
+																	<form:label path="">Combos</form:label>
+																	<select id="combo" class="form-control " 	name="combo" >
+																		<option value="-1">-Seleccionar-</option>
+																		<c:forEach items="${combos}" var="combo">
+																		<option value="${combo.id}">${combo.descripcion}</option>
+																		</c:forEach>
+																	</select>
+  																</div>
 																<div class="form-group">
 																	<form:label path="">Estado</form:label>
 																	<select id="detalleEstado" class="form-control"
@@ -157,15 +177,14 @@
 																		<option value="1">Activo</option>
 																	</select>
 																</div>
+															</div>
+														 
 																<div class="modal-footer">
 																	<button type="button" id="btnGuardarEvento"
 																		name="btnGuardarEvento" class="btn btn-success">Guardar</button>
 																	<button type="button" class="btn btn-default"
 																		data-dismiss="modal">Close</button>
 																</div>
-															</div>
-
-
 														</form:form>
 													</div>
 												</div>

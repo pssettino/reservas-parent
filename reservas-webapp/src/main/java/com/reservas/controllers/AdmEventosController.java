@@ -25,8 +25,10 @@ import com.reservas.exeptions.BusinessExeption;
 import com.reservas.model.EstadoBO;
 import com.reservas.model.EventoBO;
 import com.reservas.model.UsuarioBO;
+import com.reservas.service.ComboService;
 import com.reservas.service.EstadoService;
 import com.reservas.service.EventoService;
+import com.reservas.service.ProductoService;
 import com.reservas.service.UsuarioService;
 import com.reservas.utils.JsonResponse;
 
@@ -41,6 +43,11 @@ public class AdmEventosController extends AbstractBaseController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	ComboService comboService;
+
+	@Autowired
+	ProductoService productoService;
 
 	@RequestMapping(value = "/admEventos", method = RequestMethod.GET)
 	public ModelAndView admEventos(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
@@ -55,6 +62,8 @@ public class AdmEventosController extends AbstractBaseController {
 				dtos.add(eventoDTO);
 			}
 			modelo.addObject("usuarios", usuarioService.getAll());
+			modelo.addObject("productos", productoService.getAll());
+			modelo.addObject("combos", comboService.getAll());
 			modelo.addObject("eventos", dtos);
 			modelo.addObject("eventoDTO", new EventoDTO());
 			return modelo;
@@ -104,7 +113,7 @@ public class AdmEventosController extends AbstractBaseController {
 			if (eventoDTO.getId() == null) {
 
 				EstadoBO estado = estadoService.findByProperty("id", 1L).get(0);
-				
+
 				Date fechaDesde = sdf.parse(eventoDTO.getFechaDesde());
 				Date fechaHasta = sdf.parse(eventoDTO.getFechaHasta());
 

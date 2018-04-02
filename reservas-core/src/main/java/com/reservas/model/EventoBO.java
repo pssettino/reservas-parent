@@ -53,8 +53,18 @@ public class EventoBO implements Serializable {
 	@JoinColumn(name = "evt_usuario_fk")
 	private UsuarioBO usuario;
 
-	
-	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "evt_combo_fk")
+	private ComboBO combo;
+
+	public ComboBO getCombo() {
+		return combo;
+	}
+
+	public void setCombo(ComboBO combo) {
+		this.combo = combo;
+	}
+
 	public UsuarioBO getUsuario() {
 		return usuario;
 	}
@@ -118,15 +128,13 @@ public class EventoBO implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
 
 	public EventoBO() {
 		super();
 	}
 
 	public EventoBO(Long id, Date fechaDesde, Date fechaHasta, Boolean todoDia, String titulo, String descripcion,
-			EstadoBO estado, UsuarioBO usuario) {
+			EstadoBO estado, UsuarioBO usuario, ComboBO combo) {
 		super();
 		this.id = id;
 		this.fechaDesde = fechaDesde;
@@ -136,12 +144,14 @@ public class EventoBO implements Serializable {
 		this.descripcion = descripcion;
 		this.estado = estado;
 		this.usuario = usuario;
+		this.combo = combo;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((combo == null) ? 0 : combo.hashCode());
 		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((fechaDesde == null) ? 0 : fechaDesde.hashCode());
@@ -162,6 +172,11 @@ public class EventoBO implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		EventoBO other = (EventoBO) obj;
+		if (combo == null) {
+			if (other.combo != null)
+				return false;
+		} else if (!combo.equals(other.combo))
+			return false;
 		if (descripcion == null) {
 			if (other.descripcion != null)
 				return false;
@@ -209,9 +224,7 @@ public class EventoBO implements Serializable {
 	public String toString() {
 		return "EventoBO [id=" + id + ", fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + ", todoDia="
 				+ todoDia + ", titulo=" + titulo + ", descripcion=" + descripcion + ", estado=" + estado + ", usuario="
-				+ usuario + "]";
+				+ usuario + ", combo=" + combo + "]";
 	}
-
-	 
 
 }

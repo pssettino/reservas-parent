@@ -63,7 +63,7 @@
 											<th>Nombre</th>
 											<th>Precio</th>
 											<th>Categoria</th>
-											<th>Stock</th>
+											<th>Cantidad</th>
 											<th>Acciones</th>
 										</tr>
 									</thead>
@@ -74,7 +74,7 @@
 												<td>${producto.nombre }</td>
 												<td>${producto.precio }</td>
 												<td>${producto.categoria }</td>
-												<td>${producto.stock }</td>
+												<td>${producto.cantidad }</td>
 												<td>
 													<button type="button" data-idproducto="${producto.id }"
 														id="btnEditarProducto" name="btnEditarProducto"
@@ -138,9 +138,9 @@
 															</div>
 															<div class="col-sm-6 col-xs-12">
 																<div class="form-group">
-																	<form:label path="stock">Stock</form:label>
-																	<form:input path="stock" class="form-control"
-																		placeholder="Ingrese Stock" />
+																	<form:label path="cantidad">Cantidad</form:label>
+																	<form:input path="cantidad" class="form-control"
+																		placeholder="Ingrese Cantidad" />
 																</div>
 															</div>
 															<div class="modal-footer">
@@ -239,7 +239,7 @@
 											}
 										}
 									},
-									stock: {
+									cantidad: {
 										validators : {
 											notEmpty : {
 												message : 'Campo requerido'

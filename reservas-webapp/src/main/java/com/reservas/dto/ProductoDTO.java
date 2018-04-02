@@ -14,7 +14,7 @@ public class ProductoDTO implements Serializable {
 
 	private String nombre;
 
-	private Integer stock;
+	private Integer cantidad;
 
 	public Long getId() {
 		return id;
@@ -48,12 +48,12 @@ public class ProductoDTO implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Integer getStock() {
-		return stock;
+	public Integer getCantidad() {
+		return cantidad;
 	}
 
-	public void setStock(Integer stock) {
-		this.stock = stock;
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
 	}
 
 	public ProductoDTO() {
@@ -69,13 +69,13 @@ public class ProductoDTO implements Serializable {
 		this.categoriaId = categoriaId;
 	}
 
-	public ProductoDTO(Long id, String categoria, Double precio, String nombre, Integer stock) {
+	public ProductoDTO(Long id, String categoria, Double precio, String nombre, Integer cantidad) {
 		super();
 		this.id = id;
 		this.categoria = categoria;
 		this.precio = precio;
 		this.nombre = nombre;
-		this.stock = stock;
+		this.cantidad = cantidad;
 	}
 
 }

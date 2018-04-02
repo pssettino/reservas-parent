@@ -18,6 +18,26 @@ public class EventoDTO implements Serializable {
 
 	private String usuario;
 
+	private String comboId;
+
+	private String combo;
+
+	public String getCombo() {
+		return combo;
+	}
+
+	public void setCombo(String combo) {
+		this.combo = combo;
+	}
+
+	public String getComboId() {
+		return comboId;
+	}
+
+	public void setComboId(String comboId) {
+		this.comboId = comboId;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -75,7 +95,7 @@ public class EventoDTO implements Serializable {
 	}
 
 	public EventoDTO(Long id, String fechaDesde, String fechaHasta, String titulo, String descripcion, String usuarioId,
-			String usuario) {
+			String usuario, String comboId, String combo) {
 		super();
 		this.id = id;
 		this.fechaDesde = fechaDesde;
@@ -84,6 +104,8 @@ public class EventoDTO implements Serializable {
 		this.descripcion = descripcion;
 		this.usuarioId = usuarioId;
 		this.usuario = usuario;
+		this.comboId = comboId;
+		this.combo = combo;
 	}
 
 	public EventoDTO() {

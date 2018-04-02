@@ -7,7 +7,7 @@ $(function() {
 				id:$("#id").val(),		
 				nombre : $("#nombre").val(),
 				precio : $("#precio").val(),
-				stock : $("#stock").val(),								
+				cantidad : $("#cantidad").val(),								
 				categoria: $("#categoria").text(),
 				categoriaId: $("#categoria").val(),
 		};				
@@ -46,7 +46,7 @@ $(function() {
 					$("#id").val(producto.id);
 					$("#nombre").val(producto.nombre);
 					$("#precio").val(producto.precio);
-					$("#stock").val(producto.stock);
+					$("#cantidad").val(producto.cantidad);
 					
 					$("#modalProducto").modal("show");
 				}

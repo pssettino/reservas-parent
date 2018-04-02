@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class ComboBO {
 	@Column(name = "descuento")
 	private Double descuento;
 
-	@OneToMany(mappedBy = "combo", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "combo", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.EAGER)
 	private List<ComboProductoBO> comboProducto = new ArrayList<ComboProductoBO>();
 
 	public List<ComboProductoBO> getComboProducto() {

@@ -80,6 +80,11 @@
 												<td>${evt.usuario }</td>
 												<td>
 													<button type="button" data-idevento="${evt.id }"
+														id="btnEmitirReciboEvento" name="btnEmitirReciboEvento"
+														class="btn btn-success btnEmitirReciboEvento">
+														<i class="fa fa-copy" aria-hidden="true"></i>
+													</button>	
+													<button type="button" data-idevento="${evt.id }"
 														id="btnEditarEvento" name="btnEditarEvento"
 														class="btn btn-info btnEditarEvento">
 														<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -98,7 +103,6 @@
 
 								<div id="modalEvento" class="modal fade" role="dialog">
 									<div class="modal-dialog-center modal-lg">
-
 										<!-- Modal content-->
 										<div class="modal-content" style="left: 235px;">
 											<div class="modal-header">
@@ -106,12 +110,11 @@
 												<h4 class="modal-title">Administrar Evento</h4>
 											</div>
 											<div class="modal-body">
-												<div class="clearfix"></div>
 												<div class="panel panel-default">
 													<div class="panel-body">
 														<form:form method="POST" id="frmEvento" name="frmEvento"
 															modelAttribute="eventoDTO">
-															<div class="col-sm-6 col-xs-12">
+															<div class="col-sm-6 col-xs-6">
 																<div class="form-group">
 																	<form:label path="titulo">Titulo</form:label>
 																	<form:input path="titulo" class="form-control"
@@ -142,6 +145,8 @@
 																			class="glyphicon glyphicon-calendar"></i></span>
 																	</div>
 																</div>
+																</div>
+																<div class="col-sm-6 col-xs-6">
 																<div class="form-group">
 																	<form:label path="">Usuario</form:label>
 																	<select id="usuario" class="form-control " 	name="usuario" >
@@ -151,16 +156,6 @@
 																		</c:forEach>
 																	</select>
   																</div>
-  																<div class="form-group">
-																	<form:label path="">Productos</form:label>
-																	<select id="producto" class="form-control selectpicker" data-live-search="true" 
-																		name="producto" multiple>
-																		<option value="-1">-Seleccionar-</option>
-																		<c:forEach items="${productos}" var="producto">
-																		<option data-tokens="${producto.id}" value="${producto.id}">${producto.nombre}</option>
-																		</c:forEach>
-																	</select>
-  																</div> 
   																<div class="form-group">
 																	<form:label path="">Combos</form:label>
 																	<select id="combo" class="form-control " 	name="combo" >
@@ -179,20 +174,53 @@
 																</div>
 															</div>
 														 
-																<div class="modal-footer">
+																
+														</form:form>
+													</div>
+												</div>
+											</div>
+											
+										</div>
+										<div class="modal-footer">
 																	<button type="button" id="btnGuardarEvento"
 																		name="btnGuardarEvento" class="btn btn-success">Guardar</button>
 																	<button type="button" class="btn btn-default"
 																		data-dismiss="modal">Close</button>
 																</div>
+									</div>
+								</div>
+
+								<div id="modalReciboEmitido" class="modal fade" role="dialog">
+									<div class="modal-dialog-center modal-lg">
+										<!-- Modal content-->
+										<div class="modal-content" style="left: 235px;">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Presupuesto del Evento</h4>
+											</div>
+											<div class="modal-body">
+												<div class="panel panel-default">
+													<div class="panel-body">
+														<form:form method="POST" id="frmReciboEvento" name="frmReciboEvento"
+															modelAttribute="eventoDTO">
+															 
+																 <p id="mensaje"></p>
+																<a href="" id="descargar"><i class="fa fa-download"></i>Descargar</a>														 			
+																
 														</form:form>
 													</div>
 												</div>
+												
 											</div>
+											<div class="modal-footer">
+																	<button type="button" class="btn btn-default"
+																		data-dismiss="modal">Close</button>
+												</div>
 										</div>
 
 									</div>
 								</div>
+
 
 							</div>
 							<!-- /.panel-body -->
@@ -310,7 +338,20 @@
 																}
 															}
 														}
-													} 
+													},
+													combo: {
+														validators : {
+															notEmpty : {
+																message : 'Campo requerido'
+															},
+															callback : {
+																message : 'Campo requerido',
+																callback : function(value, validator) {													
+																	return value!='-1';
+																}
+															}
+														}
+													}
 												}
 											});
 

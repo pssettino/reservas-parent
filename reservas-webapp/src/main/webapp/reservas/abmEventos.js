@@ -9,7 +9,12 @@ $(function() {
 				titulo : $("#titulo").val(),
 				descripcion : $("#descripcion").val(),
 				fechaDesde : $("#fechaDesde").val(),				
-				fechaHasta : $("#fechaHasta").val()								
+				fechaHasta : $("#fechaHasta").val(),
+				usuarioId: $("#usuario").val(),
+				usuario: $("#usuario").text(),
+				comboId: $("#combo").val(),
+				combo: $("#combo").text()
+		
 		};
 				
 		$('#frmEvento').data('formValidation').validate();
@@ -48,8 +53,37 @@ $(function() {
 					$("#descripcion").val(evento.descripcion);
 					$("#fechaDesde").val(evento.fechaDesde);
 					$("#fechaHasta").val(evento.fechaHasta);
+					var usuario = evento.usuarioId==''?'-1':evento.usuarioId;
+					$("#usuario").val(evento.usuarioId);
+					var combo = evento.comboId==''?'-1':evento.comboId;
+					$("#combo").val(combo);
 					$("#modalEvento").modal("show");
 				}
+			},
+			error : function(data) {
+
+			}
+		});
+
+	});
+	
+	$(".btnEmitirReciboEvento").click(function() {
+		var form = {"id": $(this).data("idevento")};
+		$('#frmEvento').data('formValidation').validate();
+		$.ajax({
+			url : "./emitirReciboEvento",
+			type : "POST",
+			data : form ,			
+			dataType : "json",		
+			success : function(data) {
+				if(data.success){
+					$("#mensaje").text(data.message);
+					$("#descargar").show();	
+				}else{
+					$("#mensaje").text(data.message);
+					$("#descargar").hide();
+				}
+				$("#modalReciboEmitido").modal("show");
 			},
 			error : function(data) {
 

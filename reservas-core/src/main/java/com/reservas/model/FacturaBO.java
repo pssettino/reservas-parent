@@ -2,6 +2,7 @@ package com.reservas.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,16 +40,21 @@ public class FacturaBO {
 	@JoinColumn(name = "fk_medio_pago", nullable = true)
 	private MedioPagoBO medioPago;
 
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_tipo_factura", nullable = true)
+	private TipoFacturaBO tipoFactura;
+
 	@OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<FacturaDetalleBO> facturaDetalle = new ArrayList<FacturaDetalleBO>();
 
-	public FacturaBO(Long id, EventoBO evento, Date fecha, MedioPagoBO medioPago,
+	public FacturaBO(Long id, EventoBO evento, Date fecha, MedioPagoBO medioPago, TipoFacturaBO tipoFactura,
 			List<FacturaDetalleBO> facturaDetalle) {
 		super();
 		this.id = id;
 		this.evento = evento;
 		this.fecha = fecha;
 		this.medioPago = medioPago;
+		this.tipoFactura = tipoFactura;
 		this.facturaDetalle = facturaDetalle;
 	}
 
@@ -94,15 +100,32 @@ public class FacturaBO {
 		return "FacturaBO [id=" + id + ", evento=" + evento + ", fecha=" + fecha + ", medioPago=" + medioPago + "]";
 	}
 
+	public TipoFacturaBO getTipoFactura() {
+		return tipoFactura;
+	}
+
+	public void setTipoFactura(TipoFacturaBO tipoFactura) {
+		this.tipoFactura = tipoFactura;
+	}
+
+	public List<FacturaDetalleBO> getFacturaDetalle() {
+		return facturaDetalle;
+	}
+
+	public void setFacturaDetalle(List<FacturaDetalleBO> facturaDetalle) {
+		this.facturaDetalle = facturaDetalle;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((evento == null) ? 0 : evento.hashCode());
 		result = prime * result + ((facturaDetalle == null) ? 0 : facturaDetalle.hashCode());
 		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((medioPago == null) ? 0 : medioPago.hashCode());
-		result = prime * result + ((evento == null) ? 0 : evento.hashCode());
+		result = prime * result + ((tipoFactura == null) ? 0 : tipoFactura.hashCode());
 		return result;
 	}
 
@@ -115,6 +138,11 @@ public class FacturaBO {
 		if (getClass() != obj.getClass())
 			return false;
 		FacturaBO other = (FacturaBO) obj;
+		if (evento == null) {
+			if (other.evento != null)
+				return false;
+		} else if (!evento.equals(other.evento))
+			return false;
 		if (facturaDetalle == null) {
 			if (other.facturaDetalle != null)
 				return false;
@@ -135,12 +163,13 @@ public class FacturaBO {
 				return false;
 		} else if (!medioPago.equals(other.medioPago))
 			return false;
-		if (evento == null) {
-			if (other.evento != null)
+		if (tipoFactura == null) {
+			if (other.tipoFactura != null)
 				return false;
-		} else if (!evento.equals(other.evento))
+		} else if (!tipoFactura.equals(other.tipoFactura))
 			return false;
 		return true;
 	}
+	
 
 }

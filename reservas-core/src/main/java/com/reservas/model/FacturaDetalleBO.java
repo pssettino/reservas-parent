@@ -19,17 +19,13 @@ import javax.persistence.Table;
 public class FacturaDetalleBO implements Serializable {
 
 	@EmbeddedId
-	private FacturaProductoId id;
+	private FacturaComboId id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("facturaId")
 	private FacturaBO factura;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("productoId")
-	private ProductoBO producto;
-
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("comboId")
 	private ComboBO combo;
 
@@ -45,14 +41,6 @@ public class FacturaDetalleBO implements Serializable {
 
 	public void setFactura(FacturaBO factura) {
 		this.factura = factura;
-	}
-
-	public ProductoBO getProducto() {
-		return producto;
-	}
-
-	public void setProducto(ProductoBO producto) {
-		this.producto = producto;
 	}
 
 	public ComboBO getCombo() {
@@ -84,11 +72,11 @@ public class FacturaDetalleBO implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FacturaProductoId getId() {
+	public FacturaComboId getId() {
 		return id;
 	}
 
-	public void setId(FacturaProductoId id) {
+	public void setId(FacturaComboId id) {
 		this.id = id;
 	}
 
@@ -101,37 +89,34 @@ public class FacturaDetalleBO implements Serializable {
 			return false;
 
 		FacturaDetalleBO that = (FacturaDetalleBO) o;
-		return Objects.equals(factura, that.factura) && Objects.equals(producto, that.producto)
-				&& Objects.equals(combo, that.combo);
+		return Objects.equals(factura, that.factura) && Objects.equals(combo, that.combo);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(factura, producto, combo);
+		return Objects.hash(factura, combo);
 	}
 
-	public FacturaDetalleBO(Long idFacturaDetalle, FacturaProductoId id, FacturaBO factura, ProductoBO producto,
-			ComboBO combo, Double precio, Integer cantidad) {
+	public FacturaDetalleBO(Long idFacturaDetalle, FacturaComboId id, FacturaBO factura, ComboBO combo, Double precio,
+			Integer cantidad) {
 		super();
 		this.id = id;
 		this.factura = factura;
-		this.producto = producto;
 		this.combo = combo;
 		this.precio = precio;
 		this.cantidad = cantidad;
 	}
 
-	public FacturaDetalleBO(FacturaBO factura, ProductoBO producto, ComboBO combo) {
+	public FacturaDetalleBO(FacturaBO factura, ComboBO combo) {
 		this.factura = factura;
-		this.producto = producto;
 		this.combo = combo;
-		this.id = new FacturaProductoId(factura.getId(), producto.getId(), combo.getId());
+		this.id = new FacturaComboId(factura.getId(), combo.getId());
 	}
 
 	@Override
 	public String toString() {
-		return "FacturaDetalleBO [id=" + id + ", factura=" + factura + ", producto=" + producto + ", combo=" + combo
-				+ ", precio=" + precio + ", cantidad=" + cantidad + "]";
+		return "FacturaDetalleBO [id=" + id + ", factura=" + factura + ", combo=" + combo + ", precio=" + precio
+				+ ", cantidad=" + cantidad + "]";
 	}
 
 }

@@ -17,11 +17,11 @@ public class ComboProductoBO implements Serializable {
 	@EmbeddedId
 	private ComboProductoId id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("comboId")
 	private ComboBO combo;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("productoId")
 	private ProductoBO producto;
 

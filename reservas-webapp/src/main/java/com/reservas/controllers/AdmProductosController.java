@@ -73,7 +73,7 @@ public class AdmProductosController extends AbstractBaseController {
 	private ProductoDTO productoBOToDTO(ProductoBO productoBO) {
 		ProductoDTO producto;
 		producto = new ProductoDTO(productoBO.getId(), productoBO.getCategoria().getDescripcion(),
-				productoBO.getPrecio(), productoBO.getNombre(), productoBO.getStock());
+				productoBO.getPrecio(), productoBO.getNombre(), productoBO.getCantidad());
 		return producto;
 	}
 
@@ -88,14 +88,14 @@ public class AdmProductosController extends AbstractBaseController {
 			if (productoDTO.getId() == null) {
 
 				productoBO = new ProductoBO(productoDTO.getId(), categoria, productoDTO.getPrecio(),
-						productoDTO.getNombre(), productoDTO.getStock(), null, null);
+						productoDTO.getNombre(), productoDTO.getCantidad(), null);
 
 			} else {
 				productoBO = productoService.findByProperty("id", productoDTO.getId()).get(0);
 				productoBO.setCategoria(categoria);
 				productoBO.setPrecio(productoDTO.getPrecio());
 				productoBO.setNombre(productoDTO.getNombre());
-				productoBO.setStock(productoDTO.getStock());
+				productoBO.setCantidad(productoDTO.getCantidad());
 			}
 
 			productoService.save(productoBO);

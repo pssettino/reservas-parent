@@ -15,7 +15,7 @@ public class TipoFacturaBO implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "descipion")
+	@Column(name = "descripcion")
 	private String descripcion;
 
 	public Integer getId() {

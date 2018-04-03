@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Strings;
+import com.reservas.dao.MailSenderService;
 import com.reservas.dto.EventDataDTO;
 import com.reservas.exeptions.BusinessExeption;
 import com.reservas.model.EstadoBO;
@@ -41,6 +42,9 @@ public class ScheduleController extends AbstractBaseController {
 
 	@Autowired
 	private EstadoService estadoService;
+	
+	@Autowired
+	private MailSenderService mailSenderService;
 
 	@RequestMapping(value = "/saveEvent", method = RequestMethod.POST)
 	@ResponseBody
@@ -50,12 +54,12 @@ public class ScheduleController extends AbstractBaseController {
 		EventoBO evtBO = new EventoBO();
 		evtBO.setUsuario(usuario);
 		EventoBO evt = saveOrUpdateEvent(eventData, evtBO);
-
+		
 		eventData.setId(evt.getId());
 		return eventData;
 	}
 
-	private EventoBO saveOrUpdateEvent(EventDataDTO eventData, EventoBO evt) throws ParseException, BusinessExeption {
+	private EventoBO saveOrUpdateEvent(EventDataDTO eventData, EventoBO evt) throws Exception {
 		SimpleDateFormat sdf;
 
 		String start = eventData.getStart();
@@ -99,8 +103,17 @@ public class ScheduleController extends AbstractBaseController {
 
 		EstadoBO estado = estadoService.findByProperty("id", eventData.getEstadoId() + 1).get(0);
 		evt.setEstado(estado);
-
-		return eventoService.save(evt);
+		String mensaje="";
+		
+		if(evt.getId()==null) {
+			mensaje= "Felicitaciones usted ha reservado el evento: "+evt.getTitulo()+", en unos instantes uno de nuestros representantes se comunicará con usted.";
+		}else {
+			mensaje= "Felicitaciones usted ha modificado el evento: "+evt.getTitulo()+", en unos instantes uno de nuestros representantes se comunicará con usted.";
+		}
+		
+		EventoBO evtBO = eventoService.save(evt);
+		mailSenderService.sendMail(evt.getUsuario().getEmail(), "Eventos OnLine!", mensaje);
+		return evtBO;
 	}
 
 	@RequestMapping(value = "/getAllEvents", method = RequestMethod.POST)
